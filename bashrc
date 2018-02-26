@@ -91,6 +91,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lh='ls -lh'
 alias ..='cd ..'
 alias ...='cd ..&& cd ..'
 
@@ -125,5 +126,3 @@ alias sudo='sudo env LD_LIBRARY_PATH=$LD_LIBRARY_PATH PATH=$PATH'
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# Yavide alias
-alias yavide="gvim --servername yavide -f -N -u /home/xq/y/yavide/.vimrc"
