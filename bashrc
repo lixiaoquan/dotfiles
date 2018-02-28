@@ -119,10 +119,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH=/home/xq/build-software_develop-Desktop-Debug/sdk/bin/qemu/bin:/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/home/xq/build-software_develop-Desktop-Debug/cmodel/src
-
-alias sudo='sudo env LD_LIBRARY_PATH=$LD_LIBRARY_PATH PATH=$PATH'
-
+export PATH=/usr/local/cuda/bin:~/.local/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval $(thefuck --alias)
