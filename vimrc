@@ -36,22 +36,21 @@ set t_Co=256
 "ctags
 set tags=tags
 
-"cscope
-if filereadable("/usr/bin/cscope")
+"if filereadable("/usr/bin/cscope")
 
 ""    set cscopetag
 
-    cs add cscope.out
+"    cs add cscope.out
 
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <F5> :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <F6> :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <F4> :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-endif
+"    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"    nmap <F5> :cs find g <C-R>=expand("<cword>")<CR><CR>
+"    nmap <F6> :cs find c <C-R>=expand("<cword>")<CR><CR>
+"    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+"    nmap <F4> :cs find e <C-R>=expand("<cword>")<CR><CR>
+"    nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+"    nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+"    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+"endif
 
 "fold
 "set foldmethod=indent

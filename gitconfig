@@ -1,0 +1,17 @@
+[user]
+  email = xiaoquan.li@denglin.ai
+  name = Li Xiaoquan
+[alias]
+  ci = commit -a
+  br = branch
+  co = checkout
+  pl = pull --rebase
+
+[core]
+  editor = vim
+  quotepath = false
+
+[push]
+  default = simple
+
+
