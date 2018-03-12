@@ -95,6 +95,7 @@ alias lh='ls -lh'
 alias ..='cd ..'
 alias ...='cd ..&& cd ..'
 alias rm='rm -rf'
+alias v='vim'
 
 export SW_ROOT="47.75.14.149:/home/xq/dl/software_develop"
 
