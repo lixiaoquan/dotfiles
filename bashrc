@@ -129,4 +129,6 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+if type thefuck >/dev/null 2>&1; then
 eval $(thefuck --alias)
+fi
