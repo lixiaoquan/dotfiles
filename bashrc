@@ -98,6 +98,9 @@ alias rm='rm -rf'
 alias v='vim'
 alias vi='vim'
 
+alias itf='pip install ~/codeplay/tf_release_package/tensorflow-1.9.0-cp27-cp27mu-linux_x86_64.whl'
+alias btf='bazel build --verbose_failures -c opt --config=sycl //tensorflow/tools/pip_package:build_pip_package && bazel-bin/tensorflow/tools/pip_package/build_pip_package ~/codeplay/tf_release_package'
+
 export SW_ROOT="47.75.14.149:/home/xq/dl/software_develop"
 
 
@@ -125,6 +128,7 @@ if ! shopt -oq posix; then
   fi
 fi
 export PATH=/usr/local/cuda/bin:~/.local/bin:$PATH
+export PATH=~/bin/:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
