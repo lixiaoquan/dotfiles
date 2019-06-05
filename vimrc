@@ -84,7 +84,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
+
+"let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+
 
 " Fuzzy Finder
 if version > 701
