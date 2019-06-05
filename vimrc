@@ -96,21 +96,8 @@ let g:fuf_previewHeight=1
 let g:fuf_enumeratingLimit=20
 endif
 
-" Set color
-"colorscheme torte
-"colorscheme pablo
-"colorscheme pablo_my
-"colorscheme diablo3
-
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
 set list listchars=tab:>-,trail:-
-
-" clang complete
-let g:clang_use_library = 1
-let g:clang_library_path = "/home/xiaoquan.li"
-let g:clang_complete_macros = 1
-let g:clang_complete_auto = 1
-let g:clang_auto_select = 1
 
 map H ^
 map L $
