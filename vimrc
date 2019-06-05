@@ -106,6 +106,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Fuzzy Finder
