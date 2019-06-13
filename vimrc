@@ -3,8 +3,12 @@ noremap <F1> <nop>
 noremap <F11> <ESC>:colo torte<CR>
 noremap <F12> <ESC>:colo pablo_my<CR>
 
+let g:mapleader = "\<Space>"
+
 noremap K k
 noremap J j
+
+
 
 " syntax
 syntax on
@@ -46,6 +50,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 noremap <F2> ^i/* <ESC>$a */<ESC>
 noremap <F3> <ESC>:s/\/\*\s//g<CR>:s/\s\*\///g<CR>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
+nnoremap <F5> :set invpaste paste?<Enter>
+imap <F5> <C-O><F5>
+set pastetoggle=<F5>
 "inoremap { {<CR>}<CR><ESC>kO<TAB>
 "inoremap ( ()<LEFT>
 "inoremap [ []<LEFT>
@@ -85,6 +92,49 @@ nmap Q gq
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" {{{
+  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+  nnoremap <silent> <leader><space> :Files<CR>
+  nnoremap <silent> <leader>a :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+  nnoremap <silent> <leader>; :BLines<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  nnoremap <silent> <leader>. :AgIn 
+
+  nnoremap <silent> K :call SearchWordWithAg()<CR>
+  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+  nnoremap <silent> <leader>gl :Commits<CR>
+  nnoremap <silent> <leader>ga :BCommits<CR>
+  nnoremap <silent> <leader>ft :Filetypes<CR>
+
+  imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+  imap <C-x><C-l> <plug>(fzf-complete-line)
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+
+  function! SearchVisualSelectionWithAg() range
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Ag' selection
+  endfunction
+
+  function! SearchWithAgInDirectory(...)
+    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+  endfunction
+  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+" }}}
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -94,17 +144,6 @@ call plug#end()
 "let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
-
-
-" Fuzzy Finder
-if version > 701
-noremap <Leader>b :Files<CR>
-noremap <Leader>f :Buffers<CR>
-noremap <Leader>g :Tags<CR>
-noremap <Leader>t :FufTaggedFile<CR>
-let g:fuf_previewHeight=1
-let g:fuf_enumeratingLimit=20
-endif
 
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
 set list listchars=tab:>-,trail:-
