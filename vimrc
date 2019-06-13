@@ -52,6 +52,10 @@ noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ES
 "inoremap " ""<LEFT>
 "inoremap ' ''<LEFT>
 "inoremap ; <ESC>A;
+"
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
 
 function! RemoveNextDoubleChar(char)
     let l:line=getline(".")
