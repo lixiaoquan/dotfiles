@@ -60,6 +60,8 @@ set pastetoggle=<F5>
 "inoremap ' ''<LEFT>
 "inoremap ; <ESC>A;
 "
+nnoremap <silent> _ <C-w>>
+nnoremap <silent> + <C-w><
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
