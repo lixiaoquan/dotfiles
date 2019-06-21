@@ -65,6 +65,10 @@ nnoremap <silent> + <C-w><
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
+inoremap <C-e> <esc>:wq!<cr>               " save and exit
+nnoremap <C-e> :wq!<cr>
+inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
+nnoremap <C-q> :qa!<cr>
 
 function! RemoveNextDoubleChar(char)
     let l:line=getline(".")
