@@ -1,0 +1,89 @@
+# Alias for moving around quickly
+CURRENT_PROJECT=dli
+
+adjust_environment () {
+
+  PROJECT_BINARY=''
+  PROJECT_SROUCE=''
+  PROJECT_TEST=''
+  PROJECT_DRIVER=''
+  PROJECT_TVM=''
+
+  if [ "$CURRENT_PROJECT" = "dli" ]; then
+    PROJECT_BINARY=/LocalRun/xiaoquan.li/build-ai_software-Desktop-Debug
+    PROJECT_SOURCE=/LocalRun/xiaoquan.li/ai_software/compiler/tvm
+    PROJECT_TVM=/LocalRun/xiaoquan.li/ai_software/compiler/tvm
+    PROJECT_DRIVER=/LocalRun/xiaoquan.li/ai_software/driver
+    PROJECT_TEST=/LocalRun/xiaoquan.li/ai_software/compiler/tvm/dli/tests/python
+  else
+    echo 'CURRENT_PROJECT is not one of [dli], do nothing'
+  fi
+
+}
+
+if alias bu 2>/dev/null; then
+  unalias bu
+fi
+
+alias bu='
+         func() {
+            adjust_environment
+
+            [ ! -z "$PROJECT_BINARY" ]; cd $PROJECT_BINARY
+         }; func
+         '
+
+alias te='
+         func() {
+            adjust_environment
+
+            [ ! -z "$PROJECT_TEST" ] && cd $PROJECT_TEST
+         }; func
+         '
+
+alias sr='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_SOURCE" ]; cd $PROJECT_SOURCE
+          }; func
+          '
+
+alias tvm='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_SOURCE" ]; cd $PROJECT_TVM
+          }; func
+          '
+
+alias dr='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_SOURCE" ]; cd $PROJECT_DRIVER
+          }; func
+          '
+
+to_cd_home () {
+  scp $1 10.28.12.37:/home/xiaoquan.li
+}
+
+to_sh_home () {
+  scp $1 10.21.12.17:/home/xiaoquan.li
+}
+
+alias lh='cd /LocalRun/xiaoquan.li'
+alias cm='cd /LocalRun/xiaoquan.li/software_develop/cmodel'
+alias re='cd /LocalRun/xiaoquan.li/software_develop/reg'
+alias lsqemu="psg qemu"
+
+# Build and install TensorFlow
+alias btf='bazel build //tensorflow/tools/pip_package:build_pip_package --incompatible_remove_native_http_archive=false && ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /LocalRun/xiaoquan.li/1.12_cpu_release/'
+alias itf='pip install --no-deps --upgrade /LocalRun/xiaoquan.li/1.12_cpu_release/tensorflow-1.12.0-cp35-cp35m-linux_x86_64.whl'
+alias ctf='scp /LocalRun/xiaoquan.li/1.12_cpu_release/tensorflow-1.12.0-cp35-cp35m-linux_x86_64.whl 10.28.12.210:/LocalRun/xiaoquan.li/1.12_cpu_release/'
+alias modified_tf='. /LocalRun/xiaoquan.li/modified_tensorflow/bin/activate'
+
+# Activate python virtualenv
+alias penv3.5='. /LocalRun/xiaoquan.li/penv3.5/bin/activate'
+alias penv3.6='. /LocalRun/xiaoquan.li/penv3.6/bin/activate'

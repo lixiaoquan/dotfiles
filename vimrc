@@ -1,14 +1,4 @@
-inoremap <F1> <nop>
-noremap <F1> <nop>
-noremap <F11> <ESC>:colo torte<CR>
-noremap <F12> <ESC>:colo pablo_my<CR>
-
 let g:mapleader = "\<Space>"
-
-noremap K k
-noremap J j
-
-
 
 " syntax
 syntax on
@@ -37,9 +27,6 @@ set nobackup
 "color in putty
 set t_Co=256
 
-"ctags
-set tags=tags
-
 set scrolloff=10
 
 " viminfo and last-position-jump
@@ -47,6 +34,21 @@ set viminfo='20,\"100,<500
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 " coding mapping
+" Disable useless functions
+inoremap <F1> <nop>
+noremap <F1> <nop>
+noremap K k
+noremap J j
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+"inoremap <Up> <nop>
+"inoremap <Down> <nop>
+"inoremap <Left> <nop>
+"inoremap <Right> <nop>
+
+
 noremap <F2> ^i/* <ESC>$a */<ESC>
 noremap <F3> <ESC>:s/\/\*\s//g<CR>:s/\s\*\///g<CR>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
@@ -59,16 +61,23 @@ set pastetoggle=<F5>
 "inoremap " ""<LEFT>
 "inoremap ' ''<LEFT>
 "inoremap ; <ESC>A;
-"
 nnoremap <silent> _ <C-w>>
 nnoremap <silent> + <C-w><
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
-inoremap <C-e> <esc>:wq!<cr>               " save and exit
-nnoremap <C-e> :wq!<cr>
+
+noremap <C-S> :w<CR>
+vnoremap <C-S> <C-C>:w<CR>
+inoremap <C-S> <C-O>:w<CR>
+inoremap <C-t> <esc>:wq!<cr>               " save and exit
+nnoremap <C-t> :wq!<cr>
 inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
 nnoremap <C-q> :qa!<cr>
+inoremap <C-e> <Esc>A
+inoremap <C-a> <Esc>I
+
+map H ^
+map L $
+
+" map <enter> o<ESC>
 
 function! RemoveNextDoubleChar(char)
     let l:line=getline(".")
@@ -92,6 +101,22 @@ endfunction
 "inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>i
 "inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>i
 
+
+
+"auto close {
+function! s:CloseBracket()
+    let line = getline('.')
+    if line =~# '^\s*\(struct\|class\|enum\) '
+      return "{\<Enter>};\<Esc>O"
+    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
+      " Probably inside a function call. Close it off.
+      return "{\<Enter>});\<Esc>O"
+    else
+      return "{\<Enter>}\<Esc>O"
+    endif
+    endfunction
+inoremap <expr> {<Enter> <SID>CloseBracket()
+
 nmap Q gq
 
 " Set VIM runtime
@@ -99,7 +124,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " {{{
-  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+  let g:fzf_vim_statusline = 0 " disable statusline overwriting
 
   nnoremap <silent> <leader><space> :Files<CR>
   nnoremap <silent> <leader>b :Buffers<CR>
@@ -154,13 +179,8 @@ colorscheme solarized
 
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
 set list listchars=tab:>-,trail:-
+set gdefault
 
-map H ^
-map L $
-
-map <enter> o<ESC>
-
-" Auto reload file when it changed on disk
 set autoread
 
 " Triger `autoread` when files changes on disk
