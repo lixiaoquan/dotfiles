@@ -3,6 +3,7 @@
   name = Li Xiaoquan
 [alias]
   ci = commit -a
+  am = commit -a --amend
   br = branch
   co = checkout
   pl = pull --rebase
@@ -10,7 +11,6 @@
   cp = cherry-pick
   dc = diff --cached
   ds = diff --stat
-  r = reset
   r1 = reset HEAD^
   r2 = reset HEAD^^
   st = stash
