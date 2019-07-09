@@ -67,7 +67,7 @@ function git-branch-prompt {
 }
 
 if [ "$color_prompt" = yes ]; then
-  PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]"
+  PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]\$(git-branch-prompt)\n\$ "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
 fi
@@ -116,11 +116,6 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/completions/git
   fi
 fi
-
-GIT_PROMPT_ONLY_IN_REPO=1
-GIT_PROMPT_THEME=Solarized
-GIT_PROMPT_START=$PS1
-source ~/.bash-git-prompt/gitprompt.sh
 
 function_exists() {
     declare -f -F $1 > /dev/null
