@@ -1,0 +1,3 @@
+bind main   r !git review
+bind main   p !git push
+bind status r !git review
