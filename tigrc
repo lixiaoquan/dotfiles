@@ -1,3 +1,4 @@
 bind main   r !git review
 bind main   p !git push
 bind status r !git review
+bind status a !?git commit --amend
