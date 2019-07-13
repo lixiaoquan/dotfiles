@@ -17,6 +17,7 @@
   stp = stash pop
   r = review
   d = diff
+  p = push
 
 [core]
   editor = vim

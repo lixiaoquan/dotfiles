@@ -14,13 +14,17 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
+alias t='top'
+alias v='vim'
+alias n='ninja'
+alias f="find . -type f -iname"
+alias b="cd -"
+
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
 alias ..='cd ..'
 alias ...='cd ..&& cd ..'
 alias rm='rm -rf'
-alias v='vim'
 alias vi='vim'
 alias reload='source $HOME/.bashrc'
 alias showalias='cat $HOME/.bash_aliases'
@@ -29,7 +33,6 @@ alias ni='ninja'
 alias nr='ninja rebase'
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ff="find . -type f -iname"
-alias f="find . -name "dl_*" | xargs clang-format -style=file -i"
 alias skill="sudo kill"
 
 alias pytest='pytest -v --disable-warnings'
