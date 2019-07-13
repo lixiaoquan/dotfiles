@@ -65,6 +65,14 @@ alias dr='
           }; func
           '
 
+alias l='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_SOURCE" ]; vim -n $PROJECT_TEST/compiler.txt
+          }; func
+          '
+
 to_cd_home () {
   scp $1 10.28.12.37:/home/xiaoquan.li
 }
