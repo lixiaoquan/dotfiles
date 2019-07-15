@@ -171,6 +171,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 "let g:solarized_termcolors=256
