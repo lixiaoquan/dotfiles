@@ -138,3 +138,11 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 if type thefuck >/dev/null 2>&1; then
 eval $(thefuck --alias)
 fi
+
+TMUX_GITBAR_DIR="$HOME/.tmux-gitbar"
+
+# ensure TMUX_GITBAR_CONF is defined
+TMUX_GITBAR_CONF="$HOME/.tmux-gitbar.conf"
+
+# install update-gitbar as a prompt command if not done already
+PROMPT_COMMAND="$TMUX_GITBAR_DIR/update-gitbar; $PROMPT_COMMAND"

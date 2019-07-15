@@ -171,8 +171,6 @@ reset_statusbar() {
   tmux set-window-option "status-$TMGB_STATUS_LOCATION" "$status_string" > /dev/null
 }
 
-retval=""
-
 # Update tmux git status bar, called within PROMPT_COMMAND
 update_gitbar() {
 
@@ -190,9 +188,6 @@ update_gitbar() {
     local status_string
     status_string="#[$TMGB_OUTREPO_STYLE]$TMGB_OUTREPO_STATUS#[$TMGB_STYLE]$(do_interpolation "${TMGB_STATUS_STRING}")"
     tmux set-window-option "status-$TMGB_STATUS_LOCATION" "$status_string" > /dev/null
-
-    retval = $status_string
-
   else
     find_git_repo
     save_statusbar
