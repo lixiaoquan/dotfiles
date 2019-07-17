@@ -145,4 +145,4 @@ TMUX_GITBAR_DIR="$HOME/.tmux-gitbar"
 TMUX_GITBAR_CONF="$HOME/.tmux-gitbar.conf"
 
 # install update-gitbar as a prompt command if not done already
-PROMPT_COMMAND="$TMUX_GITBAR_DIR/update-gitbar; $PROMPT_COMMAND"
+# PROMPT_COMMAND="$TMUX_GITBAR_DIR/update-gitbar; $PROMPT_COMMAND"
