@@ -172,6 +172,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
+Plug 'valloric/youcompleteme'
 call plug#end()
 
 "let g:solarized_termcolors=256
@@ -183,6 +184,7 @@ set list listchars=tab:>-,trail:-
 set gdefault
 
 set autoread
+set encoding=utf-8
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
