@@ -173,7 +173,8 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'valloric/youcompleteme'
 " {{{
-  noremap <F2> :YcmCompleter GoToDeclaration<CR>
+  noremap <F1> :YcmCompleter GoToDeclaration<CR>
+  noremap <F2> :YcmCompleter GoToDefinition<CR>
 " }}}
 call plug#end()
 
