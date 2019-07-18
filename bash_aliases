@@ -35,6 +35,7 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ff="find . -type f -iname"
 alias skill="sudo kill"
 alias e='exit'
+alias lh='cd /LocalRun/xiaoquan.li'
 
 alias pytest='pytest -v --disable-warnings'
 
