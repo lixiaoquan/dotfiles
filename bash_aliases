@@ -34,6 +34,7 @@ alias nr='ninja rebase'
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ff="find . -type f -iname"
 alias skill="sudo kill"
+alias e='exit'
 
 alias pytest='pytest -v --disable-warnings'
 
