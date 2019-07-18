@@ -13,7 +13,7 @@ if [ ! -d "$1" ]; then
 fi
 cd "$dir" > /dev/null
 
-readonly gitstatus=$( LC_ALL=C git status --untracked-files=all --porcelain --branch )
+readonly gitstatus=$( LC_ALL=C git --no-optional-locks status --untracked-files=all --porcelain --branch )
 
 # if the status is fatal, exit now
 [[ "$?" -ne 0 ]] && exit 0
