@@ -13,13 +13,16 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# Level 0 alias
 alias t='top'
 alias v='vim'
 alias n='ninja'
 alias f="find . -type f -iname"
 alias b="cd -"
+alias p='pytest -v --disable-warnings'
+alias e='exit'
 
+# Other aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias ..='cd ..'
@@ -34,7 +37,6 @@ alias nr='ninja rebase'
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ff="find . -type f -iname"
 alias skill="sudo kill"
-alias e='exit'
 alias lh='cd /LocalRun/xiaoquan.li'
 
 alias pytest='pytest -v --disable-warnings'
