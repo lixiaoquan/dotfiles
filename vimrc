@@ -49,8 +49,7 @@ noremap <Right> <nop>
 "inoremap <Right> <nop>
 
 
-noremap <F2> ^i/* <ESC>$a */<ESC>
-noremap <F3> <ESC>:s/\/\*\s//g<CR>:s/\s\*\///g<CR>
+noremap <F3> <ESC><C-O><CR>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
@@ -173,6 +172,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'valloric/youcompleteme'
+" {{{
+  noremap <F2> :YcmCompleter GoToDeclaration<CR>
+" }}}
 call plug#end()
 
 "let g:solarized_termcolors=256
