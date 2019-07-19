@@ -49,7 +49,7 @@ noremap <Right> <nop>
 "inoremap <Right> <nop>
 
 
-noremap <F3> <ESC><C-O><CR>
+noremap <F3> <ESC><C-O>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
@@ -174,8 +174,7 @@ Plug 'tpope/vim-commentary'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'valloric/youcompleteme'
 " {{{
-  noremap <F1> :YcmCompleter GoToDeclaration<CR>
-  noremap <F2> :YcmCompleter GoToDefinition<CR>
+  noremap <F2> :YcmCompleter GoTo<CR>
   "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
   function! s:CRComplete()
