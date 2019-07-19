@@ -171,6 +171,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'valloric/youcompleteme'
 " {{{
   noremap <F1> :YcmCompleter GoToDeclaration<CR>
