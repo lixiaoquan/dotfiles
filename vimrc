@@ -55,10 +55,13 @@ noremap <Right> <nop>
 
 
 noremap <F3> <ESC><C-O>
-noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
+noremap <F4> :call system('xclip', @0)<CR>
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
+noremap <F6> mz:r !xclip -o -sel clip<CR>`z
+map <F7> i<CR><ESC>k<F6>gJgJ
+noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
 "inoremap { {<CR>}<CR><ESC>kO<TAB>
 "inoremap ( ()<LEFT>
 "inoremap [ []<LEFT>
