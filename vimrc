@@ -29,6 +29,11 @@ set t_Co=256
 
 set scrolloff=10
 
+set cursorline
+set cursorcolumn
+set number
+set relativenumber
+
 " viminfo and last-position-jump
 set viminfo='20,\"100,<500
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
