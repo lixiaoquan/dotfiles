@@ -11,7 +11,7 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 files="bashrc vimrc vim cheat tmux.conf gitconfig fzf pip dircolors \
        bash_aliases bash_aliases_internal bash_aliases_external fzf.bash \
        tmux-gitbar.conf tmux-gitbar \
-       tigrc"    # list of files/folders to symlink in homedir
+       tigrc bash_profile"    # list of files/folders to symlink in homedir
 
 ##########
 
