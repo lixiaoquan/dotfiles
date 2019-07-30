@@ -183,14 +183,14 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'valloric/youcompleteme'
 " {{{
   noremap <F2> :YcmCompleter GoTo<CR>
-  "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-  function! s:CRComplete()
-    if empty(v:completed_item)
-        execute "norm! i\<CR>"
-    endif
-  endfunction
-  inoremap <CR> <LEFT><RIGHT><C-O>:call <SID>CRComplete()<CR>
+  " function! s:CRComplete()
+  "   if empty(v:completed_item)
+  "       execute "norm! i\<CR>"
+  "   endif
+  " endfunction
+  " inoremap <CR> <LEFT><RIGHT><C-O>:call <SID>CRComplete()<CR>
 
   let g:ycm_use_clangd=0
   let g:ycm_add_preview_to_completeopt = 0
