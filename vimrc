@@ -84,6 +84,9 @@ inoremap <C-a> <Esc>I
 map H ^
 map L $
 
+" Save as sudo
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 " map <enter> o<ESC>
 
 function! RemoveNextDoubleChar(char)
