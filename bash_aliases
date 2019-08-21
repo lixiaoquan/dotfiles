@@ -21,6 +21,7 @@ alias f="find . -type f -iname"
 alias b="cd -"
 alias p='pytest -v --disable-warnings'
 alias e='exit'
+alias c='git clean -fX'
 
 # Other aliases
 alias ll='ls -alF'

@@ -81,7 +81,8 @@ to_sh_home () {
   scp $1 10.21.12.17:/home/xiaoquan.li
 }
 
-alias s='bsync -b ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
+alias s='git clean -fX; bsync -b /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
+alias ss='git clean -fX; bsync /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
 alias cm='cd /LocalRun/xiaoquan.li/software_develop/cmodel'
 alias re='cd /LocalRun/xiaoquan.li/software_develop/reg'
 alias lsqemu="psg qemu"
