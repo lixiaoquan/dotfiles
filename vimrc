@@ -183,6 +183,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'valloric/youcompleteme'
 " {{{
   noremap <F2> :YcmCompleter GoTo<CR>
