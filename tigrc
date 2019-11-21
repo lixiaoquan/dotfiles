@@ -2,5 +2,6 @@ set refresh-mode = periodic
 set refresh-interval = 5
 bind main   r !git review
 bind main   p !git push
+bind main   b !git revert
 bind status r !git review
 bind status a !?git commit --amend

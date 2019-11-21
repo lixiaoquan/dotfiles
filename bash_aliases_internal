@@ -1,6 +1,9 @@
 # Alias for moving around quickly
 CURRENT_PROJECT=dli
 
+# Set this to override root folder
+PROJECT_ROOT=/LocalRun/xiaoquan.li
+
 adjust_environment () {
 
   PROJECT_BINARY=''
@@ -10,11 +13,13 @@ adjust_environment () {
   PROJECT_TVM=''
 
   if [ "$CURRENT_PROJECT" = "dli" ]; then
-    PROJECT_BINARY=/LocalRun/xiaoquan.li/build-ai_software-Desktop-Debug
-    PROJECT_SOURCE=/LocalRun/xiaoquan.li/ai_software/compiler/tvm
-    PROJECT_TVM=/LocalRun/xiaoquan.li/ai_software/compiler/tvm
-    PROJECT_DRIVER=/LocalRun/xiaoquan.li/ai_software/driver
-    PROJECT_TEST=/LocalRun/xiaoquan.li/ai_software/compiler/tvm/dli/tests/python
+    echo ${PROJECT_ROOT}
+    PROJECT_BINARY=${PROJECT_ROOT}/build-ai_software-Desktop-Debug
+    PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/compiler/tvm
+    PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
+    PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver
+    PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dli/tests/python
+    PROJECT_DLNN=${PROJECT_ROOT}/ai_software/tensorflow/tensorflow_dlnn
   else
     echo 'CURRENT_PROJECT is not one of [dli], do nothing'
   fi
@@ -53,7 +58,7 @@ alias tvm='
           func() {
              adjust_environment
 
-             [ ! -z "$PROJECT_SOURCE" ]; cd $PROJECT_TVM
+             [ ! -z "$PROJECT_TVM" ]; cd $PROJECT_TVM
           }; func
           '
 
@@ -61,7 +66,7 @@ alias dr='
           func() {
              adjust_environment
 
-             [ ! -z "$PROJECT_SOURCE" ]; cd $PROJECT_DRIVER
+             [ ! -z "$PROJECT_DRIVER" ]; cd $PROJECT_DRIVER
           }; func
           '
 
@@ -69,7 +74,15 @@ alias l='
           func() {
              adjust_environment
 
-             [ ! -z "$PROJECT_SOURCE" ]; vim -n $PROJECT_TEST/compiler.txt
+             [ ! -z "$PROJECT_TEST" ]; vim -n $PROJECT_TEST/compiler.txt
+          }; func
+          '
+
+alias dlnn='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_DLNN" ]; cd $PROJECT_DLNN
           }; func
           '
 

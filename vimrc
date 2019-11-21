@@ -220,6 +220,7 @@ Plug 'valloric/youcompleteme'
              \ "zimbu":1,
              \ "py":1,
              \ }
+  let g:ycm_server_python_interpreter = "/usr/bin/python2.7"
 " }}}
 call plug#end()
 
