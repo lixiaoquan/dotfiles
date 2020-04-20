@@ -15,7 +15,7 @@ fi
 
 # Level 0 alias
 alias t='top'
-alias v='vim'
+alias v='~/local/bin/vim'
 alias n='ninja'
 alias f="find . -type f -iname"
 alias b="cd -"
