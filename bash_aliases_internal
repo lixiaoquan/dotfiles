@@ -116,5 +116,5 @@ penv() {
     . /mercury/tools/python/penv3.6.8/bin/activate
   fi
 }
-alias prepare=`penv; source ./activate.sh'
-alias cmake=`/mercury/utility/bin/cmake'
+alias prepare='penv; source ./activate.sh'
+alias cmake='/mercury/utility/bin/cmake'
