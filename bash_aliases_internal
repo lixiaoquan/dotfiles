@@ -4,6 +4,8 @@ CURRENT_PROJECT=dli
 # Set this to override root folder
 PROJECT_ROOT=/LocalRun/xiaoquan.li
 
+MODEL=/mercury/share/DLI/models
+
 adjust_environment () {
 
   PROJECT_BINARY=''
@@ -18,7 +20,7 @@ adjust_environment () {
     PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/compiler/tvm
     PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
     PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver
-    PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dli/tests/python
+    PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dl/tests/python
     PROJECT_DLNN=${PROJECT_ROOT}/ai_software/tensorflow/tensorflow_dlnn
   else
     echo 'CURRENT_PROJECT is not one of [dli], do nothing'
@@ -107,5 +109,12 @@ alias ctf='scp /LocalRun/xiaoquan.li/1.12_cpu_release/tensorflow-1.12.0-cp35-cp3
 alias modified_tf='. /LocalRun/xiaoquan.li/modified_tensorflow/bin/activate'
 
 # Activate python virtualenv
-alias penv3.5='. /LocalRun/xiaoquan.li/penv3.5/bin/activate'
-alias penv3.6='. /LocalRun/xiaoquan.li/penv3.6/bin/activate'
+penv() {
+  if [ -d "/usr/local/cuda" ]; then
+    . /mercury/tools/python/penv3.6.8_gpu/bin/activate
+  else
+    . /mercury/tools/python/penv3.6.8/bin/activate
+  fi
+}
+alias prepare=`penv; source ./activate.sh'
+alias cmake=`/mercury/utility/bin/cmake'

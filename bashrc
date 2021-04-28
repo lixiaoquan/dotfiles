@@ -137,6 +137,10 @@ if [ -d "$HOME/local/bin" ]; then
   export PATH=$HOME/local/bin:$PATH
 fi
 
+if [ -d "$HOME/node-v12.16.2-linux-x64/bin/" ]; then
+  export PATH=$HOME/node-v12.16.2-linux-x64/bin/:$PATH
+fi
+
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
