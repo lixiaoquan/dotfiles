@@ -32,3 +32,10 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# Config different email according to host
+if [ $HOSTNAME = "ops-Alienware-17-R4" ]; then
+  ln -s $dir/gitconfig-email-github ~/.gitconfig-email
+else
+  ln -s $dir/gitconfig-email-work ~/.gitconfig-email
+fi

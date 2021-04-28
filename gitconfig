@@ -1,5 +1,6 @@
+[include]
+  path = .gitconfig-email
 [user]
-  email = xiaoquan.li@denglin.ai
   name = Li Xiaoquan
 [alias]
   ci = commit -a
