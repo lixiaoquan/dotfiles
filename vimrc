@@ -187,6 +187,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
   noremap <F2> :call CocAction('jumpDefinition')<CR>
 " }}}
+Plug 'tpope/vim-dispatch'
 call plug#end()
 
 "let g:solarized_termcolors=256
