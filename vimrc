@@ -40,8 +40,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 " coding mapping
 " Disable useless functions
-inoremap <F1> <nop>
-noremap <F1> <nop>
 noremap K k
 noremap J j
 noremap <Up> <nop>
@@ -52,6 +50,15 @@ noremap <Right> <nop>
 "inoremap <Down> <nop>
 "inoremap <Left> <nop>
 "inoremap <Right> <nop>
+
+" Use F1 as save and build
+" There is no project concept in vim, so may need to modify $PROJECT_BINARY
+function! SaveAndBuild()
+  wa
+  execute 'Dispatch cmake --build '.$PROJECT_BINARY
+endfunction
+inoremap <F1> <ESC> :call SaveAndBuild() <CR>
+noremap <F1> :call SaveAndBuild() <CR>
 
 
 noremap <F3> <ESC><C-O>
