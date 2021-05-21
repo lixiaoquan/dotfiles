@@ -34,6 +34,9 @@ set cursorcolumn
 set number
 set relativenumber
 
+" https://www.johnhawthorn.com/2012/09/vi-escape-delays/
+set ttimeoutlen=0
+
 " viminfo and last-position-jump
 set viminfo='20,\"100,<500
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
