@@ -55,13 +55,13 @@ noremap <Right> <nop>
 "inoremap <Right> <nop>
 
 " Use F1 as save and build
-" There is no project concept in vim, so may need to modify $PROJECT_BINARY
 function! SaveAndBuild()
   wa
-  execute 'Dispatch cmake --build '.$PROJECT_BINARY
+  let cmake='~/cmake-3.17.1-Linux-x86_64/bin/cmake'
+  execute 'AsyncRun -cmd=<root> '.cmake.' --build --preset=default'
 endfunction
-inoremap <F1> <ESC> :call SaveAndBuild() <CR>
-noremap <F1> :call SaveAndBuild() <CR>
+inoremap <silent> <F1> <ESC> :call SaveAndBuild() <CR>
+noremap <silent> <F1> :call SaveAndBuild() <CR>
 
 
 noremap <F3> <ESC><C-O>
@@ -205,6 +205,9 @@ Plug 'skywind3000/asyncrun.vim'
 
   " ring the bell to notify you job finished
   let g:asyncrun_bell = 1
+
+  " root
+  let g:asyncrun_rootmarks = ['CMakeUserPresets.json']
 
   " F10 to toggle quickfix window
   nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
