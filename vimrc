@@ -57,7 +57,7 @@ noremap <Right> <nop>
 " Use F1 as save and build
 function! SaveAndBuild()
   wa
-  let cmake='~/cmake-3.17.1-Linux-x86_64/bin/cmake'
+  let cmake='~/cmake-3.20.1-Linux-x86_64/bin/cmake'
   execute 'AsyncRun -cmd=<root> '.cmake.' --build --preset=default'
 endfunction
 inoremap <silent> <F1> <ESC> :call SaveAndBuild() <CR>

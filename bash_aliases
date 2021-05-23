@@ -22,6 +22,7 @@ alias b="cd -"
 alias p='pytest -v --disable-warnings'
 alias e='exit'
 alias c='git clean -fX'
+alias z='lazygit'
 
 # Other aliases
 alias ll='ls -alF'

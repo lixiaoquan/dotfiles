@@ -117,4 +117,4 @@ penv() {
   fi
 }
 alias prepare='penv; source ./activate.sh'
-alias cmake='/mercury/utility/bin/cmake'
+alias cmake='~/cmake-3.20.1-Linux-x86_64/bin/cmake'
