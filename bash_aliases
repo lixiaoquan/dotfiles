@@ -51,3 +51,4 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias cpwd='pwd | xclip -selection clipboard'
 
 alias gdb='gdb -q'
+alias dotfiles='cd $HOME/dotfiles'

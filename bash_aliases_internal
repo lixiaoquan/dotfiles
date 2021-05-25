@@ -5,6 +5,7 @@ CURRENT_PROJECT=dli
 PROJECT_ROOT=/LocalRun/xiaoquan.li
 
 MODEL=/mercury/share/DLI/models
+ONNX_MODEL=/mercury/share/DLI/onnx
 
 adjust_environment () {
 
@@ -17,7 +18,7 @@ adjust_environment () {
   if [ "$CURRENT_PROJECT" = "dli" ]; then
     echo ${PROJECT_ROOT}
     PROJECT_BINARY=${PROJECT_ROOT}/build-ai_software-Desktop-Debug
-    PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/compiler/tvm
+    PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/
     PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
     PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver
     PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dl/tests/python
@@ -76,15 +77,7 @@ alias l='
           func() {
              adjust_environment
 
-             [ ! -z "$PROJECT_TEST" ]; vim -n $PROJECT_TEST/compiler.txt
-          }; func
-          '
-
-alias dlnn='
-          func() {
-             adjust_environment
-
-             [ ! -z "$PROJECT_DLNN" ]; cd $PROJECT_DLNN
+             [ ! -z "$PROJECT_BINARY" ]; vim -n $PROJECT_BINARY/dl.txt
           }; func
           '
 
@@ -98,7 +91,8 @@ to_sh_home () {
 
 alias s='git clean -fX; bsync -b /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
 alias ss='git clean -fX; bsync /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
-alias cm='cd /LocalRun/xiaoquan.li/software_develop/cmodel'
+alias m='cd ${MODEL}'
+alias o='cd ${ONNX_MODEL}'
 alias re='cd /LocalRun/xiaoquan.li/software_develop/reg'
 alias lsqemu="psg qemu"
 
