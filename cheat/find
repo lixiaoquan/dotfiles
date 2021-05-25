@@ -1,0 +1,4 @@
+# in cd-home-password-file mechine 10.28.12.12 user xiaoquan.li password xxx
+
+# copy a directory
+find .git -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/dotfiles/{} \;

@@ -1,0 +1,4 @@
+# copy a file
+curl -u xiaoquan.li:xxxxxx -T ${file_full_path} ftp://10.28.12.12/
+
+curl --netrc-file /home/xiaoquan.li/cd-home-password-file -T ${file_full_path} ftp://10.28.12.12/
