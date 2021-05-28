@@ -135,7 +135,8 @@ function! s:CloseBracket()
       return "{\<Enter>}\<Esc>O"
     endif
     endfunction
-inoremap <expr> {<Enter> <SID>CloseBracket()
+" It's replaced by auto-pairs
+" inoremap <expr> {<Enter> <SID>CloseBracket()
 
 nmap Q gq
 
@@ -190,6 +191,10 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
+" {{{
+  "let g:solarized_termcolors=256
+  set background=dark
+" }}}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -215,8 +220,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-"let g:solarized_termcolors=256
-set background=dark
 colorscheme solarized
 
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
