@@ -14,14 +14,16 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Level 0 alias
+alias b="cd -"
+c () {
+  cd "$@" && ls;
+}
+alias e='exit'
+alias f="ag -i -g"
+alias p='pytest -v --disable-warnings'
+alias n='ninja'
 alias t='top'
 alias v='~/local/bin/vim'
-alias n='ninja'
-alias f="find . -type f -iname"
-alias b="cd -"
-alias p='pytest -v --disable-warnings'
-alias e='exit'
-alias c='git clean -fX'
 alias z='lazygit'
 
 # Other aliases

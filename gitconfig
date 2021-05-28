@@ -20,6 +20,7 @@
   r = review
   d = diff
   s = status
+  f = fetch --all
 
 [core]
   editor = vim
