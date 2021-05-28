@@ -212,6 +212,7 @@ Plug 'skywind3000/asyncrun.vim'
   " F10 to toggle quickfix window
   nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
 " }}}
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 "let g:solarized_termcolors=256

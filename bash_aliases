@@ -54,3 +54,4 @@ alias cpwd='pwd | xclip -selection clipboard'
 
 alias gdb='gdb -q'
 alias dotfiles='cd $HOME/dotfiles'
+alias vimrc='vim $HOME/.vimrc'
