@@ -218,6 +218,8 @@ Plug 'skywind3000/asyncrun.vim'
   nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
 " }}}
 Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-brace'
 call plug#end()
 
 colorscheme solarized
