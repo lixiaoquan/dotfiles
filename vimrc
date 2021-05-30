@@ -72,12 +72,6 @@ set pastetoggle=<F5>
 noremap <F6> mz:r !xclip -o -sel clip<CR>`z
 map <F7> :set paste<CR>i<CR><ESC>k<F6>gJgJ:set nopaste<CR>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
-"inoremap { {<CR>}<CR><ESC>kO<TAB>
-"inoremap ( ()<LEFT>
-"inoremap [ []<LEFT>
-"inoremap " ""<LEFT>
-"inoremap ' ''<LEFT>
-"inoremap ; <ESC>A;
 nnoremap <silent> _ <C-w>>
 nnoremap <silent> + <C-w><
 
@@ -90,6 +84,8 @@ inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
 nnoremap <C-q> :qa!<cr>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
+" paste clipboard
+inoremap <C-V> <Esc>"*pa
 
 map H ^
 map L $
@@ -219,7 +215,7 @@ Plug 'skywind3000/asyncrun.vim'
 " }}}
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-user'
-Plug 'Julian/vim-textobj-brace'
+Plug 'rhysd/vim-textobj-anyblock'
 call plug#end()
 
 colorscheme solarized
