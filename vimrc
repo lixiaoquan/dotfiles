@@ -237,6 +237,10 @@ Plug 'lifepillar/vim-cheat40'
 " {{{
   let g:cheat40_use_default=0
 " }}}
+Plug 'arp242/undofile_warn.vim'
+" {{{
+  let g:undofile_warn_mode=2
+" }}}
 call plug#end()
 
 colorscheme solarized
