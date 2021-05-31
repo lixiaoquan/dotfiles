@@ -85,7 +85,17 @@ nnoremap <C-q> :qa!<cr>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 " paste clipboard
-inoremap <C-V> <Esc>"*pa
+" register * sometimes doesn't work in some vnc
+" inoremap <C-V> <Esc>"*pa
+
+function! Paste()
+  " read clipboard to a
+  let @a=system("xclip -o -sel clip")
+  " paste a
+  normal! "ap
+endfunction
+
+inoremap <C-V> <Esc>:call Paste()<CR>a
 
 map H ^
 map L $
