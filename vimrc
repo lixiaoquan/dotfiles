@@ -230,6 +230,10 @@ Plug 'wellle/targets.vim'
       \ 'b': {'pair': [{'o':'(', 'c':')'}, {'o':'[', 'c':']'}, {'o':'{', 'c':'}'}, {'o':'<', 'c':'>'}]},
       \ })
 " }}}
+Plug 'lifepillar/vim-cheat40'
+" {{{
+  let g:cheat40_use_default=0
+" }}}
 call plug#end()
 
 colorscheme solarized
