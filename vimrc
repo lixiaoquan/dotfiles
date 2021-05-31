@@ -215,6 +215,11 @@ Plug 'skywind3000/asyncrun.vim'
 " }}}
 Plug 'jiangmiao/auto-pairs'
 Plug 'wellle/targets.vim'
+" {{{
+  autocmd User targets#mappings#user call targets#mappings#extend({
+      \ 'b': {'pair': [{'o':'(', 'c':')'}, {'o':'[', 'c':']'}, {'o':'{', 'c':'}'}, {'o':'<', 'c':'>'}]},
+      \ })
+" }}}
 call plug#end()
 
 colorscheme solarized
