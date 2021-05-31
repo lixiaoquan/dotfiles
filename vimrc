@@ -236,6 +236,8 @@ Plug 'wellle/targets.vim'
 Plug 'lifepillar/vim-cheat40'
 " {{{
   let g:cheat40_use_default=0
+
+  nnoremap <silent> <space>t  :<C-u>Cheat40<cr>
 " }}}
 Plug 'arp242/undofile_warn.vim'
 " {{{
