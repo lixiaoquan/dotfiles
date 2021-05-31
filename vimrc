@@ -33,6 +33,7 @@ set cursorline
 set cursorcolumn
 set number
 set relativenumber
+set mouse=a
 
 " https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 set ttimeoutlen=0
@@ -65,7 +66,9 @@ noremap <silent> <F1> :call SaveAndBuild() <CR>
 
 
 noremap <F3> <ESC><C-O>
-noremap <F4> :call system('xclip', @0)<CR>
+" noremap <F4> :call system('xclip', @0)<CR>
+noremap <F4> :
+inoremap <F4> <ESC>:
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
