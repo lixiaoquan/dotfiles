@@ -143,6 +143,8 @@ fi
 
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
+export EDITOR=vim
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 if type thefuck >/dev/null 2>&1; then
