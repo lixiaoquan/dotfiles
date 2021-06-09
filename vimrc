@@ -206,6 +206,11 @@ Plug 'altercation/vim-colors-solarized'
 " }}}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
+" {{{
+  " Use Ctrl-/ to comment/uncomment
+  imap <C-_> <C-O>gcc
+  nmap <C-_> gcc
+" }}}
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
