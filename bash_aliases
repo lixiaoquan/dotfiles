@@ -19,7 +19,7 @@ c () {
   cd "$@" && ls;
 }
 alias e='exit'
-alias f="ag -i -g"
+alias f="ag --unrestricted -i -g"
 alias p='pytest -v --disable-warnings'
 alias n='ninja'
 alias t='top'
