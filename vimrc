@@ -75,6 +75,8 @@ set pastetoggle=<F5>
 noremap <F6> mz:r !xclip -o -sel clip<CR>`z
 map <F7> :set paste<CR>i<CR><ESC>k<F6>gJgJ:set nopaste<CR>
 noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
+noremap <F12> :Cheat40<cr>
+inoremap <F12> <ESC>:Cheat40<cr>
 nnoremap <silent> _ <C-w>>
 nnoremap <silent> + <C-w><
 
