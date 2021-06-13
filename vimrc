@@ -244,9 +244,9 @@ Plug 'lifepillar/vim-cheat40'
 
   nnoremap <silent> <space>t  :<C-u>Cheat40<cr>
 " }}}
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+Plug 'machakann/vim-sandwich'
 call plug#end()
+runtime macros/sandwich/keymap/surround.vim
 
 colorscheme solarized
 
