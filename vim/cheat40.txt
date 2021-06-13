@@ -58,4 +58,5 @@ Delete to beginning      «C-u»         I
 Run command              «F4»          I
 Add/Remove bookmark      mm            N
 Show all bookmarks       ma            N
+match line from non-ws   \S.*$         N
 }}}

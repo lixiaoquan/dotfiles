@@ -244,6 +244,8 @@ Plug 'lifepillar/vim-cheat40'
 
   nnoremap <silent> <space>t  :<C-u>Cheat40<cr>
 " }}}
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 colorscheme solarized
