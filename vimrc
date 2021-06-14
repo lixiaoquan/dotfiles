@@ -247,6 +247,7 @@ Plug 'lifepillar/vim-cheat40'
   nnoremap <silent> <space>t  :<C-u>Cheat40<cr>
 " }}}
 Plug 'machakann/vim-sandwich'
+Plug 'unblevable/quick-scope'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
 
