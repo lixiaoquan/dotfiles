@@ -6,3 +6,7 @@ if ! command -v parallel &> /dev/null
 then
   alias copy_dotfiles_to_internel='find .git -type f -print0 | parallel -0 -j4 curl -u xiaoquan.li:121212 --ftp-create-dirs -T {} ftp://10.28.12.12/dotfiles/{}'
 fi
+
+to_internal_dotfiles() {
+  find $1 -type f -exec curl -u xiaoquan.li:121212 --ftp-create-dirs -T {} ftp://10.28.12.12/dotfiles/{} \;
+}
