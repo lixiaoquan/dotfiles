@@ -108,6 +108,11 @@ map L $
 " Save as sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+" Map ALT keys
+" ALT-D to dw to delete a word, same as bash
+execute "set <M-d>=\ed"
+inoremap <M-d> <C-O>dw
+
 " map <enter> o<ESC>
 
 function! RemoveNextDoubleChar(char)

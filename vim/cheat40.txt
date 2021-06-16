@@ -54,13 +54,16 @@ About {{{2
   *    Acts on text under/after cursor
 }}}
 Edit {{{1
-Delete to beginning      «C-u»         I
-Run command              «F4»          I
-Add/Remove bookmark      mm            N
-Show all bookmarks       ma            N
-Match line from non-ws   \S.*$         N
+Delete to beginning      «C-u»       I
+Run command              «F4»        I
+Add/Remove bookmark      mm          N
+Show all bookmarks       ma          N
+Match line from non-ws   \S.*$       N
+Delete a word before     db          N
+Delete a word before     «C-w»       I
+Delete a word after      «A-d»       I
 }}}
 Text Object {{{1
-Select ([xxxx], yyyy)    ia            N
-Select ([xxxx, ]yyyy)    aa            N
+Select ([xxxx], yyyy)    ia          N
+Select ([xxxx, ]yyyy)    aa          N
 }}}
