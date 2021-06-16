@@ -92,6 +92,7 @@ inoremap <C-a> <Esc>I
 " paste clipboard
 " register * sometimes doesn't work in some vnc
 " inoremap <C-V> <Esc>"*pa
+inoremap <C-k> <c-o>d$
 
 function! Paste()
   " read clipboard to a

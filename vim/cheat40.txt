@@ -55,13 +55,14 @@ About {{{2
 }}}
 Edit {{{1
 Delete to beginning      «C-u»       I
+Delete to end*           «C-k»       I
+Delete a word before     db          N
+Delete a word before     «C-w»       I
+Delete a word after*     «A-d»       I
 Run command              «F4»        I
 Add/Remove bookmark      mm          N
 Show all bookmarks       ma          N
 Match line from non-ws   \S.*$       N
-Delete a word before     db          N
-Delete a word before     «C-w»       I
-Delete a word after      «A-d»       I
 }}}
 Text Object {{{1
 Select ([xxxx], yyyy)    ia          N
