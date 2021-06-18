@@ -116,45 +116,6 @@ inoremap <M-d> <C-O>dw
 
 " map <enter> o<ESC>
 
-function! RemoveNextDoubleChar(char)
-    let l:line=getline(".")
-    let l:next_char=l:line[col(".")-1]
-    let l:pair_char=a:char
-
-    if a:char == ')'
-        let l:pair_char='('
-    endif
-    if a:char == ']'
-        let l:pair_char='['
-    endif
-
-    if l:pair_char == l:next_char
-        execute "normal! l"
-    else
-        execute "normal! a" . a:char . ""
-    endif
-endfunction
-
-"inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>i
-"inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>i
-
-
-
-"auto close {
-function! s:CloseBracket()
-    let line = getline('.')
-    if line =~# '^\s*\(struct\|class\|enum\) '
-      return "{\<Enter>};\<Esc>O"
-    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
-      " Probably inside a function call. Close it off.
-      return "{\<Enter>});\<Esc>O"
-    else
-      return "{\<Enter>}\<Esc>O"
-    endif
-    endfunction
-" It's replaced by auto-pairs
-" inoremap <expr> {<Enter> <SID>CloseBracket()
-
 nmap Q gq
 
 " Set VIM runtime
