@@ -55,15 +55,32 @@ noremap <Right> <nop>
 "inoremap <Left> <nop>
 "inoremap <Right> <nop>
 
+let s:cmake='~/cmake-3.20.1-linux-x86_64/bin/cmake'
+let s:cmake_cache_file='~/build-ai-software-Desktop-Debug/CMakeCache.txt'
 " Use F1 as save and build
 function! SaveAndBuild()
-  wa
-  let cmake='~/cmake-3.20.1-linux-x86_64/bin/cmake'
-  execute 'AsyncRun -cwd=<root> '.cmake.' --build --preset=default'
+  execute 'AsyncRun -cwd=<root> -save=2 '.s:cmake.' --build --preset=default'
 endfunction
 inoremap <silent> <F1> <ESC> :call SaveAndBuild() <CR>
 noremap <silent> <F1> :call SaveAndBuild() <CR>
 
+function! s:cmake_configure()
+  execute 'AsyncRun -cwd=<root> '.s:cmake.' --preset=default'
+endfunction
+
+function! s:cmake_clean_cache()
+  let cmd=`rm -fv `.s:cmake_cache_file
+  execute 'AsyncRun -cwd=<root> '.cmd
+endfunction
+
+function! s:cmake_reconfigure()
+  let cmd=`rm -fv `.s:cmake_cache_file.' && '.s:cmake.' --preset=default'
+  execute 'AsyncRun -cwd=<root> -save=2 '.cmd
+endfunction
+
+command CleanCache call s:cmake_clean_cache()
+command Configure call s:cmake_configure()
+command Reconfigure call s:cmake_reconfigure()
 
 noremap <F3> <ESC><C-O>
 " noremap <F4> :call system('xclip', @0)<CR>
