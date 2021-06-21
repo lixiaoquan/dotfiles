@@ -69,12 +69,12 @@ function! s:cmake_configure()
 endfunction
 
 function! s:cmake_clean_cache()
-  let cmd=`rm -fv `.s:cmake_cache_file
+  let cmd='rm -fv '.s:cmake_cache_file
   execute 'AsyncRun -cwd=<root> '.cmd
 endfunction
 
 function! s:cmake_reconfigure()
-  let cmd=`rm -fv `.s:cmake_cache_file.' && '.s:cmake.' --preset=default'
+  let cmd='rm -fv '.s:cmake_cache_file.' && '.s:cmake.' --preset=default'
   execute 'AsyncRun -cwd=<root> -save=2 '.cmd
 endfunction
 
