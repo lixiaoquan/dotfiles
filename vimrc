@@ -395,4 +395,4 @@ autocmd FileChangedShellPost *
 
 " https://vi.stackexchange.com/questions/74/is-it-possible-to-make-vim-auto-save-files
 " Save on lost focus
-autocmd FocusLost * silent! w
+autocmd FocusLost * silent! wa
