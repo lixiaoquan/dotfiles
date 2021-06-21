@@ -56,7 +56,7 @@ noremap <Right> <nop>
 "inoremap <Right> <nop>
 
 let s:cmake='~/cmake-3.20.1-linux-x86_64/bin/cmake'
-let s:cmake_cache_file='../build-ai-software-Desktop-Debug/CMakeCache.txt'
+let s:cmake_cache_file='../build-ai_software-Desktop-Debug/CMakeCache.txt'
 " Use F1 as save and build
 function! SaveAndBuild()
   execute 'AsyncRun -cwd=<root> -save=2 '.s:cmake.' --build --preset=default'
