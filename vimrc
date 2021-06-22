@@ -68,7 +68,7 @@ imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 noremap <F6> mz:r !xclip -o -sel clip<CR>`z
 map <F7> :set paste<CR>i<CR><ESC>k<F6>gJgJ:set nopaste<CR>
-noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
+" noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
 noremap <F12> :Cheat40<cr>
 inoremap <F12> <ESC>:Cheat40<cr>
 nnoremap <silent> _ <C-w>>
@@ -81,6 +81,7 @@ inoremap <C-t> <esc>:wq!<cr>               " save and exit
 nnoremap <C-t> :wq!<cr>
 inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
 nnoremap <C-q> :qa!<cr>
+xnoremap <C-q> <esc>:qa!<cr>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 " paste clipboard
@@ -112,6 +113,9 @@ inoremap <M-d> <C-O>dw
 
 nmap Q gq
 
+nnoremap <leader>h <c-w>h
+nnoremap <leader>l <c-w>l
+
 " Set VIM runtime
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -126,14 +130,16 @@ Plug 'junegunn/fzf.vim'
   nnoremap <silent> <leader>o :BTags<CR>
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <F8> :History<CR>
+  inoremap <silent> <F8> <esc>:History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   nnoremap <silent> <leader>. :AgIn 
 
   nnoremap <silent> K :call SearchWordWithAg()<CR>
   vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
-  nnoremap <silent> <leader>gl :Commits<CR>
-  nnoremap <silent> <leader>ga :BCommits<CR>
-  nnoremap <silent> <leader>ft :Filetypes<CR>
+  " nnoremap <silent> <leader>gl :Commits<CR>
+  " nnoremap <silent> <leader>ga :BCommits<CR>
+  " nnoremap <silent> <leader>ft :Filetypes<CR>
 
   imap <C-x><C-f> <plug>(fzf-complete-file-ag)
   imap <C-x><C-l> <plug>(fzf-complete-line)
@@ -345,7 +351,7 @@ Plug 'lifepillar/vim-cheat40'
 " {{{
   let g:cheat40_use_default=0
 
-  nnoremap <silent> <space>t  :<C-u>Cheat40<cr>
+  nnoremap <silent> <leader>t  :<C-u>Cheat40<cr>
 " }}}
 Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
