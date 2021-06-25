@@ -68,3 +68,6 @@ Text Object {{{1
 Select ([xxxx], yyyy)    ia          N
 Select ([xxxx, ]yyyy)    aa          N
 }}}
+File {{{1
+Open in opposite window  «Spc»o      N
+}}}

@@ -132,8 +132,6 @@ Plug 'junegunn/fzf.vim'
   nnoremap <silent> <leader>o :BTags<CR>
   nnoremap <silent> <leader>O :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
-  nnoremap <silent> <F8> :History<CR>
-  inoremap <silent> <F8> <esc>:History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   nnoremap <silent> <leader>. :AgIn
 
@@ -170,33 +168,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-"{{{
-  let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
-  let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
-  let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
-  let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
-  let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right
-  let g:airline#extensions#tabline#buffer_min_count = 2  " minimum of 2 buffers needed to display the tabline
-  let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
-  let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
-
-  let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-  let g:airline#extensions#tabline#show_tab_nr = 1
-  let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-  let g:airline#extensions#tabline#buffer_nr_show = 1
-  let g:airline#extensions#tabline#fnamecollapse = 0
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-
-  nmap <leader>1 <Plug>AirlineSelectTab1
-  nmap <leader>2 <Plug>AirlineSelectTab2
-  nmap <leader>3 <Plug>AirlineSelectTab3
-  nmap <leader>4 <Plug>AirlineSelectTab4
-  nmap <leader>5 <Plug>AirlineSelectTab5
-  nmap <leader>6 <Plug>AirlineSelectTab6
-  nmap <leader>7 <Plug>AirlineSelectTab7
-  nmap <leader>8 <Plug>AirlineSelectTab8
-  nmap <leader>9 <Plug>AirlineSelectTab9
-"}}}
 Plug 'altercation/vim-colors-solarized'
 " {{{
   "let g:solarized_termcolors=256
@@ -344,7 +315,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Show commands.
   nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
   " Find symbol of current document.
-  nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+  " nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
   " Search workspace symbols.
   nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
   " Do default action for next item.
@@ -353,6 +324,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+  nnoremap <silent> <F8> :<C-u>CocList mru<CR>
+  inoremap <silent> <F8> <esc>:<C-u>CocList mru<CR>
+
+  " Open file in mru in opposite window
+  nnoremap <silent> <space>o  <C-w>w:<C-u>CocList mru<cr>
 " }}}
 Plug 'skywind3000/asyncrun.vim'
 " {{{
