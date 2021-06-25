@@ -329,8 +329,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nnoremap <silent> <F8> :<C-u>CocList mru<CR>
   inoremap <silent> <F8> <esc>:<C-u>CocList mru<CR>
 
-  " Open file in mru in opposite window
-  nnoremap <silent> <space>o  <C-w>w:<C-u>CocList mru<cr>
+  " Close quickfix and open file from mru in opposite window
+  nnoremap <silent> <space>o  :<C-u>cclose<cr><C-w>w:<C-u>CocList mru<cr>
 " }}}
 Plug 'skywind3000/asyncrun.vim'
 " {{{
