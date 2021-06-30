@@ -16,6 +16,11 @@ to_internal_coc_extensions() {
   find .config/coc/extensions -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/{} \;
 }
 
+to_internal_home_packages() {
+  cd
+  find packages -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/{} \;
+}
+
 update_coc_extensions() {
   cd
   cd .config/coc
