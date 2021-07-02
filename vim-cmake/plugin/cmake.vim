@@ -1,8 +1,8 @@
 let g:cmake_bin='/mercury/utility/cmake-3.20.5-linux-x86_64/bin/cmake'
 let g:cmake_cache_file='../build-ai_software-Desktop-Debug/CMakeCache.txt'
 
-function! cmake#build()
-  execute 'AsyncRun -cwd=<root> -save=2 '.g:cmake_bin.' --build --preset=default'
+function! cmake#build(preset = 'default')
+  execute 'AsyncRun -cwd=<root> -save=2 '.g:cmake_bin.' --build --preset=' .. a:preset
 endfunction
 
 function! s:cmake_configure()
@@ -22,3 +22,4 @@ endfunction
 command CleanCache call s:cmake_clean_cache()
 command Configure call s:cmake_configure()
 command Reconfigure call s:cmake_reconfigure()
+command -nargs=? Build call cmake#build(<q-args>)
