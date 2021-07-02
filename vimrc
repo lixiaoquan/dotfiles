@@ -362,6 +362,7 @@ Plug 'lifepillar/vim-cheat40'
 " }}}
 Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
+Plug 'skywind3000/vim-terminal-help'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
