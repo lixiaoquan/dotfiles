@@ -1,5 +1,4 @@
 let g:cmake_bin='/mercury/utility/cmake-3.20.5-linux-x86_64/bin/cmake'
-let g:cmake_cache_file='../build-ai_software-Desktop-Debug/CMakeCache.txt'
 
 function! cmake#build(preset = 'default')
   execute 'AsyncRun -cwd=<root> -save=2 '.g:cmake_bin.' --build --preset=' .. a:preset
@@ -10,7 +9,11 @@ function! s:cmake_configure()
 endfunction
 
 function! s:cmake_clean_cache()
-  let cmd='rm -fv '.g:cmake_cache_file
+  if !exists("g:cmake_binary_dir")
+    echom "g:cmake_binary_dir is not specified, can't clean cache"
+    return
+  endif
+  let cmd='rm -fv '.g:cmake_binary_dir.'/CMakeCache.txt'
   execute 'AsyncRun -cwd=<root> '.cmd
 endfunction
 
