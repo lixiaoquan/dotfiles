@@ -363,6 +363,10 @@ Plug 'lifepillar/vim-cheat40'
 Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
 Plug 'skywind3000/vim-terminal-help'
+Plug 'krisajenkins/vim-projectlocal'
+" {{{
+  let g:projectlocal_project_markers = ['CMakeUserPresets.json']
+" }}}
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
