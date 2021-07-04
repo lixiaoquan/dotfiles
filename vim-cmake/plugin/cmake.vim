@@ -18,7 +18,11 @@ function! s:cmake_clean_cache()
 endfunction
 
 function! s:cmake_reconfigure()
-  let cmd='rm -fv '.g:cmake_cache_file.' && '.g:cmake_bin.' --preset=default'
+  if !exists("g:cmake_binary_dir")
+    echom "g:cmake_binary_dir is not specified, can't reconfigure"
+    return
+  endif
+  let cmd='rm -fv '.g:cmake_binary_dir.'/CMakeCache.txt && '.g:cmake_bin.' --preset=default'
   execute 'AsyncRun -cwd=<root> -save=2 '.cmd
 endfunction
 
