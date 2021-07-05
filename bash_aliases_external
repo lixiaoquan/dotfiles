@@ -13,6 +13,10 @@ to_internal_dotfiles() {
   find $1 -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/dotfiles/{} \;
 }
 
+to_internal_dotfiles_sh() {
+  find $1 -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.21.12.12/dotfiles/{} \;
+}
+
 to_internal_coc_extensions() {
   cd
   find .config/coc/extensions -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/{} \;
