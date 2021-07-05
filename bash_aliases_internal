@@ -111,7 +111,6 @@ penv() {
   fi
 }
 alias prepare='penv; source ./activate.sh'
-alias cmake='/mercury/utility/cmake-3.20.5-linux-x86_64/bin/cmake'
 
 update_coc_extensions() {
   cd
@@ -119,3 +118,7 @@ update_coc_extensions() {
   rm -rf extensions
   tar zxvf /home/xiaoquan.li/coc_extensions.tar.gz
 }
+
+if [ -d "/mercury/utility/cmake-3.20.5-linux-x86_64/bin" ]; then
+  export PATH=/mercury/utility/cmake-3.20.5-linux-x86_64/bin:$PATH
+fi

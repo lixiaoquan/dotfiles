@@ -1,4 +1,6 @@
-let g:cmake_bin='/mercury/utility/cmake-3.20.5-linux-x86_64/bin/cmake'
+if !exists("g:cmake_bin")
+  let g:cmake_bin='cmake'
+endif
 
 function! cmake#build(preset = 'default')
   execute 'AsyncRun -cwd=<root> -save=2 '.g:cmake_bin.' --build --preset=' .. a:preset
