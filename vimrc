@@ -24,8 +24,11 @@ set backspace=indent,eol,start
 set nowritebackup
 set nobackup
 
-"color in putty
-set t_Co=256
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 set scrolloff=10
 
@@ -168,10 +171,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 " {{{
-  "let g:solarized_termcolors=256
   set background=dark
+  autocmd vimenter * ++nested colorscheme solarized8_flat
 " }}}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -370,8 +373,6 @@ Plug 'krisajenkins/vim-projectlocal'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
-
-colorscheme solarized
 
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
 set list listchars=tab:>-,trail:-
