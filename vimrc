@@ -123,7 +123,7 @@ nnoremap <leader>k <c-w>k
 
 " Set VIM runtime
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 " {{{
   let g:fzf_vim_statusline = 0 " disable statusline overwriting
