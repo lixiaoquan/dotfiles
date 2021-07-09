@@ -145,6 +145,8 @@ if [ -d "/home/xiaoquan.li/clangd_12.0.0/bin" ]; then
   export PATH=/home/xiaoquan.li/clangd_12.0.0/bin:$PATH
 fi
 
+export PATH=/home/xiaoquan.li/dotfiles/bin:$PATH
+
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 
 export EDITOR=vim
