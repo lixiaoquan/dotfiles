@@ -168,7 +168,8 @@ Plug 'junegunn/fzf.vim'
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
-Plug 'bfrg/vim-cpp-modern'
+" Plug 'bfrg/vim-cpp-modern'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'lifepillar/vim-solarized8'
