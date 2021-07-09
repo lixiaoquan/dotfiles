@@ -71,3 +71,11 @@ Select ([xxxx, ]yyyy)    aa          N
 File {{{1
 Open in opposite window  «Spc»o      N
 }}}
+Code {{{1
+Search symbol            «Spc»s      N
+}}}
+Surround {{{1
+Add                      ys{obj}{c}  N
+Change                   css         N
+Delete                   dss         N
+}}}
