@@ -49,10 +49,12 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " Disable useless functions
 noremap K k
 noremap J j
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
+noremap <Up> <c-w>k
+noremap <Down> <c-w>j
+noremap <Left> <c-w>h
+noremap <Right> <c-w>l
+nnoremap t <c-w>t
+nnoremap \ <c-w>b
 "inoremap <Up> <nop>
 "inoremap <Down> <nop>
 "inoremap <Left> <nop>
