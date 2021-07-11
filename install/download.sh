@@ -12,4 +12,14 @@ wget -c https://github.com/jesseduffield/lazygit/releases/download/v0.28.2/lazyg
 wget -c https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
 
+if [ -d vim ]; then
+  cd vim
+  git reset
+  git checkout .
+  git pull
+  cd -
+else
+  git clone https://github.com/vim/vim.git
+fi
+
 

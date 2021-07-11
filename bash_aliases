@@ -23,7 +23,7 @@ alias f="ag --unrestricted -i -g"
 alias p='pytest -v --disable-warnings'
 alias n='ninja'
 alias t='top'
-alias v='~/local/bin/vim'
+alias v='vim'
 alias z='lazygit'
 
 # Other aliases

@@ -195,7 +195,6 @@ Plug 'junegunn/fzf.vim'
 " }}}
 " Plug 'bfrg/vim-cpp-modern'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'lifepillar/vim-solarized8'
 " {{{
@@ -395,6 +394,12 @@ Plug 'skywind3000/vim-terminal-help'
 Plug 'krisajenkins/vim-projectlocal'
 " {{{
   let g:projectlocal_project_markers = ['CMakeUserPresets.json']
+" }}}
+Plug 'voldikss/vim-floaterm'
+" {{{
+  nnoremap   <silent>   <F12>   :FloatermToggle<CR>
+  tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
+  let g:floaterm_autoclose = 2
 " }}}
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
