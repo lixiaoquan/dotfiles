@@ -55,6 +55,7 @@ noremap <Left> <c-w>h
 noremap <Right> <c-w>l
 nnoremap t <c-w>t
 nnoremap \ <c-w>b
+nnoremap q <c-w>q
 "inoremap <Up> <nop>
 "inoremap <Down> <nop>
 "inoremap <Left> <nop>
@@ -82,9 +83,9 @@ nnoremap <silent> + <C-w><
 noremap <C-S> :w<CR>
 vnoremap <C-S> <C-C>:w<CR>
 inoremap <C-S> <C-O>:w<CR>
-inoremap <C-t> <esc>:wq!<cr>               " save and exit
-nnoremap <C-t> :wq!<cr>
-inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
+inoremap <C-t> <esc>:wqa!<cr>               " save and exit
+nnoremap <C-t> :wqa!<cr>
+inoremap <C-q> <esc>:qa!<cr>                " quit discarding changes
 nnoremap <C-q> :qa!<cr>
 xnoremap <C-q> <esc>:qa!<cr>
 inoremap <C-e> <Esc>A
@@ -123,7 +124,26 @@ nnoremap <leader>l <c-w>l
 nnoremap <leader>j <c-w>j
 nnoremap <leader>k <c-w>k
 
-" Set VIM runtime
+" command line mode mappings
+" quit discarding change
+cnoremap <c-q> <C-u>qa!<cr>
+
+" i mode mappings
+" go definition
+inoremap <F2> <esc>:call CocAction('jumpDefinition')<cr>
+" go back
+inoremap <F3> <esc><c-o>
+
+" n mode mappings
+function! UseF4()
+  echo "You can use F4 to replace :"
+  sleep 1000m
+  call feedkeys("\<F4>")
+endfunction
+
+nnoremap : <esc>:call UseF4()<cr>
+
+" Plugins
 call plug#begin('~/.vim/plugged')
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
