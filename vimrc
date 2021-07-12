@@ -375,6 +375,7 @@ Plug 'skywind3000/asyncrun.vim'
   " F10 to toggle quickfix window
   nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
 " }}}
+Plug 'skywind3000/asyncrun.extra'
 Plug 'Raimondi/delimitMate'
 Plug 'wellle/targets.vim'
 " {{{
