@@ -196,6 +196,10 @@ Plug 'junegunn/fzf.vim'
 " Plug 'bfrg/vim-cpp-modern'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" {{{
+  let g:airline_theme='solarized'
+" }}}
 Plug 'lifepillar/vim-solarized8'
 " {{{
   set background=dark
