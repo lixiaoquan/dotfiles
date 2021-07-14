@@ -22,4 +22,14 @@ else
   git clone https://github.com/vim/vim.git
 fi
 
+# powerline fonts
+if [ -d fonts ]; then
+  cd fonts
+  git reset
+  git checkout .
+  git pull
+  cd -
+else
+  git clone https://github.com/powerline/fonts.git --depth=1
+fi
 
