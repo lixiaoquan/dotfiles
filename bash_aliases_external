@@ -10,27 +10,23 @@ then
 fi
 
 to_internal_dotfiles() {
-  find $1 -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/dotfiles/{} \;
-}
-
-to_internal_dotfiles_sh() {
   find $1 -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.21.12.12/dotfiles/{} \;
 }
 
 to_internal_coc_extensions() {
   cd
-  find .config/coc/extensions -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/{} \;
+  find .config/coc/extensions -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.21.12.12/{} \;
 }
 
 to_internal_home_packages() {
   cd
-  find packages -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.28.12.12/{} \;
+  find packages -type f -exec curl --netrc-file /home/xiaoquan.li/cd-home-password-file --ftp-create-dirs -T {} ftp://10.21.12.12/{} \;
 }
 
 update_coc_extensions() {
   cd
   cd .config/coc
   tar zcvf /home/xiaoquan.li/coc_extensions.tar.gz extensions
-  curl --netrc-file /home/xiaoquan.li/cd-home-password-file -T /home/xiaoquan.li/coc_extensions.tar.gz ftp://10.28.12.12/
+  curl --netrc-file /home/xiaoquan.li/cd-home-password-file -T /home/xiaoquan.li/coc_extensions.tar.gz ftp://10.21.12.12/
   rm /home/xiaoquan.li/coc_extensions.tar.gz
 }
