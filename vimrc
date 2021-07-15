@@ -436,3 +436,6 @@ autocmd FocusLost * silent! wa
 
 " vertical split on startup
 au VimEnter * vsplit
+
+" It has to be here
+autocmd vimenter * ++nested hi LspCxxHlGroupMemberVariable guifg=#839496
