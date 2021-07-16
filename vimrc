@@ -371,8 +371,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'skywind3000/asyncrun.vim'
 " {{{
   " automatically open quickfix window when AsyncRun command is executed
-  " set the quickfix window 6 lines height.
-  let g:asyncrun_open = 6
+  " set the quickfix window 50 lines height.
+  let g:asyncrun_open = 50
 
   " ring the bell to notify you job finished
   let g:asyncrun_bell = 1
@@ -381,7 +381,7 @@ Plug 'skywind3000/asyncrun.vim'
   let g:asyncrun_rootmarks = ['CMakeUserPresets.json']
 
   " F10 to toggle quickfix window
-  nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
+  nnoremap <F10> :call asyncrun#quickfix_toggle(g:asyncrun_open)<cr>
 " }}}
 Plug 'skywind3000/asyncrun.extra'
 Plug 'Raimondi/delimitMate'
