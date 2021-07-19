@@ -372,7 +372,7 @@ Plug 'skywind3000/asyncrun.vim'
 " {{{
   " automatically open quickfix window when AsyncRun command is executed
   " set the quickfix window 50 lines height.
-  let g:asyncrun_open = 50
+  let g:asyncrun_open = 6
 
   " ring the bell to notify you job finished
   let g:asyncrun_bell = 1
