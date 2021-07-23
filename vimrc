@@ -410,6 +410,7 @@ Plug 'voldikss/vim-floaterm'
   tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
   let g:floaterm_autoclose = 2
 " }}}
+Plug 'antoinemadec/coc-fzf'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
