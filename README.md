@@ -1,24 +1,16 @@
-# Dependencies
-
-Some tools used by this dotfiles need to install manually
-
-## coc.nvim
-Install node.js, see
-> https://github.com/neoclide/coc.nvim#quick-start
-
-## ccls
+# Install
+## Install basic
 ```bash
-snap install ccls
+./install.sh
 ```
-
-## vim pluggins
-In vim, execute
+## Download tools
+```bash
+install/download.sh
 ```
-:PlugInstall
+## Install tools
+```bash
+install/fzf.sh
+install/tmux.sh
+install/vim.dev.sh
+...
 ```
-
-## lazygit
-https://github.com/jesseduffield/lazygit/releases
-
-## Others
-vim >= 8.2
