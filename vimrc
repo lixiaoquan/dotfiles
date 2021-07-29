@@ -411,6 +411,7 @@ Plug 'voldikss/vim-floaterm'
   let g:floaterm_autoclose = 2
 " }}}
 Plug 'antoinemadec/coc-fzf'
+Plug 'airblade/vim-gitgutter'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
