@@ -1,0 +1,27 @@
+#!/bin/bash
+# This is a tool to sync from external to internal
+
+Green='\033[0;32m'
+Off='\033[0m'
+
+password_file=/home/xiaoquan.li/cd-home-password-file
+ftp_addr=10.21.12.12
+
+full_path=$(realpath $1)
+relative_path=$1
+if [[ "$full_path" == *"$HOME"* ]]; then
+  relative_path=${full_path/"$HOME/"/}
+  echo -e "$HOME/$Green$relative_path$Off -> ftp://$ftp_addr/$Green$relative_path$Off"
+  cd
+fi
+
+read -p "Are you sure to sync $full_path to ftp://$ftp_addr/$relative_path ? " -n 1 -r
+echo   # (optional) move to a new Line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  if [[ -d $relative_path ]]; then
+    find $relative_path -type f -exec curl --netrc-file $password_file --ftp-create-dirs -T {} ftp://$ftp_addr/{} \;
+  else
+    curl --netrc-file $password_file -T $relative_path ftp://$ftp_addr/
+  fi
+fi
