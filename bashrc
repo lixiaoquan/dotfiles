@@ -160,3 +160,6 @@ export EDITOR=vim
 if type thefuck >/dev/null 2>&1; then
 eval $(thefuck --alias)
 fi
+
+export SHELL=`which zsh`
+[ -f "$SHELL" ] && exec "$SHELL" -l
