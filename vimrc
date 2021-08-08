@@ -362,8 +362,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
-  nnoremap <silent> <F8> :<C-u>CocList mru<CR>
-  inoremap <silent> <F8> <esc>:<C-u>CocList mru<CR>
+  nnoremap <silent> <F8> :<C-u>CocList -N mru<CR>
+  inoremap <silent> <F8> <esc>:<C-u>CocList -N mru<CR>
 
   " Close quickfix and open file from mru in opposite window
   nnoremap <silent> <space>o  :<C-u>cclose<cr><C-w>w:<C-u>CocList mru<cr>
