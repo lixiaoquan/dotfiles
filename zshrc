@@ -115,8 +115,8 @@ source $ZSH/oh-my-zsh.sh
 # After loding oh-my-zsh.sh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
-# ctrl-j is occupied by tmux, so we use ctrl-o
-bindkey '^o' autosuggest-execute
+# ctrl-j is occupied by tmux, so we use F5
+bindkey '^[[15~' autosuggest-execute
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
