@@ -120,48 +120,12 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 # ctrl-j is occupied by tmux, so we use ,
 bindkey ',' autosuggest-execute
 
-# Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# Host specific alias definitions
-if [ $HOST = "ops-Alienware-17-R4" ]; then
-  if [ -f ~/.bash_aliases_external ]; then
-    . ~/.bash_aliases_external
-  fi
-else
-  if [ -f ~/.bash_aliases_internal ]; then
-    . ~/.bash_aliases_internal
-  fi
-fi
-
-if [ -d "$HOME/local/bin" ]; then
-  # Add local binary to PATH
-  export PATH=$HOME/local/bin:$PATH
-fi
-
-if [ -d "$HOME/node-v12.16.2-linux-x64/bin/" ]; then
-  export PATH=$HOME/node-v12.16.2-linux-x64/bin/:$PATH
-fi
-
-if [ -d "$HOME/clangd_12.0.0/bin" ]; then
-  export PATH=$HOME/clangd_12.0.0/bin:$PATH
-fi
-
-if [ -d "$HOME/vim.dev/bin" ]; then
-  export PATH=$HOME/vim.dev/bin:$PATH
-fi
-
-export PATH=$HOME/dotfiles/bin:$PATH
-
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
-
-export EDITOR=vim
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 alias -s txt="vim"
+
+source $HOME/dotfiles/common
+
+# lines added by tools
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
