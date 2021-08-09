@@ -9,8 +9,15 @@ install/download.sh
 ```
 ## Install tools
 ```bash
-install/fzf.sh
 install/tmux.sh
+install/powerline_fonts.sh
+install/zsh.sh
+install/ohmyzsh.sh
+install/fzf.sh
+install/node.sh
 install/vim.dev.sh
+install/git.sh
+install/lazygit.sh
+install/clangd.sh
 ...
 ```
