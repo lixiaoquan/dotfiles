@@ -26,8 +26,8 @@ if [ -d "$HOME/local/bin" ]; then
   export PATH=$HOME/local/bin:$PATH
 fi
 
-if [ -d "$HOME/node-v12.16.2-linux-x64/bin/" ]; then
-  export PATH=$HOME/node-v12.16.2-linux-x64/bin/:$PATH
+if [ -d "$HOME/node-v14.17.5-linux-x64" ]; then
+  export PATH=$HOME/node-v14.17.5-linux-x64/bin/:$PATH
 fi
 
 if [ -d "$HOME/clangd_12.0.0/bin" ]; then
