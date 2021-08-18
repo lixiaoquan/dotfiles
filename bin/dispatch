@@ -5,7 +5,7 @@ read -p "Are you sure to sync $full_path ? " -n 1 -r
 echo   # (optional) move to a new Line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  RSYNC='rsync -avRPI --ignore-errors'
+  RSYNC='rsync -avRPIO --ignore-errors'
 
   $RSYNC $full_path 10.21.12.24:/
   $RSYNC $full_path shaddock:/
