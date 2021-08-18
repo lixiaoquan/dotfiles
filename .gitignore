@@ -1,1 +1,5 @@
 .netrwhist
+.*.swp
+.gitignore
+vim/plugged
+
