@@ -7,6 +7,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
   RSYNC='rsync -avRPIO --ignore-errors'
 
-  $RSYNC $full_path 10.21.12.24:/
-  $RSYNC $full_path shaddock:/
+  machines="10.21.12.24 shaddock sw17"
+
+  for addr in $machines; do
+    result=$(ifconfig)
+    if [[ "$result" == *"$addr"* ]]; then
+      echo "skip" $addr
+    else
+      $RSYNC $full_path ${addr}:/
+    fi
+  done
 fi
