@@ -79,7 +79,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
 
 # Before loding oh-my-zsh.sh
 ZSHZ_CMD=j
