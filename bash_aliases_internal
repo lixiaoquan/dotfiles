@@ -89,8 +89,6 @@ to_sh_home () {
   scp $1 10.21.12.17:/home/xiaoquan.li
 }
 
-alias s='git clean -fX; bsync -b /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
-alias ss='git clean -fX; bsync /LocalRun/xiaoquan.li/ai_software/ orange:/LocalRun/xiaoquan.li/ai_software'
 alias m='cd ${MODEL}'
 alias o='cd ${ONNX_MODEL}'
 alias re='cd /LocalRun/xiaoquan.li/software_develop/reg'
@@ -122,3 +120,9 @@ update_coc_extensions() {
 if [ -d "/mercury/utility/cmake-3.20.5-linux-x86_64/bin" ]; then
   export PATH=/mercury/utility/cmake-3.20.5-linux-x86_64/bin:$PATH
 fi
+
+update_dotfiles() {
+  cd $HOME/dotfiles
+  git checkout .
+  cd -
+}
