@@ -2,4 +2,7 @@
 .*.swp
 .gitignore
 vim/plugged
+vim/sessions
+vim/coc-settings.json
+
 

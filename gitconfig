@@ -3,24 +3,24 @@
 [user]
   name = Li Xiaoquan
 [alias]
-  ci = commit -a
-  a = commit -a --amend
-  br = branch
-  co = checkout
-  cob = checkout -b
-  pl = pull --rebase
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  cp = cherry-pick
-  dc = diff --cached
-  ds = diff --stat
-  r1 = reset HEAD^
-  r2 = reset HEAD^^
-  st = stash
-  stp = stash pop
-  r = review
-  d = diff
-  s = status
-  f = fetch --all
+  ; ci = commit -a
+  ; a = commit -a --amend
+  ; br = branch
+  ; co = checkout
+  ; cob = checkout -b
+  ; pl = pull --rebase
+  ; ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ; cp = cherry-pick
+  ; dc = diff --cached
+  ; ds = diff --stat
+  ; r1 = reset HEAD^
+  ; r2 = reset HEAD^^
+  ; st = stash
+  ; stp = stash pop
+  ; r = review
+  ; d = diff
+  ; s = status
+  ; f = fetch --all
 
 [core]
   editor = vim
