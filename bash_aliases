@@ -23,7 +23,7 @@ alias f="ag --unrestricted -i -g"
 alias p='pytest -v --disable-warnings'
 alias n='ninja'
 alias t='top'
-alias v='vim'
+alias v='nvim'
 alias z='lazygit'
 
 # Other aliases
@@ -54,7 +54,7 @@ alias cpwd='pwd | xclip -selection clipboard'
 
 alias gdb='gdb -q'
 alias dotfiles='cd $HOME/dotfiles'
-alias vimrc='vim $HOME/.vimrc'
+alias vimrc='v $HOME/dotfiles/vimrc'
 
 alias gci='git commit -a'
 alias ga='git commit -a --amend'

@@ -406,9 +406,10 @@ Plug 'lifepillar/vim-cheat40'
 " }}}
 Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
-Plug 'krisajenkins/vim-projectlocal'
+Plug 'embear/vim-localvimrc'
 " {{{
-  let g:projectlocal_project_markers = ['CMakeUserPresets.json']
+  let g:localvimrc_ask=0
+  let g:localvimrc_sandbox=0
 " }}}
 Plug 'voldikss/vim-floaterm'
 " {{{
