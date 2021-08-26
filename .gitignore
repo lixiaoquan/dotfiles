@@ -4,5 +4,7 @@
 vim/plugged
 vim/sessions
 vim/coc-settings.json
+config/coc
+config/lazygit
 
 

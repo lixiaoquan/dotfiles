@@ -112,8 +112,11 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Map ALT keys
 " ALT-D to dw to delete a word, same as bash
-execute "set <M-d>=\ed"
-inoremap <M-d> <C-O>dw
+
+if !has("nvim")
+  execute "set <M-d>=\ed"
+  inoremap <M-d> <C-O>dw
+endif
 
 " map <enter> o<ESC>
 
@@ -193,8 +196,12 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_preview_window = ['right:50%', 'ctrl-_']
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '-U', fzf#vim#with_preview(), <bang>0)
 " }}}
-" Plug 'bfrg/vim-cpp-modern'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+if has("nvim")
+  Plug 'nvim-treesitter/nvim-treesitter'
+else
+  " Plug 'bfrg/vim-cpp-modern'
+  Plug 'jackguo380/vim-lsp-cxx-highlight'
+endif
 Plug 'vim-airline/vim-airline'
 " {{{
   let g:airline#extensions#whitespace#enabled = 0
