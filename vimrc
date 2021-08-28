@@ -8,8 +8,9 @@ syntax on
 
 "basic configure
 set nocompatible
-set is
-set ic
+set ignorecase
+set smartcase
+set incsearch
 set ts=2
 set shiftwidth=2
 set expandtab
@@ -112,13 +113,14 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Map ALT keys
 " ALT-D to dw to delete a word, same as bash
-
 if !has("nvim")
   execute "set <M-d>=\ed"
-  inoremap <M-d> <C-O>dw
 endif
+inoremap <M-d> <C-O>dw
 
 " map <enter> o<ESC>
+" <CR> to clear highlight caused by search
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 nmap Q gq
 
@@ -421,6 +423,11 @@ Plug 'voldikss/vim-floaterm'
 " }}}
 Plug 'antoinemadec/coc-fzf'
 Plug 'airblade/vim-gitgutter'
+Plug 'justinmk/vim-sneak'
+" {{{
+  let g:sneak#use_ic_scs=1
+  let g:sneak#label=1
+" }}}
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
