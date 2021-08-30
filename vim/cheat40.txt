@@ -67,6 +67,8 @@ Match line from non-ws   \S.*$       N
 Text Object {{{1
 Select ([xxxx], yyyy)    ia          N
 Select ([xxxx, ]yyyy)    aa          N
+Select "[xxxx]"          iq          N
+Select ["xxxx"]          aq          N
 }}}
 File {{{1
 Open in opposite window  «Spc»o      N
