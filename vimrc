@@ -124,7 +124,7 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 nmap Q gq
 
-nnoremap <leader>h <c-w>h
+nnoremap <leader>v :<C-U>vs<CR>
 nnoremap <leader>l <c-w>l
 nnoremap <leader>j <c-w>j
 nnoremap <leader>k <c-w>k
