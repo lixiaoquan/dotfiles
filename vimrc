@@ -428,6 +428,12 @@ Plug 'justinmk/vim-sneak'
   let g:sneak#use_ic_scs=1
   let g:sneak#label=1
 " }}}
+Plug 'liuchengxu/vim-which-key'
+" {{{
+  nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+  set timeoutlen=500
+" }}}
+Plug 'honza/vim-snippets'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
