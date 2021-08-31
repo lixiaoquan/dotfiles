@@ -112,7 +112,7 @@ alias prepare='penv; source ./activate.sh'
 
 update_coc_extensions() {
   cd
-  cd .config/coc
+  cd $XDG_CONFIG_HOME/coc
   rm -rf extensions
   tar zxvf /home/xiaoquan.li/coc_extensions.tar.gz
 }

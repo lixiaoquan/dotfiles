@@ -25,7 +25,7 @@ to_internal_home_packages() {
 
 update_coc_extensions() {
   cd
-  cd .config/coc
+  cd $XDG_CONFIG_HOME/coc
   tar zcvf /home/xiaoquan.li/coc_extensions.tar.gz extensions
   curl --netrc-file /home/xiaoquan.li/cd-home-password-file -T /home/xiaoquan.li/coc_extensions.tar.gz ftp://10.21.12.12/
   rm /home/xiaoquan.li/coc_extensions.tar.gz
