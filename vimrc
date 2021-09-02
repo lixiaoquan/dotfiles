@@ -191,7 +191,7 @@ Plug 'junegunn/fzf.vim'
   endfunction
 
   function! SearchWithAgInDirectory(...)
-    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+    call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}))
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 
