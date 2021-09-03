@@ -127,7 +127,7 @@ nmap Q gq
 nnoremap <leader>v :<C-U>vs<CR>
 nnoremap <leader>l <c-w>l
 nnoremap <leader>j <c-w>j
-nnoremap <leader>k <c-w>k
+nnoremap <leader>k :<C-U>pwd<CR>
 
 " command line mode mappings
 " quit discarding change
@@ -161,7 +161,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <silent> <leader>; :BLines<CR>
   nnoremap <silent> <leader>o :BTags<CR>
   nnoremap <silent> <leader>O :Tags<CR>
-  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>h :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   nnoremap <silent> <leader>. :AgIn
 
