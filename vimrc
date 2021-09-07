@@ -126,8 +126,7 @@ nmap Q gq
 
 nnoremap <leader>v :<C-U>vs<CR>
 nnoremap <leader>l <c-w>l
-nnoremap <leader>j <c-w>j
-nnoremap <leader>k :<C-U>pwd<CR>
+nnoremap <leader>p :<C-U>pwd<CR>
 
 " command line mode mappings
 " quit discarding change
@@ -199,7 +198,8 @@ Plug 'junegunn/fzf.vim'
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '-U', fzf#vim#with_preview(), <bang>0)
 " }}}
 if has("nvim")
-  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', {'branch' : '0.5-compat'}
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
 else
   " Plug 'bfrg/vim-cpp-modern'
   Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -370,7 +370,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Do default action for previous item.
   " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
-  nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+  " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
   nnoremap <silent> <F8> :<C-u>CocList -N mru<CR>
