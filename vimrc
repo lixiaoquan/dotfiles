@@ -2,9 +2,6 @@ let g:mapleader = "\<Space>"
 
 " syntax
 syntax on
-"let g:c_no_curly_error = 1
-"set synmaxcol=500
-"let loaded_matchparen=1
 
 "basic configure
 set nocompatible
@@ -41,10 +38,6 @@ set mouse=a
 
 " https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 set ttimeoutlen=0
-
-" viminfo and last-position-jump
-set viminfo='20,\"100,<500
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 " coding mapping
 " Disable useless functions
@@ -434,6 +427,7 @@ Plug 'liuchengxu/vim-which-key'
   set timeoutlen=500
 " }}}
 Plug 'honza/vim-snippets'
+Plug 'farmergreg/vim-lastplace'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
