@@ -7,7 +7,7 @@ function! cmake#build(preset = 'default')
 endfunction
 
 function! s:cmake_configure()
-  execute 'AsyncRun -cwd=<root> '.g:cmake_bin.' --preset=default'
+  execute 'AsyncRun -cwd=<root> '.g:cmake_bin.' --preset=default -Wno-dev'
 endfunction
 
 function! s:cmake_clean_cache()
@@ -24,7 +24,7 @@ function! s:cmake_reconfigure()
     echom "g:cmake_binary_dir is not specified, can't reconfigure"
     return
   endif
-  let cmd='rm -fv '.g:cmake_binary_dir.'/CMakeCache.txt && '.g:cmake_bin.' --preset=default'
+  let cmd='rm -fv '.g:cmake_binary_dir.'/CMakeCache.txt && '.g:cmake_bin.' --preset=default -Wno-dev'
   execute 'AsyncRun -cwd=<root> -save=2 '.cmd
 endfunction
 
