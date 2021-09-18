@@ -11,6 +11,7 @@ wget -c https://github.com/jesseduffield/lazygit/releases/download/v0.29/lazygit
 wget -c https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
 wget -c https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz
+wget -c https://github.com/oinume/path-shrinker/releases/download/v0.1.1/path-shrinker_0.1.1_Linux_x86_64.tar.gz
 
 if [ -d vim ]; then
   cd vim

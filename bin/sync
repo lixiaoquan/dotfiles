@@ -22,6 +22,6 @@ then
   if [[ -d $relative_path ]]; then
     find $relative_path -type f -exec curl --netrc-file $password_file --ftp-create-dirs -T {} ftp://$ftp_addr/{} \;
   else
-    curl --netrc-file $password_file -T $relative_path ftp://$ftp_addr/
+    curl --netrc-file $password_file --ftp-create-dirs -T $relative_path ftp://$ftp_addr/$relative_path
   fi
 fi
