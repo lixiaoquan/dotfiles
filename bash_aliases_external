@@ -30,3 +30,7 @@ update_coc_extensions() {
   curl --netrc-file /home/xiaoquan.li/cd-home-password-file -T /home/xiaoquan.li/coc_extensions.tar.gz ftp://10.21.12.12/
   rm /home/xiaoquan.li/coc_extensions.tar.gz
 }
+
+if [ -d "$HOME/cmake-3.20.4-linux-x86_64/bin" ]; then
+  export PATH=$HOME/cmake-3.20.4-linux-x86_64/bin:$PATH
+fi
