@@ -42,6 +42,10 @@ if [ -d "$HOME/nvim-linux64/bin" ]; then
   export PATH=$HOME/nvim-linux64/bin:$PATH
 fi
 
+if [ -d "$HOME/kitty/bin" ]; then
+  export PATH=$HOME/kitty/bin:$PATH
+fi
+
 export PATH=$HOME/dotfiles/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
