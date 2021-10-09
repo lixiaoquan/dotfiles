@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install libcurl4-openssl-dev
+
 # Install git
 mkdir -p build_package
 cd build_package

@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt install libevent-dev
+sudo apt install libevent-dev libncurses5-dev
 
 # Install vim
 mkdir -p build_package
