@@ -17,7 +17,7 @@ adjust_environment () {
 
   if [ "$CURRENT_PROJECT" = "dli" ]; then
     echo ${PROJECT_ROOT}
-    PROJECT_BINARY=${PROJECT_ROOT}/build-ai_software-Desktop-Debug
+    PROJECT_BINARY=${PROJECT_ROOT}/build
     PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/
     PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
     PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver

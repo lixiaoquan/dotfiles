@@ -6,5 +6,9 @@ vim/sessions
 vim/coc-settings.json
 config/coc
 config/lazygit
+config/pulse
+config/caja
+config/dconf
+config/tilda
 
 
