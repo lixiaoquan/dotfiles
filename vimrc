@@ -428,6 +428,7 @@ Plug 'liuchengxu/vim-which-key'
 " }}}
 Plug 'honza/vim-snippets'
 Plug 'farmergreg/vim-lastplace'
+Plug 'rhysd/git-messenger.vim'
 Plug '~/dotfiles/vim-cmake'
 call plug#end()
 runtime macros/sandwich/keymap/surround.vim
