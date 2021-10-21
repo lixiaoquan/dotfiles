@@ -15,7 +15,7 @@ wget -c https://${github}/clangd/clangd/releases/download/12.0.0/clangd-linux-12
 wget -c https://${github}/jesseduffield/lazygit/releases/download/v0.29/lazygit_0.29_Linux_x86_64.tar.gz
 wget -c https://${github}/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
-wget -c https://${github}/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz
+wget -c https://${github}/neovim/neovim/releases/download/v0.5.1/nvim-linux64.tar.gz
 wget -c https://${github}/oinume/path-shrinker/releases/download/v0.1.1/path-shrinker_0.1.1_Linux_x86_64.tar.gz
 wget -c https://www.zsh.org/pub/zsh-5.8.tar.xz
 wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
