@@ -210,6 +210,9 @@ Plug 'lifepillar/vim-solarized8'
 " {{{
   set background=dark
   autocmd vimenter * ++nested colorscheme solarized8_flat
+  if has("nvim")
+    set fillchars+=vert:\|
+  endif
 " }}}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
