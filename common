@@ -1,6 +1,8 @@
+dotfiles_dir=$HOME/dotfiles
+
 # Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f $dotfiles_dir/bash_aliases ]; then
+    . $dotfiles_dir/bash_aliases
 fi
 
 # Host specific alias definitions
