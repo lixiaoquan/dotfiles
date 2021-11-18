@@ -19,6 +19,8 @@ wget -c https://${github}/neovim/neovim/releases/download/v0.5.1/nvim-linux64.ta
 wget -c https://${github}/oinume/path-shrinker/releases/download/v0.1.1/path-shrinker_0.1.1_Linux_x86_64.tar.gz
 wget -c https://www.zsh.org/pub/zsh-5.8.tar.xz
 wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
+wget -c https://${github}/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
+wget -c ftp://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz
 
 if [ -d vim ]; then
   cd vim
