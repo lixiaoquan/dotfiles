@@ -11,12 +11,14 @@ cd libevent-2.1.12-stable
 ./configure --prefix=$HOME/local --disable-shared
 make -j8
 make install
+cd -
 
 tar xvzf $HOME/packages/ncurses-6.2.tar.gz
 cd ncurses-6.2
 ./configure --prefix=$HOME/local
 make -j8
 make install
+cd -
 
 tar zxvf $HOME/packages/tmux-3.2a.tar.gz
 cd tmux-3.2a

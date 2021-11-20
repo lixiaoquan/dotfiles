@@ -22,16 +22,6 @@ wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.
 wget -c https://${github}/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 wget -c ftp://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz
 
-if [ -d vim ]; then
-  cd vim
-  git reset
-  git checkout .
-  git pull
-  cd -
-else
-  git clone https://${github}/vim/vim.git
-fi
-
 # powerline fonts
 if [ -d fonts ]; then
   cd fonts
