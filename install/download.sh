@@ -3,7 +3,9 @@
 # Helper to download tools
 
 # github mirror
-github="hub.fastgit.org"
+if [ -z "$github" ]; then
+  github="hub.fastgit.org"
+fi
 
 # github="github.com"
 

@@ -24,6 +24,8 @@ WORKDIR /home/tester/dotfiles
 # Run setup
 RUN ./install.sh
 
+ENV github github.com
+
 RUN ./install/download.sh
 
 RUN ./install/all.sh
