@@ -36,12 +36,12 @@ if [ -d "$HOME/clangd_12.0.0/bin" ]; then
   export PATH=$HOME/clangd_12.0.0/bin:$PATH
 fi
 
-if [ -d "$HOME/vim.dev/bin" ]; then
-  export PATH=$HOME/vim.dev/bin:$PATH
-fi
-
 if [ -d "$HOME/nvim-linux64/bin" ]; then
   export PATH=$HOME/nvim-linux64/bin:$PATH
+fi
+
+if [ -d "$HOME/nvim-osx64/bin" ]; then
+  export PATH=$HOME/nvim-osx64/bin:$PATH
 fi
 
 if [ -d "$HOME/kitty/bin" ]; then
