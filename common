@@ -48,6 +48,10 @@ if [ -d "$HOME/kitty/bin" ]; then
   export PATH=$HOME/kitty/bin:$PATH
 fi
 
+if [ -d "$HOME/docker" ]; then
+  export PATH=$HOME/docker:$PATH
+fi
+
 export PATH=$HOME/dotfiles/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
