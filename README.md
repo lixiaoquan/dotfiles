@@ -21,3 +21,7 @@ install/lazygit.sh
 install/clangd.sh
 ...
 ```
+
+## Troubleshooting
+### Build zsh with error about cur_term
+apt install libncurses-dev
