@@ -34,3 +34,6 @@
 
 [init]
   defaultBranch = main
+
+[commit]
+  template = ~/dotfiles/gitmessage
