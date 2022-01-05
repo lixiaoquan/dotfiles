@@ -54,7 +54,7 @@
     vcs                       # git status
     # command_execution_time  # previous command duration
     # =========================[ Line #2 ]=========================
-    newline                   # \n
+    # newline                   # \n
     # virtualenv              # python virtual environment
     prompt_char               # prompt symbol
   )
