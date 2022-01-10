@@ -1,0 +1,21 @@
+curl -fsSL http://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+
+# install from the Docker repo instead of the default Ubuntu 16.04 repo
+apt-cache policy docker-ce
+
+# install docker
+sudo apt-get install -y docker-ce
+
+# check if the docker daemon is running
+sudo systemctl status docker
+
+# add user to docker group
+sudo usermod -aG docker ${USER}
+su - ${USER}
+id -nG
+
+# Make sure to logout and login again
