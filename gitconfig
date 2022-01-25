@@ -23,7 +23,7 @@
   ; f = fetch --all
 
 [core]
-  editor = vim
+  editor = nvim
   quotepath = false
 
 [push]

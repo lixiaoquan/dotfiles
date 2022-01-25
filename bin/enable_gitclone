@@ -1,0 +1,3 @@
+#!/bin/bash
+git config --global url."https://gitclone.com/".insteadOf "https://"
+git config protocol.https.allow always
