@@ -4,7 +4,7 @@
 
 # github mirror
 if [ -z "$github" ]; then
-  github="hub.fastgit.org"
+  github="hub.gitfast.tk"
 fi
 
 # github="github.com"
@@ -15,6 +15,7 @@ cd packages
 wget -c https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-x64.tar.xz
 wget -c https://${github}/clangd/clangd/releases/download/12.0.0/clangd-linux-12.0.0.zip
 wget -c https://${github}/jesseduffield/lazygit/releases/download/v0.31.4/lazygit_0.31.4_Linux_x86_64.tar.gz
+wget -c https://${github}/ThomasLachaux/lazydocker-high-contrast/releases/download/v0.13-high-contrast/lazydocker
 wget -c https://${github}/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
 
