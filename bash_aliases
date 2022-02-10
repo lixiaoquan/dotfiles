@@ -74,3 +74,5 @@ alias gr='git review'
 alias gd='git diff'
 alias gs='git status'
 alias gf='git fetch --all'
+
+alias lzd='TERM=screen-256color lazydocker'
