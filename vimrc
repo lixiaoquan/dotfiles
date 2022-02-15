@@ -208,7 +208,7 @@ Plug 'vim-airline/vim-airline-themes'
 " }}}
 Plug 'lifepillar/vim-solarized8'
 " {{{
-  set background=dark
+  set background=light
   autocmd vimenter * ++nested colorscheme solarized8_flat
   if has("nvim")
     set fillchars+=vert:\|
