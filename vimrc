@@ -192,8 +192,8 @@ Plug 'junegunn/fzf.vim'
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '-U', fzf#vim#with_preview(), <bang>0)
 " }}}
 if has("nvim")
-  Plug 'nvim-treesitter/nvim-treesitter', {'branch' : '0.5-compat'}
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'do' : ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 else
   " Plug 'bfrg/vim-cpp-modern'
   Plug 'jackguo380/vim-lsp-cxx-highlight'
