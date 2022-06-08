@@ -22,7 +22,6 @@ adjust_environment () {
     PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
     PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver
     PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dl/tests/python
-    PROJECT_DLNN=${PROJECT_ROOT}/ai_software/tensorflow/tensorflow_dlnn
   else
     echo 'CURRENT_PROJECT is not one of [dli], do nothing'
   fi
@@ -86,12 +85,11 @@ to_cd_home () {
 }
 
 to_sh_home () {
-  scp $1 10.21.12.17:/home/xiaoquan.li
+  scp $1 10.21.12.28:/home/xiaoquan.li
 }
 
 alias m='cd ${MODEL}'
 alias o='cd ${ONNX_MODEL}'
-alias re='cd /LocalRun/xiaoquan.li/software_develop/reg'
 alias lsqemu="psg qemu"
 
 # Build and install TensorFlow
