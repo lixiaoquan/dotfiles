@@ -11,7 +11,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
   RSYNC='rsync -avRPIO --ignore-errors'
 
-  machines="10.21.12.24 10.28.12.231 10.21.12.28"
+  machines="10.21.12.24 10.28.13.41 10.21.12.28"
 
   for addr in $machines; do
     result=$(ifconfig)
