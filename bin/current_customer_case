@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Generate a script to for customer case
+
+echo "#!/bin/bash" > ~/customer_case.sh
+echo cd $PWD >> ~/customer_case.sh
+echo ./run >> ~/customer_case.sh
+chmod a+x ~/customer_case.sh
