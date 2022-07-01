@@ -4,5 +4,5 @@
 
 echo "#!/bin/bash" > ~/customer_case.sh
 echo cd $PWD >> ~/customer_case.sh
-echo ./run >> ~/customer_case.sh
+echo ./run.sh >> ~/customer_case.sh
 chmod a+x ~/customer_case.sh
