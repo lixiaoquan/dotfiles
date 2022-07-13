@@ -17,7 +17,6 @@ set nowrap
 set diffopt+=context:8
 set nonu
 set backspace=indent,eol,start
-set laststatus=3
 
 " backup
 set nowritebackup
