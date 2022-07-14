@@ -129,3 +129,17 @@ source $HOME/dotfiles/common
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+function toggle-transient-prompt() {
+  (( ${+functions[p10k]} )) || return
+  if [[ ${POWERLEVEL9K_TRANSIENT_PROMPT-} == off ]]; then
+    typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+  else
+    typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
+  fi
+  p10k reload
+  if zle; then
+    zle push-input
+    zle accept-line
+  fi
+}
