@@ -12,6 +12,9 @@ echo "rm -rf sdk" >> ${script}
 echo "ninja install-base > /dev/null" >> ${script}
 echo ". ./sdk/env.sh" >> ${script}
 
+echo "# export DL_TVM_DEBUG_LEVEL=1" >> ${script}
+echo "# export DL_TVM_DISABLE_CUSTOM_PASSES=1" >> ${script}
+
 echo cd $PWD >> ~/customer_case.sh
-echo ./run.sh >> ~/customer_case.sh
+echo bash ./run.sh >> ~/customer_case.sh
 chmod a+x ~/customer_case.sh
