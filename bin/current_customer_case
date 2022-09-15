@@ -12,7 +12,7 @@ echo "rm -rf sdk" >> ${script}
 echo "ninja install-base > /dev/null" >> ${script}
 echo ". ./sdk/env.sh" >> ${script}
 
-echo "# export DL_TVM_DEBUG_LEVEL=1" >> ${script}
+echo "# export DL_TVM_LOG_LEVEL=1" >> ${script}
 echo "# export DL_TVM_DISABLE_CUSTOM_PASSES=1" >> ${script}
 
 echo cd $PWD >> ~/customer_case.sh
