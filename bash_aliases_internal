@@ -2,7 +2,7 @@
 CURRENT_PROJECT=dli
 
 # Set this to override root folder
-PROJECT_ROOT=/LocalRun/xiaoquan.li
+PROJECT_ROOT=/LocalRun/xiaoquan.li/ws
 
 MODEL=/mercury/share/DLI/models
 ONNX_MODEL=/mercury/share/DLI/onnx
