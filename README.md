@@ -25,3 +25,10 @@ install/clangd.sh
 ## Troubleshooting
 ### Build zsh with error about cur_term
 apt install libncurses-dev
+
+
+## Update nvim plugin
+1. PlugUpdate
+2. CocUpdate
+3. TSUpdate
+4. sync dotfiles/vim and dotfiles/config/coc/extensions
