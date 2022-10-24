@@ -32,8 +32,8 @@ if [ -d "$HOME/node-v14.17.5-linux-x64" ]; then
   export PATH=$HOME/node-v14.17.5-linux-x64/bin/:$PATH
 fi
 
-if [ -d "$HOME/clangd_12.0.0/bin" ]; then
-  export PATH=$HOME/clangd_12.0.0/bin:$PATH
+if [ -d "$HOME/clangd_15.0.3/bin" ]; then
+  export PATH=$HOME/clangd_15.0.3/bin:$PATH
 fi
 
 if [ -d "$HOME/nvim-linux64/bin" ]; then
