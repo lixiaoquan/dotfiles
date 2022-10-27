@@ -284,7 +284,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> gr <Plug>(coc-references)
 
   " Use <leader>d to show documentation in preview window.
-  nnoremap <silent> <leader>d :call <SID>ShowDocumentation()<CR>
+  nnoremap <silent> <leader>d :call ShowDocumentation()<CR>
 
   function! ShowDocumentation()
     if CocAction('hasProvider', 'hover')

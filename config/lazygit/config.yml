@@ -16,7 +16,7 @@ gui:
     optionsTextColor:
       - blue
     selectedLineBgColor:
-      - default
+      - green
     selectedRangeBgColor:
       - blue
     cherryPickedCommitBgColor:
@@ -201,3 +201,7 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
+customCommands:
+  - key: '<f1>'
+    command: "git pull --rebase"
+    context: 'global'
