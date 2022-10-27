@@ -251,25 +251,26 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
   " other plugin before putting this into your config.
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
         \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-  function! s:check_back_space() abort
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice.
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
 
   " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-
-  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-  " position. Coc only does snippet and additional edit on confirm.
-  if exists('*complete_info')
-    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
   else
-    imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <silent><expr> <c-@> coc#refresh()
   endif
 
   " Use `[g` and `]g` to navigate diagnostics
@@ -283,15 +284,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> gr <Plug>(coc-references)
 
   " Use <leader>d to show documentation in preview window.
-  nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
+  nnoremap <silent> <leader>d :call <SID>ShowDocumentation()<CR>
 
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
+  function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
       call CocActionAsync('doHover')
     else
-      execute '!' . &keywordprg . " " . expand('<cword>')
+      call feedkeys('K', 'in')
     endif
   endfunction
 
