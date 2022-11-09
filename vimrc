@@ -193,6 +193,7 @@ Plug 'junegunn/fzf.vim'
 if has("nvim")
   Plug 'nvim-treesitter/nvim-treesitter', {'do' : ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'm-demare/hlargs.nvim'
 else
   " Plug 'bfrg/vim-cpp-modern'
   Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -460,3 +461,5 @@ au VimEnter * vsplit
 
 " It has to be here
 autocmd vimenter * ++nested hi LspCxxHlGroupMemberVariable guifg=#839496
+
+lua require("hlargs").setup()
