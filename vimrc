@@ -215,7 +215,6 @@ Plug 'lifepillar/vim-solarized8'
     set fillchars+=vert:\|
   endif
 " }}}
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 " {{{
   " Use Ctrl-/ to comment/uncomment
@@ -461,5 +460,10 @@ au VimEnter * vsplit
 
 " It has to be here
 autocmd vimenter * ++nested hi LspCxxHlGroupMemberVariable guifg=#839496
+
+" Use <C-K> to clear the highlighting of :set hlsearch.
+if maparg('<C-K>', 'n') ==# ''
+  nnoremap <silent> <C-K> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
 
 lua require("hlargs").setup()
