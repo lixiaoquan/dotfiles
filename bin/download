@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import argparse
+from subprocess import Popen, PIPE, STDOUT
+
+def use_ghproxy(URL):
+    ghproxy="https://ghproxy.com"
+
+    cmdline = f"wget -c {ghproxy}/{URL}"
+
+    process = Popen(cmdline, shell=True, stdout=PIPE)
+
+    print(cmdline)
+
+    (out, _) = process.communicate()
+
+    if process.returncode != 0:
+        raise RuntimeError(out.decode("utf-8"))
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(prog="download")
+
+    parser.add_argument("URL")
+
+    args = parser.parse_args()
+
+    use_ghproxy(args.URL)
+
