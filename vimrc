@@ -66,7 +66,7 @@ inoremap <F4> <ESC>:
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
-noremap <F6> mz:r !xclip -o -sel clip<CR>`z
+noremap <F6> :call cmake#generate_pytest_command() <CR>
 map <F7> :set paste<CR>i<CR><ESC>k<F6>gJgJ:set nopaste<CR>
 " noremap <F8> <ESC>f)i<CR><ESC>kf(a<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>f,li<CR><ESC>
 noremap <F12> :Cheat40<cr>

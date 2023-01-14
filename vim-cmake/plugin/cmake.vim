@@ -52,6 +52,17 @@ function! s:cmake_reconfigure()
   execute 'AsyncRun -cwd=<root> -save=2 '.cmd
 endfunction
 
+" Helper functions not related to cmake
+function! cmake#generate_pytest_command()
+  let current_line = getline(".")
+  let test_name = substitute(current_line, "def ", "", "g")
+  let test_name = substitute(test_name, "\(.*:", "", "g")
+  let file_name = expand("%")
+  let test_str = 'pytest -s -v '.file_name.'::'.test_name
+  echo test_str
+  let @"=test_str
+endfunction
+
 command CleanCache call s:cmake_clean_cache()
 command Configure call s:cmake_configure()
 command Reconfigure call s:cmake_reconfigure()
