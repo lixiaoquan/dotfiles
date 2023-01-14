@@ -57,7 +57,7 @@ function! cmake#generate_pytest_command()
   let current_line = getline(".")
   let test_name = substitute(current_line, "def ", "", "g")
   let test_name = substitute(test_name, "\(.*:", "", "g")
-  let file_name = expand("%")
+  let file_name = expand("%:p")
   let test_str = 'pytest -s -v '.file_name.'::'.test_name
   echo test_str
   let @"=test_str
