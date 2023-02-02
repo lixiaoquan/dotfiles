@@ -205,3 +205,7 @@ customCommands:
   - key: '<f1>'
     command: "git pull --rebase"
     context: 'global'
+  - key: '<f2>'
+    command: '${HOME}/dotfiles/bin/revert.sh {{.SelectedLocalCommit.Sha}}'
+    context: 'commits'
+    subprocess: true
