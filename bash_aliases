@@ -21,7 +21,7 @@ c () {
 alias e='exit'
 alias f="ag --unrestricted -i -g"
 alias p='pytest -v --disable-warnings'
-alias n='ninja'
+alias n='nice -n 20 ninja'
 alias t='top'
 alias v='nvim'
 alias z='lazygit'
