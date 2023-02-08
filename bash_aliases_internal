@@ -81,7 +81,7 @@ alias l='
           '
 
 to_cd_home () {
-  scp $1 10.28.12.37:/home/xiaoquan.li
+  scp $1 10.28.12.12:/home/xiaoquan.li
 }
 
 to_sh_home () {
