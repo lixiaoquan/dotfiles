@@ -10,7 +10,7 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="bashrc vimrc vim cheat tmux.conf gitconfig pip dircolors \
        bash_aliases_internal bash_aliases_external toprc \
-       tigrc bash_profile zshrc p10k.zsh"    # list of files/folders to symlink in homedir
+       tigrc bash_profile zshrc p10k.zsh vsvimrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -23,6 +23,13 @@ echo "...done"
 echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
+
+case "$OSTYPE" in
+  msys*)
+    # To make ln -s work
+    export MSYS=winsymlinks:nativestrict
+    ;;
+esac
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
