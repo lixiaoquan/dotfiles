@@ -66,10 +66,12 @@ function git-branch-prompt {
   if [ $branch ]; then printf " [%s]" $branch; fi
 }
 
-if [ "$color_prompt" = yes ]; then
-  PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]\$(git-branch-prompt)\n\$ "
-else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
+if [[ "$OSTYPE" != "msys" ]]; then
+  if [ "$color_prompt" = yes ]; then
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]\$(git-branch-prompt)\n\$ "
+  else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
+  fi
 fi
 unset color_prompt force_color_prompt
 
@@ -110,5 +112,5 @@ eval $(thefuck --alias)
 fi
 
 # Use zsh by default
-export SHELL=`which zsh`
+export SHELL=`which zsh 2> /dev/null`
 [ -f "$SHELL" ] && exec "$SHELL" -l
