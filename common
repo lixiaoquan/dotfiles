@@ -59,3 +59,14 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
 export EDITOR=vim
 
 export XDG_CONFIG_HOME=$HOME/dotfiles/config
+
+case "$OSTYPE" in
+  msys*)
+    # To make ln -s work
+    export MSYS=winsymlinks:nativestrict
+
+    if [ -d "$HOME/node-v18.14.0-win-x64" ]; then
+      export PATH=$HOME/node-v18.14.0-win-x64:$PATH
+    fi
+    ;;
+esac
