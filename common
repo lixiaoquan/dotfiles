@@ -20,8 +20,11 @@ else
   fi
 fi
 
-export PATH=/usr/local/cuda/bin:~/.local/bin:$PATH
-export PATH=~/bin/:$PATH
+export PATH=~/bin:~/.local/bin:$PATH
+
+if [ -d /usr/local/cuda/bin ]; then
+  export PATH=/usr/local/cuda/bin:$PATH
+fi
 
 if [ -d "$HOME/local/bin" ]; then
   # Add local binary to PATH
@@ -54,7 +57,13 @@ fi
 
 export PATH=$HOME/dotfiles/bin:$PATH
 
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:$LD_LIBRARY_PATH
+if [ -d /usr/local/cuda/lib64 ]; then
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+fi
+
+if [ -d /usr/local/lib ]; then
+  export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+fi
 
 export EDITOR=vim
 
