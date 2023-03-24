@@ -93,22 +93,6 @@ alias m='cd ${MODEL}'
 alias o='cd ${ONNX_MODEL}'
 alias lsqemu="psg qemu"
 
-# Build and install TensorFlow
-alias btf='bazel build //tensorflow/tools/pip_package:build_pip_package --incompatible_remove_native_http_archive=false && ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /LocalRun/xiaoquan.li/1.12_cpu_release/'
-alias itf='pip install --no-deps --upgrade /LocalRun/xiaoquan.li/1.12_cpu_release/tensorflow-1.12.0-cp35-cp35m-linux_x86_64.whl'
-alias ctf='scp /LocalRun/xiaoquan.li/1.12_cpu_release/tensorflow-1.12.0-cp35-cp35m-linux_x86_64.whl 10.28.12.210:/LocalRun/xiaoquan.li/1.12_cpu_release/'
-alias modified_tf='. /LocalRun/xiaoquan.li/modified_tensorflow/bin/activate'
-
-# Activate python virtualenv
-penv() {
-  if [ -d "/usr/local/cuda" ]; then
-    . /mercury/tools/python/penv3.6.8_gpu/bin/activate
-  else
-    . /mercury/tools/python/penv3.6.8/bin/activate
-  fi
-}
-alias prepare='penv; source ./activate.sh'
-
 update_coc_extensions() {
   cd
   cd $XDG_CONFIG_HOME/coc
@@ -116,8 +100,8 @@ update_coc_extensions() {
   tar zxvf /home/xiaoquan.li/coc_extensions.tar.gz
 }
 
-if [ -d "/mercury/utility/cmake-3.20.5-linux-x86_64/bin" ]; then
-  export PATH=/mercury/utility/cmake-3.20.5-linux-x86_64/bin:$PATH
+if [ -d "/mercury/utility/cmake-3.25.2-linux-x86_64/bin" ]; then
+  export PATH=/mercury/utility/cmake-3.25.2-linux-x86_64/bin:$PATH
 fi
 
 update_dotfiles() {
