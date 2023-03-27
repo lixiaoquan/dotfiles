@@ -24,7 +24,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   os="linux64"
 fi
-wget -c https://${github}/antoineco/neovim-neovim/releases/download/v0.8.0/nvim-${os}.tar.gz
+wget -c https://${github}/neovim/neovim/releases/download/v0.8.3/nvim.appimage
 wget -c https://${github}/oinume/path-shrinker/releases/download/v0.1.1/path-shrinker_0.1.1_Linux_x86_64.tar.gz
 wget -c https://www.zsh.org/pub/zsh-5.8.tar.xz
 wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
