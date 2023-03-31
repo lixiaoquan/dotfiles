@@ -373,6 +373,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " Close quickfix and open file from mru in opposite window
   nnoremap <silent> <space>o  :<C-u>cclose<cr><C-w>w:<C-u>CocList mru<cr>
+
+  let g:coc_global_extensions = [
+      \ 'coc-clangd',
+      \ 'coc-lists',
+      \ 'coc-cmake',
+      \ 'coc-word',
+      \ 'coc-json',
+      \ ]
 " }}}
 Plug 'skywind3000/asyncrun.vim'
 " {{{
