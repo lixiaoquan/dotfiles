@@ -109,3 +109,19 @@ update_dotfiles() {
   git checkout .
   cd -
 }
+
+convert() {
+  python -m dl convert $@
+}
+
+verify() {
+  python -m dl verify $@
+}
+
+view() {
+  python -m dl view $@
+}
+
+quantize() {
+  python -m dl quantize $@
+}
