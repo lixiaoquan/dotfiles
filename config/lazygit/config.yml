@@ -209,3 +209,9 @@ customCommands:
     command: '${HOME}/dotfiles/bin/revert.sh {{.SelectedLocalCommit.Sha}}'
     context: 'commits'
     subprocess: true
+  - key: '<f3>'
+    command: "git push gerrit HEAD:refs/for/master"
+    context: 'global'
+  - key: '<f4>'
+    command: "git push gerrit HEAD:refs/for/release"
+    context: 'global'
