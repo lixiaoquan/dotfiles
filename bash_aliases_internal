@@ -85,8 +85,16 @@ to_cd_home () {
 }
 
 to_sh_home () {
-  scp $1 10.21.12.24:/home/xiaoquan.li
-  scp $1 10.21.12.28:/home/xiaoquan.li
+  machines="10.21.12.24 10.21.12.28"
+
+  for addr in $machines; do
+    result=$(ifconfig)
+    if [[ "$result" == *"$addr"* ]]; then
+      echo "skip" $addr
+    else
+      scp $1 ${addr}:/home/xiaoquan.li
+    fi
+  done
 }
 
 alias m='cd ${MODEL}'
