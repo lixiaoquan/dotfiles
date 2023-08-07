@@ -1,17 +1,31 @@
 #!/bin/bash
 # This is a tool to sync tools between different home
+
+machines="10.21.12.24 10.28.13.41 10.21.12.28"
+
+while (( $# )); do
+    case "$1" in
+      -h|--host)
+          machines=$2
+          shift 2
+          ;;
+
+      *)
+          filename="$1"
+          shift
+    esac
+done
+
 get_abs_filename() {
   # $1 : relative filename
-  echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+  echo "$(cd "$(dirname $filename)" && pwd)/$(basename $filename)"
 }
-full_path=$(get_abs_filename $1)
+full_path=$(get_abs_filename $filename)
 read -p "Are you sure to sync $full_path ? " -n 1 -r
 echo   # (optional) move to a new Line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   RSYNC='rsync -avRPIO --ignore-errors'
-
-  machines="10.21.12.24 10.28.13.41 10.21.12.28"
 
   for addr in $machines; do
     result=$(ifconfig)
