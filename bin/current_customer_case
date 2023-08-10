@@ -9,7 +9,7 @@ echo "#!/bin/bash" > ~/customer_case.sh
 echo "cd ../build" >> ${script}
 echo "nice -n 20 ninja" >> ${script}
 echo "rm -rf sdk" >> ${script}
-echo "ninja install-base > /dev/null" >> ${script}
+echo "ninja install-tests > /dev/null" >> ${script}
 echo ". ./sdk/env.sh" >> ${script}
 
 echo "# export DL_TVM_LOG_LEVEL=CONSOLE" >> ${script}
