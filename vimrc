@@ -444,7 +444,7 @@ call plug#end()
 runtime macros/sandwich/keymap/surround.vim
 
 "autocmd FileType c,h autocmd BufWritePre <buffer> :%s/\s\+$//e
-set list listchars=tab:>-,trail:-
+set list listchars=tab:»·,trail:·
 set gdefault
 
 set autoread
