@@ -31,8 +31,8 @@ if [ -d "$HOME/local/bin" ]; then
   export PATH=$HOME/local/bin:$PATH
 fi
 
-if [ -d "$HOME/node-v14.17.5-linux-x64" ]; then
-  export PATH=$HOME/node-v14.17.5-linux-x64/bin/:$PATH
+if [ -d "$HOME/node-v16.18.0-linux-x64" ]; then
+  export PATH=$HOME/node-v16.18.0-linux-x64/bin/:$PATH
 fi
 
 if [ -d "$HOME/clangd_15.0.3/bin" ]; then

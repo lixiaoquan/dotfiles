@@ -12,7 +12,7 @@ fi
 cd
 mkdir -p packages
 cd packages
-wget -c https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-x64.tar.xz
+wget -c https://nodejs.org/dist/v16.18.0/node-v16.18.0-linux-x64.tar.xz
 wget -c https://${github}/clangd/clangd/releases/download/15.0.3/clangd-linux-15.0.3.zip
 wget -c https://${github}/jesseduffield/lazygit/releases/download/v0.36.0/lazygit_0.36.0_Linux_x86_64.tar.gz
 wget -c https://${github}/ThomasLachaux/lazydocker-high-contrast/releases/download/v0.13-high-contrast/lazydocker
