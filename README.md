@@ -32,3 +32,7 @@ apt install libncurses-dev
 2. CocUpdate
 3. TSUpdate
 4. sync dotfiles/vim and dotfiles/config/coc/extensions
+
+
+## gitstatusd for powerlevel10
+Copy downloaded binary ~/.cache/gitstatus/gitstatusd-linux-x86_64 to machines without internet access

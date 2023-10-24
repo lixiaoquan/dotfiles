@@ -65,10 +65,30 @@
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
     # context                   # user@host
+    ip
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline                   # \n
   )
+
+  # LAN IP foreground color.
+  typeset -g POWERLEVEL9K_IP_FOREGROUND=0
+
+  # LAN IP background color.
+  typeset -g POWERLEVEL9K_IP_BACKGROUND=6
+
+  # Set IP interface
+  case $OSTYPE in
+  darwin*)
+      typeset -g POWERLEVEL9K_IP_INTERFACE=$(route get 8.8.8.8 | awk '/interface:/{print $2}')
+  ;;
+  linux*)
+      typeset -g POWERLEVEL9K_IP_INTERFACE=$(ip -o route get to 8.8.8.8 | awk {' print $5 '})
+  ;;
+  *)
+      typeset -g POWERLEVEL9K_IP_INTERFACE='eth0'
+  ;;
+  esac
 
   # Basic style options that define the overall prompt look.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
