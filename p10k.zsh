@@ -72,10 +72,10 @@
   )
 
   # LAN IP foreground color.
-  typeset -g POWERLEVEL9K_IP_FOREGROUND=0
+  typeset -g POWERLEVEL9K_IP_FOREGROUND=2
 
   # LAN IP background color.
-  typeset -g POWERLEVEL9K_IP_BACKGROUND=6
+  # typeset -g POWERLEVEL9K_IP_BACKGROUND=6
 
   # Set IP interface
   case $OSTYPE in
