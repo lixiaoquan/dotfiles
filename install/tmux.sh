@@ -8,7 +8,7 @@ cd build_package
 
 tar xvzf $HOME/packages/libevent-2.1.12-stable.tar.gz
 cd libevent-2.1.12-stable
-./configure --prefix=$HOME/local --disable-shared
+./configure --prefix=$HOME/local --disable-shared --disable-openssl
 make -j8
 make install
 cd -
