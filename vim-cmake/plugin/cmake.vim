@@ -58,8 +58,14 @@ function! cmake#generate_pytest_command()
   let test_name = substitute(current_line, "def ", "", "g")
   let test_name = substitute(test_name, "\(.*:", "", "g")
   let file_name = expand("%:p")
-  let test_str = 'pytest -s -v '.file_name.'::'.test_name
+
+  if has('win32')
+    let test_str = 'pytest -s -v '."\'".file_name.'::'.test_name."\'"
+  else
+    let test_str = 'pytest -s -v '.file_name.'::'.test_name
+  endif
   echo test_str
+
   let @"=test_str
 endfunction
 
