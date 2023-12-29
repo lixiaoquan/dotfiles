@@ -16,7 +16,7 @@ wget -c https://${github}/oinume/path-shrinker/releases/download/v0.1.1/path-shr
 wget -c https://${github}/neovim/neovim/releases/download/v0.8.3/nvim.appimage
 wget -c https://${github}/jesseduffield/lazygit/releases/download/v0.36.0/lazygit_0.36.0_Linux_x86_64.tar.gz
 wget -c https://nodejs.org/dist/v16.18.0/node-v16.18.0-linux-x64.tar.xz
-wget -c https://${github}/clangd/clangd/releases/download/15.0.3/clangd-linux-15.0.3.zip
+wget -c https://${github}/clangd/clangd/releases/download/17.0.3/clangd-linux-17.0.3.zip
 wget -c https://${github}/ThomasLachaux/lazydocker-high-contrast/releases/download/v0.13-high-contrast/lazydocker
 wget -c https://${github}/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz

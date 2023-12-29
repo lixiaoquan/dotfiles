@@ -222,6 +222,11 @@ Plug 'tpope/vim-commentary'
   nmap <C-_> gcc
 " }}}
 Plug 'MattesGroeger/vim-bookmarks'
+" {{{
+  let g:bookmark_save_per_working_dir = 1
+  let g:bookmark_auto_save = 1
+  nmap <C-_> gcc
+" }}}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
   noremap <F2> :call CocAction('jumpDefinition')<CR>
