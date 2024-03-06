@@ -114,4 +114,4 @@ fi
 # Use zsh by default, except sw_64
 export SHELL=`which zsh 2> /dev/null`
 arch=$(uname -m)
-[ $arch != "sw_64"] && [ -f "$SHELL" ] && exec "$SHELL" -l
+[ $arch != "sw_64" ] && [ -f "$SHELL" ] && exec "$SHELL" -l
