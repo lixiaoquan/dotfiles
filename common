@@ -26,9 +26,18 @@ if [ -d /usr/local/cuda/bin ]; then
   export PATH=/usr/local/cuda/bin:$PATH
 fi
 
-if [ -d "$HOME/local/bin" ]; then
+arch=$(uname -m)
+
+local_root="$HOME/local"
+
+if [ $arch != "x86_64" ]; then
   # Add local binary to PATH
-  export PATH=$HOME/local/bin:$PATH
+  local_root="$HOME/${arch}_local"
+fi
+
+if [ -d "${local_root}/bin" ]; then
+  # Add local binary to PATH
+  export PATH=${local_root}/bin:$PATH
 fi
 
 if [ -d "$HOME/node-v16.18.0-linux-x64" ]; then

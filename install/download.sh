@@ -21,6 +21,7 @@ wget -c https://${github}/ThomasLachaux/lazydocker-high-contrast/releases/downlo
 wget -c https://${github}/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz
 wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
 wget -c https://www.zsh.org/pub/zsh-5.8.tar.xz
+wget -c https://${github}/romkatv/zsh-bin/releases/download/v6.1.1/zsh-5.8-linux-aarch64.tar.gz
 wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
 wget -c https://${github}/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 wget -c ftp://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz
