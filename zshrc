@@ -143,3 +143,6 @@ function toggle-transient-prompt() {
     zle accept-line
   fi
 }
+
+# Enable completion for my scripts or commands
+compdef _gnu_generic sync to_sh_home to_cd_home
