@@ -10,5 +10,6 @@ config/pulse
 config/caja
 config/dconf
 config/tilda
+config/*
 
 
