@@ -66,6 +66,8 @@
     virtualenv                # python virtual environment
     # context                   # user@host
     ip
+    ram
+    load
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline                   # \n
