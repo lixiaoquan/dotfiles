@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+
+import subprocess
+import tempfile
+from datetime import datetime
+import shutil
+import os
+import argparse
+
+
+def get_ubuntu_codename():
+    """Returns the codename of the Ubuntu version if it's detected, otherwise None.
+
+    Tries three methods:
+      1. Using `platform.linux_distribution()`.
+      2. Parsing `/etc/os-release`.
+      3. Using `lsb_release` (optional).
+
+    Returns:
+      str: The codename of the Ubuntu version, or None if not detected.
+    """
+
+    # Try parsing /etc/os-release
+    try:
+        output = subprocess.check_output(["cat", "/etc/os-release"]).decode("utf-8")
+        for line in output.splitlines():
+            if line.startswith("VERSION_CODENAME="):
+                return line.split("=")[1].strip().strip('"')
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass
+
+    # Not detected
+    return None
+
+
+def get_filename_with_time(prefix="my_file"):
+    """
+    Generates a filename with the current date and time in format YYYY_MM_DD_HH_MM_SS.
+
+    Args:
+      prefix: Optional prefix for the filename (default: "my_file").
+
+    Returns:
+      str: The formatted filename with current date and time.
+    """
+    now = datetime.now()
+    timestamp = now.strftime("%Y_%m_%d_%H_%M_%S")
+    filename = f"{prefix}.{timestamp}"
+    return filename
+
+
+def setup_apt():
+
+    codename = get_ubuntu_codename()
+
+    assert codename in ["jammy", "focal", "bionic", "xenial"]
+
+    template = f"""
+deb https://mirrors.ustc.edu.cn/ubuntu/ {codename} main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ {codename}-security main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ {codename}-updates main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ {codename}-backports main restricted universe multiverse
+    """
+
+    with tempfile.NamedTemporaryFile() as temp_file:
+        temp_file.write(template.encode())
+        temp_file.flush()
+
+        source_list = "/etc/apt/sources.list"
+        backup = get_filename_with_time(source_list)
+
+        # backup
+        shutil.copyfile(source_list, backup)
+
+        # replace
+        shutil.copyfile(temp_file.name, source_list)
+
+        print(f"{source_list} is backed up to {backup}")
+        print(f"sudo mv {backup} {source_list}")
+
+    return
+
+
+def setup_git():
+
+    class Proxy:
+        def __init__(self, proxy_url, cwd):
+            self.proxy_url = proxy_url
+            self.timeout = 60
+            self.wget_available = False
+            self.clone_available = False
+            self.cwd = cwd
+            os.makedirs(self.cwd)
+
+        def get_clone_url(self, url):
+            return self.proxy_url + "/" + url
+
+        def clone(self, url):
+            url = self.get_clone_url(url)
+
+            cmd = ["git", "clone", url]
+
+            try:
+                completed_process = subprocess.run(
+                    cmd, timeout=self.timeout, check=True, cwd=self.cwd
+                )
+                self.clone_available = True
+            except subprocess.TimeoutExpired:
+                print("Process timed out after 10 seconds.")
+            except subprocess.CalledProcessError as e:
+                print("Error executing command:", e)
+
+        def wget(self, url):
+            url = self.proxy_url + "/" + url
+
+            cmd = ["wget", url]
+
+            try:
+                completed_process = subprocess.run(
+                    cmd, timeout=self.timeout, check=True, cwd=self.cwd
+                )
+                self.wget_available = True
+            except subprocess.TimeoutExpired:
+                print("Process timed out after 10 seconds.")
+            except subprocess.CalledProcessError as e:
+                print("Error executing command:", e)
+
+        def report(self):
+            shutil.rmtree(self.cwd)
+            colors = {
+                "red": "\033[91m",
+                "green": "\033[92m",
+                "yellow": "\033[93m",
+                "blue": "\033[94m",
+                "purple": "\033[95m",
+                "cyan": "\033[96m",
+                "white": "\033[97m",
+                "reset": "\033[0m",
+            }
+
+            wget_color = colors["green"] if self.wget_available else colors["red"]
+            clone_color = colors["green"] if self.clone_available else colors["red"]
+            print(
+                f"{self.proxy_url}: wget {wget_color}{self.wget_available}{colors['reset']} clone {clone_color}{self.clone_available}{colors['reset']}"
+            )
+
+    class Gitclone(Proxy):
+        def __init__(self):
+            super().__init__("https://gitclone.com", "gitclone_check")
+
+        def wget(self, url):
+            pass
+
+        def get_clone_url(self, url):
+            return self.proxy_url + "/" + url.replace("https://", "")
+
+    class Ghproxy(Proxy):
+        def __init__(self):
+            super().__init__("https://mirror.ghproxy.com", "ghproxy_check")
+
+    proxies = [Ghproxy(), Gitclone()]
+
+    FILE_URL = "https://github.com/indygreg/python-build-standalone/releases/download/20240224/cpython-3.11.8+20240224-aarch64-unknown-linux-gnu-install_only.tar.gz"
+    REPO_URL = "https://github.com/stilleshan/dockerfiles"
+
+    for p in proxies:
+        p.wget(FILE_URL)
+        p.clone(REPO_URL)
+
+    for p in proxies:
+        p.report()
+
+    return
+
+
+def setup_pip():
+    return
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-c", "--check-git-proxy", action="store_true")
+
+    args = parser.parse_args()
+
+    if args.check_git_proxy:
+        setup_git()
+
+    # setup_apt()
+    # setup_pip()
+    return
+
+
+if __name__ == "__main__":
+    main()
