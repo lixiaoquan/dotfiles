@@ -40,8 +40,14 @@ if [ -d "${local_root}/bin" ]; then
   export PATH=${local_root}/bin:$PATH
 fi
 
-if [ -d "$HOME/node-v16.18.0-linux-x64" ]; then
-  export PATH=$HOME/node-v16.18.0-linux-x64/bin/:$PATH
+if [ $arch == "aarch64" ]; then
+  if [ -d "$HOME/node-v16.20.2-linux-arm64" ]; then
+    export PATH=$HOME/node-v16.20.2-linux-arm64/bin/:$PATH
+  fi
+else
+  if [ -d "$HOME/node-v16.18.0-linux-x64" ]; then
+    export PATH=$HOME/node-v16.18.0-linux-x64/bin/:$PATH
+  fi
 fi
 
 if [ -d "$HOME/clangd_15.0.3/bin" ]; then
