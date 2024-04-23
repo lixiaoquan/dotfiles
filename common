@@ -40,7 +40,7 @@ if [ -d "${local_root}/bin" ]; then
   export PATH=${local_root}/bin:$PATH
 fi
 
-if [ $arch == "aarch64" ]; then
+if [ $arch = "aarch64" ]; then
   if [ -d "$HOME/node-v16.20.2-linux-arm64" ]; then
     export PATH=$HOME/node-v16.20.2-linux-arm64/bin/:$PATH
   fi
