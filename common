@@ -72,10 +72,6 @@ fi
 
 export PATH=$HOME/dotfiles/bin:$PATH
 
-if [ -d /usr/local/cuda/lib64 ]; then
-  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-fi
-
 if [ -d /usr/local/lib ]; then
   export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 fi
@@ -94,3 +90,6 @@ case "$OSTYPE" in
     fi
     ;;
 esac
+
+# Remove duplicate
+PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
