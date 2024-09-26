@@ -20,6 +20,7 @@ adjust_environment () {
     PROJECT_BINARY=${PROJECT_ROOT}/build
     PROJECT_SOURCE=${PROJECT_ROOT}/ai_software/
     PROJECT_TVM=${PROJECT_ROOT}/ai_software/compiler/tvm
+    PROJECT_TVM2=${PROJECT_ROOT}/ai_software/dltvm2/tvm
     PROJECT_DRIVER=${PROJECT_ROOT}/ai_software/driver
     PROJECT_TEST=${PROJECT_ROOT}/ai_software/compiler/tvm/dl/tests/python
   else
@@ -61,6 +62,14 @@ alias tvm='
              adjust_environment
 
              [ ! -z "$PROJECT_TVM" ]; cd $PROJECT_TVM
+          }; func
+          '
+
+alias t2='
+          func() {
+             adjust_environment
+
+             [ ! -z "$PROJECT_TVM2" ]; cd $PROJECT_TVM2
           }; func
           '
 
