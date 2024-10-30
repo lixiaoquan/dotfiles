@@ -70,6 +70,10 @@ if [ -d "$HOME/docker" ]; then
   export PATH=$HOME/docker:$PATH
 fi
 
+if [ -d "$HOME/static_zsh/bin" ]; then
+  export PATH=$HOME/static_zsh/bin:$PATH
+fi
+
 export PATH=$HOME/dotfiles/bin:$PATH
 
 if [ -d /usr/local/lib ]; then
