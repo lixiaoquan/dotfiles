@@ -5,7 +5,7 @@ Green='\033[0;32m'
 Off='\033[0m'
 
 password_file=/home/xiaoquan.li/cd-home-password-file
-ftp_addr=10.21.12.12
+ftp_addr=cddevftp.denglin.com
 
 full_path=$(realpath $1)
 relative_path=$1
