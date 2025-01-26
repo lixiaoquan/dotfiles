@@ -111,7 +111,10 @@ if type thefuck >/dev/null 2>&1; then
 eval $(thefuck --alias)
 fi
 
-# Use zsh by default, except sw_64
-export SHELL=`which zsh 2> /dev/null`
-arch=$(uname -m)
-[ $arch != "sw_64" ] && [ -f "$SHELL" ] && exec "$SHELL" -l
+# Use NO_ZSH to control use bash or zsh
+if [ -z "$NO_ZSH" ]; then
+  # Use zsh by default, except sw_64
+  export SHELL=`which zsh 2> /dev/null`
+  arch=$(uname -m)
+  [ $arch != "sw_64" ] && [ -f "$SHELL" ] && exec "$SHELL" -l
+fi
