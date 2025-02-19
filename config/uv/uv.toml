@@ -1,0 +1,5 @@
+python-install-mirror = "https://mirror.nju.edu.cn/github-release/indygreg/python-build-standalone/"
+
+[[index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+default = true
