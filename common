@@ -10,7 +10,7 @@ if [ -n "$ZSH_VERSION" ]; then
    HOSTNAME="$HOST"
 fi
 
-if [ $HOSTNAME = "ops-Alienware-17-R4" ]; then
+if [ $HOSTNAME = "ops-Alienware-17-R4" ] || [ $HOSTNAME = "swsrv-31-41" ]; then
   if [ -f ~/.bash_aliases_external ]; then
     . ~/.bash_aliases_external
   fi
