@@ -470,7 +470,7 @@ autocmd FileChangedShellPost *
 autocmd FocusLost * silent! wa
 
 " vertical split on startup
-au VimEnter * vsplit
+au BufEnter *.py,*.cpp if winnr('$') == 1 | vsplit | endif
 
 " It has to be here
 autocmd vimenter * ++nested hi LspCxxHlGroupMemberVariable guifg=#839496
