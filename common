@@ -15,6 +15,7 @@ external_hostnames=(
   "swsrv-31-41"
   "sw-gigabyte-31-52"
   "Inspur-NF5468G7-31-54"
+  "ext-opt-31-51"
   )
 
 if [[ " ${external_hostnames[@]} " =~ " $HOSTNAME " ]]; then
