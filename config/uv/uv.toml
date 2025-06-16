@@ -1,4 +1,4 @@
-python-install-mirror = "https://mirror.nju.edu.cn/github-release/indygreg/python-build-standalone/"
+python-install-mirror = "https://github.hlug.cn/https://github.com/astral-sh/python-build-standalone/releases/download/"
 
 [[index]]
 url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
