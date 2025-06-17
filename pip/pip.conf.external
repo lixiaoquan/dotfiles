@@ -1,0 +1,10 @@
+[global]
+trusted-host = ext-artifactory.denglin.com
+               mirrors.tuna.tsinghua.edu.cn
+               mirrors.cloud.tencent.com
+
+index-url = http://ext-artifactory.denglin.com:8082/artifactory/api/pypi/dl-pypi-remote/simple
+
+# index-url = https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/
+# index-url = https://mirrors.cloud.tencent.com/pypi/simple
+timeout = 6000

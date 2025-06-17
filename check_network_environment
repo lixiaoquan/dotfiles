@@ -1,0 +1,34 @@
+#!/bin/bash
+
+is_internal_network() {
+    # Get current IP address (try multiple methods for compatibility)
+    local ip=""
+    
+    # Method 1: Using ip command (common in Linux systems)
+    if command -v ip &>/dev/null; then
+        ip=$(ip route get 8.8.8.8 2>/dev/null | grep -oP 'src \K\S+' | head -1)
+    fi
+    
+    # Method 2: Using hostname command (if method 1 fails)
+    if [ -z "$ip" ] && command -v hostname &>/dev/null; then
+        ip=$(hostname -I 2>/dev/null | awk '{print $1}')
+    fi
+    
+    # Method 3: Using ifconfig command (for older systems)
+    if [ -z "$ip" ] && command -v ifconfig &>/dev/null; then
+        ip=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -1)
+    fi
+    
+    # Check if IP was successfully obtained
+    if [ -z "$ip" ]; then
+        echo "Error: Unable to get current IP address"
+        return 1
+    fi
+    
+    # Only check specific internal network segments (10.28.13.x or 10.21.12.x)
+    if [[ $ip =~ ^10\.28\.13\. ]] || [[ $ip =~ ^10\.21\.12\. ]]; then
+        return 0  # Internal network
+    else
+        return 1  # External network
+    fi
+}

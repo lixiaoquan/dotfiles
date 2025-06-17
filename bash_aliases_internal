@@ -148,3 +148,5 @@ view() {
 quantize() {
   python -m dl quantize $@
 }
+
+export PIP_CONFIG_FILE=${HOME}/dotfiles/pip/pip.conf.internal

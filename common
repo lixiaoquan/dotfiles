@@ -1,3 +1,5 @@
+source ${HOME}/dotfiles/check_network_environment
+
 dotfiles_dir=$HOME/dotfiles
 
 # Alias definitions.
@@ -18,13 +20,13 @@ external_hostnames=(
   "ext-opc-31-51"
   )
 
-if [[ " ${external_hostnames[@]} " =~ " $HOSTNAME " ]]; then
-  if [ -f ~/.bash_aliases_external ]; then
-    . ~/.bash_aliases_external
-  fi
-else
+if is_internal_network; then
   if [ -f ~/.bash_aliases_internal ]; then
     . ~/.bash_aliases_internal
+  fi
+else
+  if [ -f ~/.bash_aliases_external ]; then
+    . ~/.bash_aliases_external
   fi
 fi
 
