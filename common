@@ -86,10 +86,6 @@ fi
 
 export PATH=$HOME/dotfiles/bin:$PATH
 
-if [ -d /usr/local/lib ]; then
-  export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-fi
-
 export EDITOR=vim
 
 export XDG_CONFIG_HOME=$HOME/dotfiles/config
