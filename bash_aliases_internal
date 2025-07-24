@@ -123,9 +123,7 @@ update_coc_extensions() {
   tar zxvf /home/xiaoquan.li/coc_extensions.tar.gz
 }
 
-if [ -d "/mercury/utility/cmake-3.25.2-linux-x86_64/bin" ]; then
-  export PATH=/mercury/utility/cmake-3.25.2-linux-x86_64/bin:$PATH
-fi
+add_to_path_if_exists "/mercury/utility/cmake-3.25.2-linux-x86_64/bin"
 
 update_dotfiles() {
   cd $HOME/dotfiles

@@ -31,9 +31,7 @@ update_coc_extensions() {
   rm /home/xiaoquan.li/coc_extensions.tar.gz
 }
 
-if [ -d "$HOME/cmake-3.20.4-linux-x86_64/bin" ]; then
-  export PATH=$HOME/cmake-3.20.4-linux-x86_64/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/cmake-3.20.4-linux-x86_64/bin"
 
 alias enable_proxy='export https_proxy=http://proxy.denglin.com:1080 && export http_proxy=http://proxy.denglin.com:1080'
 alias disable_proxy='unset https_proxy && unset http_proxy'

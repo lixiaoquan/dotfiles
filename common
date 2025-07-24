@@ -1,5 +1,12 @@
 source ${HOME}/dotfiles/check_network_environment
 
+# Function to add directory to PATH if it exists
+add_to_path_if_exists() {
+  if [ -d "$1" ]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
 dotfiles_dir=$HOME/dotfiles
 
 # Alias definitions.
@@ -34,9 +41,7 @@ export PATH="BEGIN_COMMON":$PATH:"BEFORE_COMMON"
 
 export PATH=~/bin:~/.local/bin:$PATH
 
-if [ -d /usr/local/cuda/bin ]; then
-  export PATH=/usr/local/cuda/bin:$PATH
-fi
+add_to_path_if_exists "/usr/local/cuda/bin"
 
 arch=$(uname -m)
 
@@ -47,44 +52,25 @@ if [ $arch != "x86_64" ]; then
   local_root="$HOME/${arch}_local"
 fi
 
-if [ -d "${local_root}/bin" ]; then
-  # Add local binary to PATH
-  export PATH=${local_root}/bin:$PATH
-fi
+add_to_path_if_exists "${local_root}/bin"
 
 if [ $arch = "aarch64" ]; then
-  if [ -d "$HOME/node-v22.17.1-linux-arm64" ]; then
-    export PATH=$HOME/node-v22.17.1-linux-arm64/bin:$PATH
-  fi
+  add_to_path_if_exists "$HOME/node-v22.17.1-linux-arm64/bin"
 else
-  if [ -d "$HOME/node-v22.17.1-linux-x64" ]; then
-    export PATH=$HOME/node-v22.17.1-linux-x64/bin:$PATH
-  fi
+  add_to_path_if_exists "$HOME/node-v22.17.1-linux-x64/bin"
 fi
 
-if [ -d "$HOME/clangd_15.0.3/bin" ]; then
-  export PATH=$HOME/clangd_15.0.3/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/clangd_15.0.3/bin"
 
-if [ -d "$HOME/nvim-linux64/bin" ]; then
-  export PATH=$HOME/nvim-linux64/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/nvim-linux64/bin"
 
-if [ -d "$HOME/nvim-osx64/bin" ]; then
-  export PATH=$HOME/nvim-osx64/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/nvim-osx64/bin"
 
-if [ -d "$HOME/kitty/bin" ]; then
-  export PATH=$HOME/kitty/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/kitty/bin"
 
-if [ -d "$HOME/docker" ]; then
-  export PATH=$HOME/docker:$PATH
-fi
+add_to_path_if_exists "$HOME/docker"
 
-if [ -d "$HOME/static_zsh/bin" ]; then
-  export PATH=$HOME/static_zsh/bin:$PATH
-fi
+add_to_path_if_exists "$HOME/static_zsh/bin"
 
 export PATH=$HOME/dotfiles/bin:$PATH
 
@@ -99,9 +85,7 @@ case "$OSTYPE" in
     # To make ln -s work
     export MSYS=winsymlinks:nativestrict
 
-    if [ -d "$HOME/node-v18.14.0-win-x64" ]; then
-      export PATH=$HOME/node-v18.14.0-win-x64:$PATH
-    fi
+    add_to_path_if_exists "$HOME/node-v18.14.0-win-x64"
     ;;
 esac
 
