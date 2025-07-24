@@ -19,14 +19,6 @@ if [ -n "$ZSH_VERSION" ]; then
    HOSTNAME="$HOST"
 fi
 
-external_hostnames=(
-  "ops-Alienware-17-R4"
-  "swsrv-31-41"
-  "sw-gigabyte-31-52"
-  "Inspur-NF5468G7-31-54"
-  "ext-opc-31-51"
-  )
-
 if is_internal_network; then
   if [ -f ~/.bash_aliases_internal ]; then
     . ~/.bash_aliases_internal
