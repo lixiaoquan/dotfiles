@@ -30,6 +30,8 @@ else
   fi
 fi
 
+export PATH="BEGIN_COMMON":$PATH:"BEFORE_COMMON"
+
 export PATH=~/bin:~/.local/bin:$PATH
 
 if [ -d /usr/local/cuda/bin ]; then
@@ -52,11 +54,11 @@ fi
 
 if [ $arch = "aarch64" ]; then
   if [ -d "$HOME/node-v22.17.1-linux-arm64" ]; then
-    export PATH=$HOME/node-v22.17.1-linux-arm64/bin/:$PATH
+    export PATH=$HOME/node-v22.17.1-linux-arm64/bin:$PATH
   fi
 else
   if [ -d "$HOME/node-v22.17.1-linux-x64" ]; then
-    export PATH=$HOME/node-v22.17.1-linux-x64/bin/:$PATH
+    export PATH=$HOME/node-v22.17.1-linux-x64/bin:$PATH
   fi
 fi
 
@@ -85,6 +87,8 @@ if [ -d "$HOME/static_zsh/bin" ]; then
 fi
 
 export PATH=$HOME/dotfiles/bin:$PATH
+
+export PATH="END_COMMON":$PATH
 
 export EDITOR=vim
 
