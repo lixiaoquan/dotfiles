@@ -77,3 +77,62 @@ alias lzd='TERM=screen-256color lazydocker'
 
 alias justbash='NO_ZSH=1 bash'
 alias cpv="rsync -ah --progress"
+
+
+dlgpu() {
+    if [ $# -lt 2 ]; then
+        echo "Usage: dlgpu <gpu_ids> <command>"
+        echo "Example: dlgpu 012 'python train.py'"
+        echo "         dlgpu 01234567 'nvidia-smi'"
+        return 1
+    fi
+    
+    local gpu_ids="$1"
+    shift
+    
+    # Convert gpu_ids string to comma-separated format
+    local cuda_devices=""
+    for (( i=0; i<${#gpu_ids}; i++ )); do
+        local gpu_id="${gpu_ids:$i:1}"
+        if [ $i -eq 0 ]; then
+            cuda_devices="$gpu_id"
+        else
+            cuda_devices="$cuda_devices,$gpu_id"
+        fi
+    done
+    
+    echo "Running with CUDA_VISIBLE_DEVICES=$cuda_devices $*"
+    CUDA_VISIBLE_DEVICES="$cuda_devices" "$@"
+}
+
+ks38() {
+    if [ $# -lt 2 ]; then
+        echo "Usage: ks38 <group_ids> <command>"
+        echo "Example: ks38 0 'python train.py'     # Uses GPUs 0,1,2,3"
+        echo "         ks38 1 'python train.py'     # Uses GPUs 4,5,6,7"
+        echo "         ks38 01 'python train.py'    # Uses GPUs 0,1,2,3,4,5,6,7"
+        return 1
+    fi
+    
+    local group_ids="$1"
+    shift
+    
+    # Convert group_ids to comma-separated GPU list
+    local cuda_devices=""
+    for (( i=0; i<${#group_ids}; i++ )); do
+        local group_id="${group_ids:$i:1}"
+        local start_gpu=$((group_id * 4))
+        
+        for j in {0..3}; do
+            local gpu_id=$((start_gpu + j))
+            if [ -z "$cuda_devices" ]; then
+                cuda_devices="$gpu_id"
+            else
+                cuda_devices="$cuda_devices,$gpu_id"
+            fi
+        done
+    done
+    
+    echo "Running with CUDA_VISIBLE_DEVICES=$cuda_devices $*"
+    CUDA_VISIBLE_DEVICES="$cuda_devices" "$@"
+}
