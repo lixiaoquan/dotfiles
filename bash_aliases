@@ -136,3 +136,20 @@ ks38() {
     echo "Running with CUDA_VISIBLE_DEVICES=$cuda_devices $*"
     CUDA_VISIBLE_DEVICES="$cuda_devices" "$@"
 }
+
+verbose_warmup() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: verbose_warmup <command>"
+        echo "Example: verbose_warmup 'python train.py'"
+        echo "         verbose_warmup 'nvidia-smi'"
+        return 1
+    fi
+    
+    # Create date-based directory under $HOME
+    local dump_dir="$HOME/dleol_dump_$(date +%Y%m%d)/"
+    mkdir -p "$dump_dir"
+    
+    echo "Running with verbose warmup settings: $*"
+    echo "DLEOL_DUMP_PATH set to: $dump_dir"
+    DLEOL_MISC_INFO=1 DLEOL_ENABLE_JIT_INFO=1 DLEOL_DUMP_CU=_ DLEOL_DUMP_PATH="$dump_dir" "$@"
+}
