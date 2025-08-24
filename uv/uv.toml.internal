@@ -1,0 +1,5 @@
+python-install-mirror = "https://github.hlug.cn/https://github.com/astral-sh/python-build-standalone/releases/download/"
+
+[[index]]
+url = "http://artifactory.denglin.com:8082/artifactory/api/pypi/dl-pypi-remote/simple"
+default = true

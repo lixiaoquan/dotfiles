@@ -37,3 +37,4 @@ alias enable_proxy='export https_proxy=http://proxy.denglin.com:1080 && export h
 alias disable_proxy='unset https_proxy && unset http_proxy'
 
 export PIP_CONFIG_FILE=${HOME}/dotfiles/pip/pip.conf.external
+export UV_CONFIG_FILE=${HOME}/dotfiles/uv/uv.toml.external

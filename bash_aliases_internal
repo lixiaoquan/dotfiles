@@ -148,3 +148,4 @@ quantize() {
 }
 
 export PIP_CONFIG_FILE=${HOME}/dotfiles/pip/pip.conf.internal
+export UV_CONFIG_FILE=${HOME}/dotfiles/uv/uv.toml.internal
