@@ -220,12 +220,14 @@ Plug 'tpope/vim-commentary'
   " Use Ctrl-/ to comment/uncomment
   imap <C-_> <C-O>gcc
   nmap <C-_> gcc
+  " Alternative mapping for problematic terminals
+  imap <C-c><C-c> <C-O>gcc
+  nmap <C-c><C-c> gcc
 " }}}
 Plug 'MattesGroeger/vim-bookmarks'
 " {{{
   let g:bookmark_save_per_working_dir = 1
   let g:bookmark_auto_save = 1
-  nmap <C-_> gcc
 " }}}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
