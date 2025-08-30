@@ -111,6 +111,13 @@ if type thefuck >/dev/null 2>&1; then
 eval $(thefuck --alias)
 fi
 
+# Auto-attach tmux on SSH login (fast) if any session exists; skip inside tmux
+if [ -z "$TMUX" ] && [ -n "$SSH_TTY" ] && command -v tmux >/dev/null 2>&1; then
+  if tmux ls >/dev/null 2>&1; then
+    exec tmux attach
+  fi
+fi
+
 # Use NO_ZSH to control use bash or zsh
 if [ -z "$NO_ZSH" ]; then
   # Use zsh by default, except sw_64
