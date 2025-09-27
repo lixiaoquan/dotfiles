@@ -7,17 +7,6 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Obj
 # Set PowerShell to use UTF-8 for all operations
 [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-# Custom prompt function (optional)
-function prompt {
-    $currentPath = (Get-Location).Path
-    $hostName = $env:COMPUTERNAME
-    $userName = $env:USERNAME
-    Write-Host "[$userName@$hostName " -NoNewline -ForegroundColor Green
-    Write-Host "$currentPath" -NoNewline -ForegroundColor Blue
-    Write-Host "]$ " -NoNewline -ForegroundColor Green
-    return " "
-}
-
 # Aliases
 # Time alias that behaves like Linux 'time' command
 function time {
@@ -32,7 +21,7 @@ function time {
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
     
     try {
-        # Execute the command
+        # Execute the command and capture both output and result
         if ($Command.Count -eq 1) {
             $result = Invoke-Expression $Command[0]
         } else {
@@ -41,13 +30,16 @@ function time {
         
         $stopwatch.Stop()
         
-        # Display timing information similar to Linux time
+        # First display the command output/result
+        if ($result -ne $null) {
+            $result
+        }
+        
+        # Then display timing information similar to Linux time
         $elapsed = $stopwatch.Elapsed
         Write-Host "`nreal    $($elapsed.TotalSeconds.ToString("F3"))s" -ForegroundColor Cyan
         Write-Host "user    $($elapsed.TotalSeconds.ToString("F3"))s" -ForegroundColor Cyan
         Write-Host "sys     0.000s" -ForegroundColor Cyan
-        
-        return $result
     }
     catch {
         $stopwatch.Stop()
@@ -60,14 +52,12 @@ function time {
 # Common aliases
 Set-Alias -Name ll -Value Get-ChildItem
 Set-Alias -Name la -Value Get-ChildItem
-Set-Alias -Name grep -Value Select-String
 
 # Directory navigation aliases
 function .. { Set-Location .. }
 function ... { Set-Location ..\.. }
 function .... { Set-Location ..\..\.. }
 
-# Git aliases (if git is available)
 if (Get-Command git -ErrorAction SilentlyContinue) {
     function gs { git status }
     function ga { git add $args }
@@ -77,13 +67,6 @@ if (Get-Command git -ErrorAction SilentlyContinue) {
     function gd { git diff $args }
 }
 
-# Enhanced ls function with colors (similar to Linux ls -la)
-function ls {
-    param([string]$Path = ".")
-    Get-ChildItem -Path $Path | Format-Table -AutoSize
-}
-
-# Function to reload profile
 function Reload-Profile {
     . $PROFILE
     Write-Host "PowerShell profile reloaded!" -ForegroundColor Green
@@ -95,44 +78,5 @@ function Edit-Profile {
         & $env:EDITOR $PROFILE
     } else {
         notepad $PROFILE
-    }
-}
-
-# Welcome message
-Write-Host "PowerShell profile loaded successfully!" -ForegroundColor Green
-Write-Host "Type 'Get-Help about_profiles' for more information about PowerShell profiles." -ForegroundColor Cyan
-
-# Additional custom functions can be added here
-# ...
-
-# Load additional modules if available
-$modules = @("PSReadLine", "posh-git")
-foreach ($module in $modules) {
-    if (Get-Module -ListAvailable -Name $module) {
-        Import-Module $module -ErrorAction SilentlyContinue
-    }
-}
-
-# PSReadLine configuration (if available)
-if (Get-Module PSReadLine) {
-    # Check if PSReadLine version supports prediction features
-    $psReadLineVersion = (Get-Module PSReadLine).Version
-    
-    # PredictionSource was introduced in PSReadLine 2.1.0
-    if ($psReadLineVersion -ge [Version]"2.1.0") {
-        try {
-            Set-PSReadLineOption -PredictionSource History
-        } catch {
-            Write-Warning "PredictionSource feature not available in current PSReadLine version"
-        }
-    }
-    
-    # These options are available in older versions
-    try {
-        Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-        Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-        Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-    } catch {
-        Write-Warning "Some PSReadLine features not available in current version"
     }
 }
