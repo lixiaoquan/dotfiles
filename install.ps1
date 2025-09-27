@@ -142,17 +142,6 @@ Write-Host ""
 
 if ($Success) {
     Write-Host "Installation completed successfully!" -ForegroundColor Green
-    Write-Host ""
-    Write-Host "To activate the new profile:" -ForegroundColor Cyan
-    Write-Host "  1. Restart PowerShell, or" -ForegroundColor Gray
-    Write-Host "  2. Run: . `$PROFILE" -ForegroundColor Gray
-    Write-Host ""
-    Write-Host "Available features in the new profile:" -ForegroundColor Cyan
-    Write-Host "  - time command (similar to Linux time)" -ForegroundColor Gray
-    Write-Host "  - Git aliases (gs, ga, gc, gp, gl, gd)" -ForegroundColor Gray
-    Write-Host "  - Directory navigation (.., ..., ....)" -ForegroundColor Gray
-    Write-Host "  - Enhanced ls command" -ForegroundColor Gray
-    Write-Host "  - Profile management (Reload-Profile, Edit-Profile)" -ForegroundColor Gray
 } else {
     Write-Host "Installation failed!" -ForegroundColor Red
     exit 1
