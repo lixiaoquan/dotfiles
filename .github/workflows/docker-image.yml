@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag dotfiles:$(date +%s)
 
-  windows-info:
+  windows-test:
 
     runs-on: windows-latest
 
@@ -45,6 +45,88 @@ jobs:
         echo "Number of Logical Processors: $((Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors)"
         echo "Number of Physical Processors: $((Get-WmiObject -Class Win32_ComputerSystem).NumberOfProcessors)"
         echo "Number of CPU Cores: $((Get-WmiObject -Class Win32_Processor).NumberOfCores)"
+    
+    - name: Test PowerShell profile installation
+      run: |
+        echo "=== Testing PowerShell Profile Installation ==="
+        echo "Current directory: $(Get-Location)"
+        echo "PowerShell version: $($PSVersionTable.PSVersion)"
         echo ""
-        echo "=== Detailed System Information ==="
-        systeminfo
+        
+        # Check if files exist
+        echo "Checking required files:"
+        if (Test-Path "profile.ps1") {
+          echo "✓ profile.ps1 found"
+        } else {
+          echo "✗ profile.ps1 not found"
+          exit 1
+        }
+        
+        if (Test-Path "install.ps1") {
+          echo "✓ install.ps1 found"
+        } else {
+          echo "✗ install.ps1 not found"
+          exit 1
+        }
+        
+        echo ""
+        echo "=== Testing install.ps1 Script ==="
+        
+        # Test install.ps1 help
+        echo "Testing install.ps1 help:"
+        .\install.ps1 -Help
+        
+        echo ""
+        echo "=== Running install.ps1 (without admin, will copy files) ==="
+        # Run installation (will copy files since not running as admin)
+        echo "y" | .\install.ps1 -Force
+    
+    - name: Test time alias functionality
+      run: |
+        echo "=== Testing Time Alias Functionality ==="
+        
+        # Source the profile to load functions
+        . .\profile.ps1
+        
+        echo ""
+        echo "Testing time alias with simple command:"
+        time Get-Date
+        
+        echo ""
+        echo "Testing time alias with dir command:"
+        time dir
+        
+        echo ""
+        echo "Testing time alias with more complex command:"
+        time Get-Process | Select-Object -First 5
+        
+        echo ""
+        echo "Testing time alias with pipeline:"
+        time "Get-ChildItem | Measure-Object"
+        
+        echo ""
+        echo "=== Testing Other Profile Features ==="
+        
+        # Test other aliases
+        echo "Testing directory navigation aliases:"
+        $originalLocation = Get-Location
+        try {
+          ..
+          echo "✓ .. (up one directory) works"
+          Set-Location $originalLocation
+          
+          ...
+          echo "✓ ... (up two directories) works"
+          Set-Location $originalLocation
+        } catch {
+          echo "✗ Directory navigation failed: $_"
+          Set-Location $originalLocation
+        }
+        
+        # Test ls alias
+        echo ""
+        echo "Testing enhanced ls command:"
+        ls | Select-Object -First 3
+        
+        echo ""
+        echo "=== All Tests Completed Successfully ==="
