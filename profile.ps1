@@ -115,8 +115,24 @@ foreach ($module in $modules) {
 
 # PSReadLine configuration (if available)
 if (Get-Module PSReadLine) {
-    Set-PSReadLineOption -PredictionSource History
-    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    # Check if PSReadLine version supports prediction features
+    $psReadLineVersion = (Get-Module PSReadLine).Version
+    
+    # PredictionSource was introduced in PSReadLine 2.1.0
+    if ($psReadLineVersion -ge [Version]"2.1.0") {
+        try {
+            Set-PSReadLineOption -PredictionSource History
+        } catch {
+            Write-Warning "PredictionSource feature not available in current PSReadLine version"
+        }
+    }
+    
+    # These options are available in older versions
+    try {
+        Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+        Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+        Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    } catch {
+        Write-Warning "Some PSReadLine features not available in current version"
+    }
 }
