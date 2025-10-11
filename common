@@ -59,7 +59,12 @@ add_to_path_if_exists "${local_root}/bin"
 if [ $arch = "aarch64" ]; then
   add_to_path_if_exists "$HOME/node-v22.17.1-linux-arm64/bin"
 else
-  add_to_path_if_exists "$HOME/node-v22.17.1-linux-x64/bin"
+  # Check hostname for specific Node.js version because apple has a glibc 2.23
+  if [ "$HOSTNAME" = "apple" ]; then
+    add_to_path_if_exists "$HOME/node-v16.18.0-linux-x64/bin"
+  else
+    add_to_path_if_exists "$HOME/node-v22.17.1-linux-x64/bin"
+  fi
 fi
 
 add_to_path_if_exists "$HOME/clangd_15.0.3/bin"
