@@ -11,6 +11,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   arch=$(uname -m)
   rm -rf $HOME/${arch}_local/bin/nvim
+  mkdir -p $HOME/${arch}_local/bin
   cp $HOME/packages/nvim-v0.8.3.aarch64.appimage $HOME/${arch}_local/bin/nvim
   chmod a+x $HOME/${arch}_local/bin/nvim
 fi
