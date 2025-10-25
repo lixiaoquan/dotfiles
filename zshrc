@@ -79,7 +79,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
+plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting alias-tips zsh-abbr)
 
 # Before loding oh-my-zsh.sh
 ZSHZ_CMD=j
@@ -146,3 +146,9 @@ function toggle-transient-prompt() {
 
 # Enable completion for my scripts or commands
 compdef _gnu_generic sync to_sh_home to_cd_home
+
+# Abbreviations: only use if zsh-abbr is installed
+if (( ${+functions[abbr]} )); then
+  export ABBR_SET_EXPANSION_CURSOR=1
+  abbr -g --force --quiet mp="/mars/aebox/LLM/model/%" 2>/dev/null
+fi
