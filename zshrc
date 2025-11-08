@@ -150,5 +150,4 @@ compdef _gnu_generic sync to_sh_home to_cd_home
 # Abbreviations: only use if zsh-abbr is installed
 if (( ${+functions[abbr]} )); then
   export ABBR_SET_EXPANSION_CURSOR=1
-  abbr -g --force --quiet mp="/mars/aebox/LLM/model/%" 2>/dev/null
 fi
