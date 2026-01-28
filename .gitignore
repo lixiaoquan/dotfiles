@@ -11,5 +11,5 @@ config/caja
 config/dconf
 config/tilda
 config/*
-
+*.pyc
 
