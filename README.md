@@ -22,6 +22,12 @@ install/clangd.sh
 ...
 ```
 
+## Install skills
+```bash
+cd ~/.claude
+ln -s ~/dotfiles/skills .
+```
+
 ## Troubleshooting
 ### Build zsh with error about cur_term
 apt install libncurses-dev
