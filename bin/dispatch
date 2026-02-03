@@ -18,21 +18,29 @@ done
 
 get_abs_filename() {
   # $1 : relative filename
-  echo "$(cd "$(dirname $filename)" && pwd)/$(basename $filename)"
+  echo "$(cd "$(dirname "$filename")" && pwd)/$(basename "$filename")"
 }
-full_path=$(get_abs_filename $filename)
+full_path=$(get_abs_filename "$filename")
 read -p "Are you sure to sync $full_path ? " -n 1 -r
 echo   # (optional) move to a new Line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   RSYNC='rsync -avRPIO --ignore-errors'
+  local_ips=$(ifconfig 2>/dev/null || ip addr 2>/dev/null)
 
   for addr in $machines; do
-    result=$(ifconfig)
-    if [[ "$result" == *"$addr"* ]]; then
-      echo "skip" $addr
+    host=${addr%:*}
+    port=${addr##*:}
+    [[ "$addr" != *:* ]] && port=""
+
+    if [[ "$local_ips" == *"$host"* ]]; then
+      echo "skip $addr"
     else
-      $RSYNC $full_path ${addr}:/
+      if [[ -n "$port" ]]; then
+        $RSYNC -e "ssh -p $port" "$full_path" "${host}:/"
+      else
+        $RSYNC "$full_path" "${host}:/"
+      fi
     fi
   done
 fi
