@@ -81,8 +81,15 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting alias-tips zsh-abbr)
 
-# Before loding oh-my-zsh.sh
+# Before loading oh-my-zsh.sh
 ZSHZ_CMD=j
+
+# History settings
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY           # Share history across sessions
+setopt EXTENDED_HISTORY        # Add timestamps to history
+setopt HIST_IGNORE_DUPS        # Don't record duplicates
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,7 +119,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# After loding oh-my-zsh.sh
+# After loading oh-my-zsh.sh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 # ctrl-j is occupied by tmux, so we use F5
