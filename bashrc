@@ -107,9 +107,6 @@ source $HOME/dotfiles/common
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-if type thefuck >/dev/null 2>&1; then
-eval $(thefuck --alias)
-fi
 
 # Auto-attach tmux on SSH login (fast) if any session exists; skip inside tmux
 if [ -z "$TMUX" ] && [ -n "$SSH_TTY" ] && command -v tmux >/dev/null 2>&1; then
