@@ -14,3 +14,4 @@ config/*
 *.pyc
 
 *.skill
+debug_dump-*.log
