@@ -255,6 +255,93 @@ dlsmi --query-gpu=fan.speed --format=csv,noheader,nounits
 dlsmi -l 5 --query-gpu=temperature.gpu --format=csv,noheader,nounits
 ```
 
+### Scenario: GPU Hang or Crash
+
+**Diagnosis and data collection:**
+```bash
+# Quick health check
+dlsmi --query-gpu=index,name,temperature.gpu,utilization.gpu,power.draw --format=csv
+
+# Check for hang detection in debugfs
+sudo cat /proc/driver/denglin0/hang_detect
+
+# Collect complete debug dump for analysis
+sudo dliv2_debug_dump.sh
+
+# Check kernel logs for GPU errors
+sudo dmesg | grep -i denglin | tail -50
+
+# Check for ECC errors
+dlsmi --query-gpu=index,ecc.errors.corrected.volatile.total,ecc.errors.uncorrected.volatile.total --format=csv
+```
+
+**Analyzing the debug dump:**
+```bash
+# Find the latest debug dump
+ls -lt debug_dump-*.log | head -1
+
+# Check for hang detection
+grep -A5 "hang_detect" debug_dump-*.log
+
+# Check for task errors
+grep -A10 "### status" debug_dump-*.log
+
+# Check firmware reset flags
+grep "firmware global reset" debug_dump-*.log
+
+# Check for PCIe errors
+grep -A5 "lspci" debug_dump-*.log | grep -i error
+```
+
+### Scenario: Performance Degradation Over Time
+
+**Baseline comparison:**
+```bash
+# Collect baseline debug dump when system is healthy
+sudo dliv2_debug_dump.sh
+mv debug_dump-*.log baseline_healthy.log
+
+# After performance degrades, collect another dump
+sudo dliv2_debug_dump.sh
+
+# Compare key metrics
+echo "=== Baseline vs Current ==="
+grep "temperature" baseline_healthy.log
+grep "temperature" debug_dump-*.log
+
+# Check for ECC errors accumulation
+grep "ecc" debug_dump-*.log
+
+# Compare performance states
+grep "pstate" baseline_healthy.log
+grep "pstate" debug_dump-*.log
+```
+
+### Scenario: Intermittent GPU Issues
+
+**Continuous monitoring with debug dumps:**
+```bash
+#!/bin/bash
+# Monitor and capture debug dumps on error
+LOG_DIR="gpu_debug_$(date +%Y%m%d_%H%M%S)"
+mkdir -p $LOG_DIR
+
+while true; do
+    # Check GPU status
+    UTIL=$(dlsmi --query-gpu=utilization.gpu --format=csv,noheader,nounits | head -1)
+    TEMP=$(dlsmi --query-gpu=temperature.gpu --format=csv,noheader,nounits | head -1)
+
+    # Capture debug dump if issues detected
+    if [ "$UTIL" -eq 0 ] && [ "$TEMP" -gt 80 ]; then
+        echo "Issue detected at $(date)"
+        sudo dliv2_debug_dump.sh
+        mv debug_dump-*.log $LOG_DIR/issue_$(date +%H%M%S).log
+    fi
+
+    sleep 60
+done
+```
+
 ## Automation Scripts
 
 ### GPU Selection Script

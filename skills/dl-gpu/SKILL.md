@@ -210,6 +210,34 @@ dlsmi --query-gpu=clocks_event_reasons.gpu_idle,clocks_event_reasons.hw_slowdown
 dlsmi --query-gpu=pstate --format=csv,noheader,nounits
 ```
 
+### Collect Debug Information
+
+When experiencing GPU issues, collect comprehensive debug information for analysis:
+
+```bash
+# Generate complete debug dump (requires root)
+sudo dliv2_debug_dump.sh
+
+# The script creates a timestamped log file:
+# debug_dump-YYYY-MM-DD-HHMMSS.log
+
+# View the debug file
+less debug_dump-*.log
+```
+
+**What the debug dump includes:**
+- GPU chip info, parameters, debug registers
+- Hang detection and cluster remap info
+- Task information (command buffers, memory maps, ring buffers, runlists)
+- Firmware statistics and reset flags
+- System information (PCIe topology, interrupts, processes, kernel logs)
+
+**Best practices:**
+- Run debug dump immediately after issue occurs
+- Include debug dump when reporting GPU issues
+- Compare debug dumps from healthy and problematic states
+- Check for hang detection flags or ECC errors in the dump
+
 ## Resources
 
 For detailed command reference and advanced options, see [COMMANDS.md](references/COMMANDS.md).
