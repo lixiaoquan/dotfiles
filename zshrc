@@ -93,6 +93,9 @@ setopt HIST_IGNORE_DUPS        # Don't record duplicates
 
 source $ZSH/oh-my-zsh.sh
 
+# Treat // as single / in path completion (instead of /*/)
+zstyle ':completion:*' squeeze-slashes true
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
