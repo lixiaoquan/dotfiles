@@ -1,0 +1,5 @@
+#!/bin/bash
+# Remove all url.*.insteadOf configurations
+git config --global --get-regexp '^url\.' 2>/dev/null | cut -d' ' -f1 | while read key; do
+    git config --global --unset "$key"
+done

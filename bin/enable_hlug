@@ -1,0 +1,2 @@
+#!/bin/bash
+git config --global url."https://github.hlug.cn/https://github.com/".insteadOf "https://github.com/"
