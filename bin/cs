@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+# cs - switch ~/.claude/settings.json symlink between profiles
+
+set -euo pipefail
+
+CLAUDE_DIR="$HOME/.claude"
+SETTINGS="$CLAUDE_DIR/settings.json"
+
+die() { printf '\033[31mError: %s\033[0m\n' "$1" >&2; exit 1; }
+
+# Get current active profile name (empty if not a symlink or broken)
+current() {
+    if [[ -L "$SETTINGS" ]]; then
+        local target
+        target=$(readlink "$SETTINGS")
+        # extract name from settings.<name>.json
+        if [[ "$target" =~ ^settings\.(.+)\.json$ ]]; then
+            echo "${BASH_REMATCH[1]}"
+            return
+        fi
+    fi
+    echo ""
+}
+
+# List all available profile names
+profiles() {
+    for f in "$CLAUDE_DIR"/settings.*.json; do
+        [[ -f "$f" ]] || continue
+        local base=$(basename "$f")
+        if [[ "$base" =~ ^settings\.(.+)\.json$ ]]; then
+            echo "${BASH_REMATCH[1]}"
+        fi
+    done
+}
+
+# Switch to a profile
+switch_to() {
+    local name="$1"
+    local target="settings.${name}.json"
+    [[ -f "$CLAUDE_DIR/$target" ]] || die "settings.${name}.json not found"
+
+    local cur
+    cur=$(current)
+    [[ "$cur" == "$name" ]] && { echo "Already on: $name"; return; }
+
+    ln -sf "$target" "$SETTINGS"
+    if [[ -n "$cur" ]]; then
+        echo "Switched: $cur → $name"
+    else
+        echo "Switched to: $name"
+    fi
+}
+
+# Interactive selection
+select_profile() {
+    local cur names
+    cur=$(current)
+    mapfile -t names < <(profiles)
+
+    [[ ${#names[@]} -eq 0 ]] && die "No settings.*.json found in $CLAUDE_DIR"
+
+    if command -v fzf &>/dev/null; then
+        local selected
+        selected=$(printf '%s\n' "${names[@]}" | fzf \
+            --prompt="profile> " \
+            --header="current: ${cur:-none}" \
+            --no-sort --walker-root=/dev/null --highlight-line) || return 0
+        switch_to "$selected"
+    else
+        echo "Current: ${cur:-none}"
+        echo
+        local i=1
+        for name in "${names[@]}"; do
+            if [[ "$name" == "$cur" ]]; then
+                printf "  \033[32m* %d) %s\033[0m\n" "$i" "$name"
+            else
+                printf "    %d) %s\n" "$i" "$name"
+            fi
+            ((i++))
+        done
+        echo
+        read -rp "Select [1-${#names[@]}]: " choice
+        [[ -z "$choice" ]] && return 0
+        [[ "$choice" =~ ^[0-9]+$ ]] || die "Invalid choice"
+        ((choice >= 1 && choice <= ${#names[@]})) || die "Out of range"
+        switch_to "${names[$((choice - 1))]}"
+    fi
+}
+
+# --- main ---
+case "${1:-}" in
+    "")
+        select_profile
+        ;;
+    ls)
+        cur=$(current)
+        for name in $(profiles); do
+            if [[ "$name" == "$cur" ]]; then
+                printf "  \033[32m* %s\033[0m\n" "$name"
+            else
+                printf "    %s\n" "$name"
+            fi
+        done
+        ;;
+    -h|--help)
+        echo "Usage: cs [profile|ls]"
+        echo
+        echo "  cs          Interactive profile selection"
+        echo "  cs <name>   Switch to settings.<name>.json"
+        echo "  cs ls       List available profiles"
+        ;;
+    *)
+        switch_to "$1"
+        ;;
+esac
