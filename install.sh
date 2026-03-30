@@ -39,9 +39,10 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
-# Config different email according to host
-if [ $HOSTNAME = "ops-Alienware-17-R4" ]; then
-  ln -s $dir/gitconfig-email-github ~/.gitconfig-email
-else
+# Config different email according to network environment
+source $dir/check_network_environment
+if is_internal_network; then
   ln -s $dir/gitconfig-email-work ~/.gitconfig-email
+else
+  ln -s $dir/gitconfig-email-github ~/.gitconfig-email
 fi
