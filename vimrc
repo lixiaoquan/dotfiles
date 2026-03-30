@@ -190,7 +190,7 @@ Plug 'junegunn/fzf.vim'
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '-U', fzf#vim#with_preview(), <bang>0)
 " }}}
 if has("nvim")
-  Plug 'nvim-treesitter/nvim-treesitter', {'do' : ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'commit': 'f2778bd', 'do' : ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'm-demare/hlargs.nvim'
 else
