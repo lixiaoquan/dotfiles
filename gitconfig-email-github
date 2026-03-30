@@ -1,5 +1,5 @@
 [user]
-  email = radioheads@163.com
+  email = xiaoquan.li@denglin.ai
 
 [url "http://ext-gitlab.denglin.com:81/software/dl_AE"]
 	insteadOf = ssh://git@gitlab.denglin.com:23/SW/ae
