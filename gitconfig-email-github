@@ -4,5 +4,11 @@
 [url "http://ext-gitlab.denglin.com:81/software/dl_AE"]
 	insteadOf = ssh://git@gitlab.denglin.com:23/SW/ae
 
+[url "http://ext-gitlab.denglin.com:81/software/dl_framework"]
+	insteadOf = ssh://git@gitlab.denglin.com:23/SW/dl_framework
+
+[url "http://ext-gitlab.denglin.com:81/software/ci/docker.git"]
+	insteadOf = ssh://git@gitlab.denglin.com:23/ai/docker.git
+
 [url "https://github.hlug.cn/https://github.com/"]
 	insteadOf = https://github.com/
