@@ -1,12 +1,24 @@
 #!/bin/bash
 # This is a tool to sync tools between different home
 
-machines="10.21.12.24 10.28.13.41 10.21.12.18"
+internal_machines="10.21.12.24 10.28.13.41 10.21.12.18"
+external_machines="10.28.31.41 10.28.31.51 10.28.31.52 10.28.31.54"
+target_machines="$internal_machines"
+host_overridden=0
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+network_checker="$script_dir/../check_network_environment"
+
+if [ -f "$network_checker" ]; then
+  # Reuse the existing repo-level network detection rules.
+  source "$network_checker"
+fi
 
 while (( $# )); do
     case "$1" in
       -h|--host)
-          machines=$2
+          target_machines=$2
+          host_overridden=1
           shift 2
           ;;
 
@@ -18,8 +30,15 @@ done
 
 get_abs_filename() {
   # $1 : relative filename
-  echo "$(cd "$(dirname "$filename")" && pwd)/$(basename "$filename")"
+  echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
+
+if (( ! host_overridden )) && declare -F is_internal_network >/dev/null; then
+  if ! is_internal_network; then
+    target_machines="$external_machines"
+  fi
+fi
+
 full_path=$(get_abs_filename "$filename")
 read -p "Are you sure to sync $full_path ? " -n 1 -r
 echo   # (optional) move to a new Line
@@ -28,7 +47,7 @@ then
   RSYNC='rsync -avRPIO --ignore-errors'
   local_ips=$(ifconfig 2>/dev/null || ip addr 2>/dev/null)
 
-  for addr in $machines; do
+  for addr in $target_machines; do
     host=${addr%:*}
     port=${addr##*:}
     [[ "$addr" != *:* ]] && port=""
