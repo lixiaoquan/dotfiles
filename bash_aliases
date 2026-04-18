@@ -71,6 +71,7 @@ alias lzd='TERM=screen-256color lazydocker'
 
 alias justbash='NO_ZSH=1 bash'
 alias cpv="rsync -ah --progress"
+alias cget='curl --netrc --fail --location --remote-name'
 
 
 dlgpu() {
