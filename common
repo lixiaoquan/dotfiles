@@ -78,6 +78,7 @@ add_to_path_if_exists "$HOME/kitty/bin"
 add_to_path_if_exists "$HOME/docker"
 
 add_to_path_if_exists "$HOME/static_zsh/bin"
+add_to_path_if_exists "/LocalRun/xiaoquan.li/artifactory"
 
 export PATH=$HOME/dotfiles/bin:$PATH
 
