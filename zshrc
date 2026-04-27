@@ -163,4 +163,5 @@ if (( ${+functions[abbr]} )); then
 fi
 
 # direnv
+export DIRENV_LOG_FORMAT=""
 (( $+commands[direnv] )) && eval "$(direnv hook zsh)"
