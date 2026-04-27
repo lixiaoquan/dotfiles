@@ -161,3 +161,6 @@ compdef _gnu_generic sync to_sh_home to_cd_home
 if (( ${+functions[abbr]} )); then
   export ABBR_SET_EXPANSION_CURSOR=1
 fi
+
+# direnv
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
