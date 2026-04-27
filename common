@@ -105,3 +105,16 @@ LD_LIBRARY_PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, 
 if [ -d "/LocalRun/${USER}" ]; then
     export UV_CACHE_DIR="/LocalRun/${USER}/.cache/uv"
 fi
+
+ac() {
+  local src="$HOME/dotfiles/envrc"
+  if [ ! -f "$src" ]; then
+    echo "ac: $src not found" >&2
+    return 1
+  fi
+  if [ -e ".envrc" ]; then
+    echo "ac: .envrc already exists" >&2
+    return 1
+  fi
+  ln -s "$src" .envrc && direnv allow
+}
