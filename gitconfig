@@ -25,6 +25,7 @@
 [core]
   editor = nvim
   quotepath = false
+  excludesfile = ~/dotfiles/gitignore_global
 
 [push]
   default = simple
