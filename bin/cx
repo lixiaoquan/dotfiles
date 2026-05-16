@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# cx - switch ~/.codex/config.toml and auth.json symlinks between profiles
+
+set -euo pipefail
+
+CODEX_DIR="$HOME/.codex"
+
+die() { printf '\033[31mError: %s\033[0m\n' "$1" >&2; exit 1; }
+
+current() {
+    if [[ -L "$CODEX_DIR/config.toml" ]]; then
+        local target
+        target=$(readlink "$CODEX_DIR/config.toml")
+        if [[ "$target" =~ ^config\.toml\.(.+)$ ]]; then
+            echo "${BASH_REMATCH[1]}"
+            return
+        fi
+    fi
+    echo ""
+}
+
+profiles() {
+    for f in "$CODEX_DIR"/config.toml.*; do
+        [[ -f "$f" ]] || continue
+        local base=$(basename "$f")
+        if [[ "$base" =~ ^config\.toml\.(.+)$ ]]; then
+            echo "${BASH_REMATCH[1]}"
+        fi
+    done
+}
+
+switch_to() {
+    local name="$1"
+    [[ -f "$CODEX_DIR/config.toml.${name}" ]] || die "config.toml.${name} not found"
+
+    local cur
+    cur=$(current)
+    [[ "$cur" == "$name" ]] && { echo "Already on: $name"; return; }
+
+    ln -sf "config.toml.${name}" "$CODEX_DIR/config.toml"
+
+    if [[ -f "$CODEX_DIR/auth.json.${name}" ]]; then
+        ln -sf "auth.json.${name}" "$CODEX_DIR/auth.json"
+    else
+        printf '\033[33mWarning: auth.json.%s not found\033[0m\n' "$name"
+    fi
+
+    if [[ -n "$cur" ]]; then
+        echo "Switched: $cur → $name"
+    else
+        echo "Switched to: $name"
+    fi
+}
+
+select_profile() {
+    local cur names
+    cur=$(current)
+    mapfile -t names < <(profiles)
+
+    [[ ${#names[@]} -eq 0 ]] && die "No config.toml.* found in $CODEX_DIR"
+
+    if command -v fzf &>/dev/null; then
+        local selected
+        selected=$(printf '%s\n' "${names[@]}" | fzf \
+            --prompt="codex> " \
+            --header="current: ${cur:-none}" \
+            --no-sort --walker-root=/dev/null --highlight-line) || return 0
+        switch_to "$selected"
+    else
+        echo "Current: ${cur:-none}"
+        echo
+        local i=1
+        for name in "${names[@]}"; do
+            if [[ "$name" == "$cur" ]]; then
+                printf "  \033[32m* %d) %s\033[0m\n" "$i" "$name"
+            else
+                printf "    %d) %s\n" "$i" "$name"
+            fi
+            ((i++))
+        done
+        echo
+        read -rp "Select [1-${#names[@]}]: " choice
+        [[ -z "$choice" ]] && return 0
+        [[ "$choice" =~ ^[0-9]+$ ]] || die "Invalid choice"
+        ((choice >= 1 && choice <= ${#names[@]})) || die "Out of range"
+        switch_to "${names[$((choice - 1))]}"
+    fi
+}
+
+case "${1:-}" in
+    "")
+        select_profile
+        ;;
+    ls)
+        cur=$(current)
+        for name in $(profiles); do
+            if [[ "$name" == "$cur" ]]; then
+                printf "  \033[32m* %s\033[0m\n" "$name"
+            else
+                printf "    %s\n" "$name"
+            fi
+        done
+        ;;
+    -h|--help)
+        echo "Usage: cx [profile|ls]"
+        echo
+        echo "  cx          Interactive profile selection"
+        echo "  cx <name>   Switch to config.toml.<name> + auth.json.<name>"
+        echo "  cx ls       List available profiles"
+        ;;
+    *)
+        switch_to "$1"
+        ;;
+esac
