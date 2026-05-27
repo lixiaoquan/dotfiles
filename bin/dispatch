@@ -2,7 +2,7 @@
 # This is a tool to sync tools between different home
 
 internal_machines="10.21.12.24 10.28.13.41 10.21.12.18"
-external_machines="10.28.31.41 10.28.31.51 10.28.31.52 10.28.31.54"
+external_machines="10.28.31.41 10.28.31.51 10.28.31.52 10.28.31.54 10.28.31.66"
 target_machines="$internal_machines"
 host_overridden=0
 
