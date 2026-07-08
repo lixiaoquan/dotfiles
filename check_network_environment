@@ -1,45 +1,36 @@
 #!/bin/bash
 
-_network_environment_url="http://envcheck.denglin.com:1314/?format=json"
-_network_environment_checked=0
-_network_environment_json=""
-
-_fetch_network_environment() {
-    if [ "$_network_environment_checked" -eq 1 ]; then
-        [ -n "$_network_environment_json" ]
-        return
-    fi
-
-    _network_environment_checked=1
-
-    if ! command -v curl &>/dev/null; then
-        return 1
-    fi
-
-    _network_environment_json=$(curl -fsS --connect-timeout 1 --max-time 2 "$_network_environment_url" 2>/dev/null) || {
-        _network_environment_json=""
-        return 1
-    }
-}
-
-_parse_is_dev_environment() {
-    printf '%s\n' "$_network_environment_json" | sed -n 's/.*"is_dev"[[:space:]]*:[[:space:]]*\(true\|false\).*/\1/p'
-}
-
 is_internal_network() {
-    local is_dev=""
-
-    if _fetch_network_environment; then
-        is_dev=$(_parse_is_dev_environment)
-        case "$is_dev" in
-            true)
-                return 0
-                ;;
-            false)
-                return 1
-                ;;
-        esac
+    # Get current IP address (try multiple methods for compatibility)
+    local ip=""
+    
+    # Method 1: Using ip command (common in Linux systems)
+    if command -v ip &>/dev/null; then
+        ip=$(ip route get 8.8.8.8 2>/dev/null | grep -oP 'src \K\S+' | head -1)
     fi
-
-    return 1
+    
+    # Method 2: Using hostname command (if method 1 fails)
+    if [ -z "$ip" ] && command -v hostname &>/dev/null; then
+        ip=$(hostname -I 2>/dev/null | awk '{print $1}')
+    fi
+    
+    # Method 3: Using ifconfig command (for older systems)
+    if [ -z "$ip" ] && command -v ifconfig &>/dev/null; then
+        ip=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -1)
+    fi
+    
+    # Check if IP was successfully obtained
+    if [ -z "$ip" ]; then
+        echo "Error: Unable to get current IP address"
+        return 1
+    fi
+    
+    # Check if IP belongs to internal network segments
+    if [[ $ip =~ ^10\.28\.13\. ]] || \
+       [[ $ip =~ ^10\.21\.12\. ]] || \
+       [[ $ip =~ ^10\.28\.18\. ]]; then
+        return 0  # Internal network
+    else
+        return 1  # External network
+    fi
 }
