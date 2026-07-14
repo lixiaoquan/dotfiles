@@ -1,2 +1,7 @@
 source ${SDK_DIR:-/LocalRun/xiaoquan.li/artifactory/sdk}/testenv.sh >/dev/null 2>&1
-source venv/bin/activate
+
+if [[ -f venv/bin/activate ]]; then
+  source venv/bin/activate
+elif [[ -f .venv/bin/activate ]]; then
+  source .venv/bin/activate
+fi
