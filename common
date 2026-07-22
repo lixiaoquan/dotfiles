@@ -88,6 +88,15 @@ export EDITOR=vim
 
 export XDG_CONFIG_HOME=$HOME/dotfiles/config
 
+# Termius supports 24-bit color, but SSH only propagates TERM.
+if [ -n "${SSH_TTY:-}" ] && [ -z "${COLORTERM:-}" ]; then
+  case "${TERM:-}" in
+    xterm-256color|tmux-256color)
+      export COLORTERM=truecolor
+      ;;
+  esac
+fi
+
 case "$OSTYPE" in
   msys*)
     # To make ln -s work
