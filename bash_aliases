@@ -169,6 +169,7 @@ jfget() {
     local pattern="${1:-framework-release/*}"
     jf rt search "$pattern" \
         | jq -r '.[].path' \
+        | sort -r \
         | fzf --prompt="pick artifact> " --query="${2:-}" \
         | xargs -r -I{} jf rt download "{}" --flat
 }
