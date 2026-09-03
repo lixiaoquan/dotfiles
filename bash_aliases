@@ -158,3 +158,17 @@ tag_um() {
         git diff origin/master..origin/dev -- "${excludes[@]}"
     fi
 }
+
+# Search Artifactory, pick one via fzf, and download it (--flat, to cwd).
+# Defaults to searching "framework-release/*" so you can just fuzzy-filter in fzf.
+# Usage:
+#   jfget                     # search framework-release/*, then filter in fzf
+#   jfget "" vllm             # same, prefill fzf query with "vllm"
+#   jfget "framework-release/*vllm*"  # narrow at the server side when results are large
+jfget() {
+    local pattern="${1:-framework-release/*}"
+    jf rt search "$pattern" \
+        | jq -r '.[].path' \
+        | fzf --prompt="pick artifact> " --query="${2:-}" \
+        | xargs -r -I{} jf rt download "{}" --flat
+}
