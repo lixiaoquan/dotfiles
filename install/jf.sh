@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-install_dir="$HOME/local/bin"
+install_dir="$HOME/.local/bin"
 tmp_dir="$(mktemp -d)"
 
 cleanup() {
