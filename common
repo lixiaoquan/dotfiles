@@ -41,7 +41,8 @@ fi
 
 export PATH="BEGIN_COMMON":$PATH:"BEFORE_COMMON"
 
-export PATH=~/bin:~/.local/bin:$PATH
+add_to_path_if_exists "$HOME/.local/bin"
+add_to_path_if_exists "$HOME/bin"
 
 add_to_path_if_exists "/usr/local/cuda/bin"
 
