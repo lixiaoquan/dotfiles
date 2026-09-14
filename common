@@ -69,8 +69,6 @@ fi
 
 add_to_path_if_exists "$HOME/clangd_15.0.3/bin"
 
-add_to_path_if_exists "$HOME/nvim-linux64/bin"
-
 add_to_path_if_exists "$HOME/nvim-osx64/bin"
 
 add_to_path_if_exists "$HOME/kitty/bin"
