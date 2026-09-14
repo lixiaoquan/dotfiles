@@ -16,7 +16,6 @@ install/ohmyzsh.sh
 install/fzf.sh
 install/node.sh
 install/vim.dev.sh
-install/git.sh
 install/lazygit.sh
 install/clangd.sh
 ...

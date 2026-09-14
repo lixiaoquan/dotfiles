@@ -24,7 +24,6 @@ wget -c https://nodejs.org/dist/v22.17.1/node-v22.17.1-linux-arm64.tar.xz
 wget -c https://${github}/clangd/clangd/releases/download/17.0.3/clangd-linux-17.0.3.zip
 wget -c https://${github}/ThomasLachaux/lazydocker-high-contrast/releases/download/v0.13-high-contrast/lazydocker
 wget -c https://${github}/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz
-wget -c https://www.kernel.org/pub/software/scm/git/git-2.32.0.tar.gz
 wget -c https://www.zsh.org/pub/zsh-5.8.tar.xz
 wget -c https://${github}/romkatv/zsh-bin/releases/download/v6.1.1/zsh-5.8-linux-aarch64.tar.gz
 wget -c https://${github}/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
