@@ -13,6 +13,7 @@ cd
 mkdir -p packages
 cd packages
 wget -c https://${github}/rtk-ai/rtk/releases/download/v0.36.0/rtk-x86_64-unknown-linux-musl.tar.gz
+wget -c https://${github}/direnv/direnv/releases/download/v2.37.1/direnv.linux-amd64
 wget -c https://${github}/romkatv/zsh-bin/releases/download/v6.1.1/zsh-5.8-linux-x86_64.tar.gz
 wget -c https://${github}/oinume/path-shrinker/releases/download/v0.1.1/path-shrinker_0.1.1_Linux_x86_64.tar.gz
 wget -c https://${github}/neovim/neovim/releases/download/v0.8.3/nvim.appimage
@@ -49,4 +50,3 @@ if [ -d nerd-fonts ]; then
 else
   git clone --depth=1 https://${github}/ryanoasis/nerd-fonts.git
 fi
-
