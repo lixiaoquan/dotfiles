@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""List users with active compute processes on each GPU."""
+
+import csv
+import pwd
+import subprocess
+import sys
+from pathlib import Path
+
+
+def user_for_pid(pid):
+    try:
+        for line in (Path("/proc") / pid / "status").read_text().splitlines():
+            if line.startswith("Uid:"):
+                uid = int(line.split()[1])
+                try:
+                    return pwd.getpwuid(uid).pw_name
+                except KeyError:
+                    return str(uid)
+    except (OSError, ValueError):
+        pass
+    return None
+
+
+def main():
+    try:
+        output = subprocess.check_output(
+            ["dlsmi", "--query-compute-apps=gpu_index,pid,process_name", "--format=csv,noheader"],
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        print(f"gpuwho: dlsmi failed: {exc}", file=sys.stderr)
+        return 1
+
+    processes = []
+    for row in csv.reader(output.splitlines()):
+        if len(row) != 3:
+            continue
+        gpu, pid, name = (field.strip() for field in row)
+        if not gpu.isdecimal() or not pid.isdecimal():
+            continue
+        user = user_for_pid(pid)
+        if user is not None:
+            processes.append((int(gpu), user, name, int(pid)))
+
+    if not processes:
+        print("No active GPU processes.")
+        return 0
+
+    rows = [(str(gpu), user, str(pid), name) for gpu, user, name, pid in sorted(processes)]
+    headers = ("GPU", "USER", "PID")
+    widths = [max(len(row[i]) for row in [headers, *rows]) for i in range(3)]
+    print("  ".join(f"{header:<{width}}" for header, width in zip(headers, widths)) + "  PROCESS")
+    for gpu, user, pid, name in rows:
+        print(f"{gpu:<{widths[0]}}  {user:<{widths[1]}}  {pid:<{widths[2]}}  {name}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
