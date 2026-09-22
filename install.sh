@@ -39,6 +39,12 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+# Create the work shortcut even when its target is not available yet.
+if [ ! -e "$HOME/work" ] && [ ! -L "$HOME/work" ]; then
+  echo "Creating symlink to /LocalRun/$(id -un) at $HOME/work."
+  ln -s "/LocalRun/$(id -un)" "$HOME/work"
+fi
+
 # Config different email according to network environment
 source $dir/check_network_environment
 if is_internal_network; then
