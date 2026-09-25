@@ -97,3 +97,59 @@ $psrl = Get-Module PSReadLine
 if ($psrl -and $psrl.Version -ge [version]'2.1.0' -and -not [Console]::IsOutputRedirected) {
     Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView -EditMode Windows
 }
+
+# ---- Linux command equivalents ----
+
+# realpath: resolve to absolute path (non-existent paths allowed, like realpath -m)
+function realpath {
+    param([Parameter(Mandatory, Position=0, ValueFromRemainingArguments)][string[]]$Path)
+    foreach ($p in $Path) {
+        if (Test-Path -LiteralPath $p) {
+            (Resolve-Path -LiteralPath $p).Path
+        }
+        elseif ([System.IO.Path]::IsPathRooted($p)) {
+            [System.IO.Path]::GetFullPath($p)
+        }
+        else {
+            [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $p))
+        }
+    }
+}
+
+# which: show what a command resolves to
+function which {
+    param([Parameter(Mandatory, Position=0)][string]$Name)
+    Get-Command $Name
+}
+
+# touch: create empty file, or update timestamp if it exists
+function touch {
+    param([Parameter(Mandatory, Position=0, ValueFromRemainingArguments)][string[]]$File)
+    foreach ($f in $File) {
+        if (Test-Path -LiteralPath $f) {
+            (Get-Item -LiteralPath $f).LastWriteTime = Get-Date
+        }
+        else {
+            New-Item -ItemType File -Path $f | Out-Null
+        }
+    }
+}
+
+# head: first n lines ("head file" / "head -n 5 file" / "head file 5")
+function head {
+    param(
+        [Parameter(Position=0)][string]$File,
+        [Parameter(Position=1)][int]$n = 10
+    )
+    Get-Content $File -TotalCount $n
+}
+
+# tail: last n lines ("tail file" / "tail -n 50 file" / "tail -f file" follows)
+function tail {
+    param(
+        [Parameter(Position=0)][string]$File,
+        [Parameter(Position=1)][int]$n = 10,
+        [switch]$f
+    )
+    Get-Content $File -Tail $n -Wait:$f
+}
