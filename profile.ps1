@@ -58,6 +58,10 @@ function .. { Set-Location .. }
 function ... { Set-Location ..\.. }
 function .... { Set-Location ..\..\.. }
 
+# Built-in aliases gc/gp (Get-Content/Get-ItemProperty) outrank functions,
+# so our git commit/push shortcuts never worked until these are removed
+Remove-Item Alias:gc, Alias:gp -Force -ErrorAction SilentlyContinue
+
 if (Get-Command git -ErrorAction SilentlyContinue) {
     function gs { git status }
     function ga { git add $args }
@@ -79,4 +83,17 @@ function Edit-Profile {
     } else {
         notepad $PROFILE
     }
+}
+
+# PSReadLine: history search with arrows, Tab menu completion
+Set-PSReadLineOption -HistoryNoDuplicates -HistorySearchCursorMovesToEnd
+Set-PSReadLineKeyHandler -Key UpArrow   -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Key Tab       -Function MenuComplete
+
+# Gray inline prediction from history (needs PSReadLine >= 2.1; PS 5.1 has 2.0 and skips this)
+# Also skipped when output is redirected (CI/scripts): console lacks VT processing there
+$psrl = Get-Module PSReadLine
+if ($psrl -and $psrl.Version -ge [version]'2.1.0' -and -not [Console]::IsOutputRedirected) {
+    Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView -EditMode Windows
 }
