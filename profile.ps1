@@ -67,6 +67,7 @@ if (Get-Command git -ErrorAction SilentlyContinue) {
     function ga { git add $args }
     function gc { git commit $args }
     function gp { git push $args }
+    function gpl { git pull --rebase $args }
     function gl { git log --oneline -10 }
     function gd { git diff $args }
 }
