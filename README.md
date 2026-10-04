@@ -21,6 +21,11 @@ install/clangd.sh
 ...
 ```
 
+## Install tools (Windows)
+```powershell
+install\ahk.ps1   # AutoHotkey v2 portable + .ahk association, runs ahk\hotkeys.ahk
+```
+
 ## Install skills
 ```bash
 cd ~/.claude
