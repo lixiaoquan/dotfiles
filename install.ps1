@@ -145,7 +145,7 @@ foreach ($Dest in $InstallTargets) {
                 New-Item -ItemType Directory -Path $ParentDir -Force | Out-Null
             }
 
-            if (Test-Path $ProfilePath -and -not $Force) {
+            if ((Test-Path $ProfilePath) -and -not $Force) {
                 $BackupPath = "$ProfilePath.backup.$(Get-Date -Format 'yyyyMMdd-HHmmss')"
                 Move-Item $ProfilePath $BackupPath
                 Write-Host "  Backed up existing profile to: $BackupPath" -ForegroundColor Yellow
