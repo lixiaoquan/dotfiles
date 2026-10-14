@@ -2,10 +2,50 @@
 """List users with active compute processes on each GPU."""
 
 import csv
+import json
 import pwd
+import re
 import subprocess
 import sys
+from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
+
+
+CONTAINER_ID_RE = re.compile(r"(?:docker[-/]|/)([0-9a-f]{12,64})(?:\.scope)?(?:/|$)")
+USER_SLICE_RE = re.compile(r"(?:^|/)user-(\d+)\.slice(?:/|$)")
+
+
+@dataclass(frozen=True)
+class GpuProcess:
+    gpu: int
+    user: str
+    process_name: str
+    pid: int
+    container_id: str = None
+    rootless_uid: int = None
+
+
+@dataclass(frozen=True)
+class DisplayRow:
+    gpu: int
+    user: str
+    pid: int
+    container: str
+    process_name: str
+    owner_inferred: bool = False
+
+
+class Confidence(Enum):
+    EXPLICIT = "explicit"
+    INFERRED = "inferred"
+
+
+@dataclass(frozen=True)
+class OwnerCandidate:
+    user: str
+    source: str
+    confidence: Confidence
 
 
 def user_for_pid(pid):
@@ -22,15 +62,132 @@ def user_for_pid(pid):
     return None
 
 
-def main():
+def cgroup_info(pid):
+    """Return a Docker container ID and rootless-daemon uid, when visible."""
+    try:
+        text = (Path("/proc") / pid / "cgroup").read_text()
+    except OSError:
+        return None, None
+
+    container_id = None
+    rootless_uid = None
+    for line in text.splitlines():
+        match = CONTAINER_ID_RE.search(line)
+        if match:
+            container_id = match.group(1)
+        match = USER_SLICE_RE.search(line)
+        if match and int(match.group(1)) != 0:
+            rootless_uid = int(match.group(1))
+    return container_id, rootless_uid
+
+
+def username(uid):
+    try:
+        return pwd.getpwuid(uid).pw_name
+    except KeyError:
+        return str(uid)
+
+
+def inspect_containers(container_ids):
+    if not container_ids:
+        return {}
     try:
         output = subprocess.check_output(
-            ["dlsmi", "--query-compute-apps=gpu_index,pid,process_name", "--format=csv,noheader"],
+            ["docker", "inspect", *sorted(container_ids)],
             text=True,
+            stderr=subprocess.DEVNULL,
         )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        print(f"gpuwho: dlsmi failed: {exc}", file=sys.stderr)
-        return 1
+        return {item["Id"]: item for item in json.loads(output)}
+    except (OSError, subprocess.CalledProcessError, json.JSONDecodeError, KeyError):
+        return {}
+
+
+def host_user_from_path(path):
+    """Infer a local user when a host path lives below that user's home."""
+    try:
+        path = Path(path)
+    except TypeError:
+        return None
+    matches = []
+    for entry in pwd.getpwall():
+        if entry.pw_uid == 0 or not entry.pw_dir or entry.pw_dir == "/":
+            continue
+        try:
+            path.relative_to(entry.pw_dir)
+            matches.append((len(entry.pw_dir), entry.pw_name))
+        except ValueError:
+            pass
+    return max(matches, default=(0, None))[1]
+
+
+def owner_from_labels(info):
+    labels = info.get("Config", {}).get("Labels") or {}
+    for key in ("host.user", "host.username", "owner", "user"):
+        if labels.get(key):
+            return OwnerCandidate(labels[key], f"label:{key}", Confidence.EXPLICIT)
+    return None
+
+
+def owner_from_environment(info):
+    for value in info.get("Config", {}).get("Env") or []:
+        for key in ("HOST_USER=", "HOST_USERNAME=", "CONTAINER_OWNER="):
+            if value.startswith(key) and value[len(key):]:
+                return OwnerCandidate(value[len(key):], f"env:{key[:-1]}", Confidence.EXPLICIT)
+    return None
+
+
+def owner_from_rootless_uid(rootless_uid):
+    if rootless_uid is not None:
+        return OwnerCandidate(username(rootless_uid), "rootless uid", Confidence.EXPLICIT)
+    return None
+
+
+def owner_from_host_paths(info):
+    labels = info.get("Config", {}).get("Labels") or {}
+    paths = [labels.get("com.docker.compose.project.working_dir")]
+    paths.extend(mount.get("Source") for mount in info.get("Mounts", []))
+    for path in filter(None, paths):
+        user = host_user_from_path(path)
+        if user:
+            return OwnerCandidate(user, f"host path:{path}", Confidence.INFERRED)
+    return None
+
+
+def owner_from_container_name(info):
+    # Container naming conventions such as alice-training are a weak last resort.
+    name = info.get("Name", "").lstrip("/")
+    prefix = re.split(r"[-_.]", name, maxsplit=1)[0]
+    try:
+        pwd.getpwnam(prefix)
+        if prefix != "root":
+            return OwnerCandidate(prefix, f"container name:{name}", Confidence.INFERRED)
+    except KeyError:
+        pass
+    return None
+
+
+def container_owner_candidates(info, rootless_uid):
+    """Collect owner candidates in descending order of preference."""
+    candidates = (
+        owner_from_labels(info),
+        owner_from_environment(info),
+        owner_from_rootless_uid(rootless_uid),
+        owner_from_host_paths(info),
+        owner_from_container_name(info),
+    )
+    return [candidate for candidate in candidates if candidate is not None]
+
+
+def select_container_owner(info, rootless_uid):
+    candidates = container_owner_candidates(info, rootless_uid)
+    return candidates[0] if candidates else None
+
+
+def query_gpu_processes():
+    output = subprocess.check_output(
+        ["dlsmi", "--query-compute-apps=gpu_index,pid,process_name", "--format=csv,noheader"],
+        text=True,
+    )
 
     processes = []
     for row in csv.reader(output.splitlines()):
@@ -41,18 +198,86 @@ def main():
             continue
         user = user_for_pid(pid)
         if user is not None:
-            processes.append((int(gpu), user, name, int(pid)))
+            container_id, rootless_uid = cgroup_info(pid)
+            processes.append(
+                GpuProcess(
+                    gpu=int(gpu),
+                    user=user,
+                    process_name=name,
+                    pid=int(pid),
+                    container_id=container_id,
+                    rootless_uid=rootless_uid,
+                )
+            )
+    return processes
+
+
+def enrich_processes(processes):
+    inspected = inspect_containers(
+        {process.container_id for process in processes if process.container_id}
+    )
+    rows = []
+    for process in sorted(
+        processes,
+        key=lambda item: (item.gpu, item.user, item.process_name, item.pid),
+    ):
+        user = process.user
+        container = "-"
+        owner_inferred = False
+        if process.container_id:
+            info = next(
+                (
+                    value
+                    for key, value in inspected.items()
+                    if key.startswith(process.container_id)
+                ),
+                {},
+            )
+            container = info.get("Name", "").lstrip("/") or process.container_id[:12]
+            owner = select_container_owner(info, process.rootless_uid)
+            if user == "root" and owner:
+                owner_inferred = owner.confidence is Confidence.INFERRED
+                user = owner.user + ("?" if owner_inferred else "")
+        rows.append(
+            DisplayRow(
+                gpu=process.gpu,
+                user=user,
+                pid=process.pid,
+                container=container,
+                process_name=process.process_name,
+                owner_inferred=owner_inferred,
+            )
+        )
+    return rows
+
+
+def print_table(rows):
+    headers = ("GPU", "USER", "PID", "CONTAINER")
+    values = [(str(row.gpu), row.user, str(row.pid), row.container) for row in rows]
+    widths = [max(len(row[i]) for row in [headers, *values]) for i in range(4)]
+    print("  ".join(f"{header:<{width}}" for header, width in zip(headers, widths)) + "  PROCESS")
+    for row, value in zip(rows, values):
+        gpu, user, pid, container = value
+        print(
+            f"{gpu:<{widths[0]}}  {user:<{widths[1]}}  {pid:<{widths[2]}}  "
+            f"{container:<{widths[3]}}  {row.process_name}"
+        )
+    if any(row.owner_inferred for row in rows):
+        print("\n? inferred from the container's host paths or name")
+
+
+def main():
+    try:
+        processes = query_gpu_processes()
+    except (OSError, subprocess.CalledProcessError) as exc:
+        print(f"gpuwho: dlsmi failed: {exc}", file=sys.stderr)
+        return 1
 
     if not processes:
         print("No active GPU processes.")
         return 0
 
-    rows = [(str(gpu), user, str(pid), name) for gpu, user, name, pid in sorted(processes)]
-    headers = ("GPU", "USER", "PID")
-    widths = [max(len(row[i]) for row in [headers, *rows]) for i in range(3)]
-    print("  ".join(f"{header:<{width}}" for header, width in zip(headers, widths)) + "  PROCESS")
-    for gpu, user, pid, name in rows:
-        print(f"{gpu:<{widths[0]}}  {user:<{widths[1]}}  {pid:<{widths[2]}}  {name}")
+    print_table(enrich_processes(processes))
     return 0
 
 
