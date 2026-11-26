@@ -114,6 +114,10 @@ if [ -d "/LocalRun/${USER}" ]; then
     export UV_CACHE_DIR="/LocalRun/${USER}/.cache/uv"
 fi
 
+# Bypass proxy for localhost and denglin.com domains
+export NO_PROXY="localhost,127.0.0.1,.denglin.com"
+export no_proxy="$NO_PROXY"
+
 ac() {
   local src="$HOME/dotfiles/envrc"
   if [ ! -f "$src" ]; then
